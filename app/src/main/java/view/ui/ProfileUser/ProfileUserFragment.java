@@ -51,7 +51,6 @@ public class ProfileUserFragment extends Fragment {
     DatabaseReference reference;
     @BindView(R.id.imageView_user)
     CircleImageView imageViewUser;
-
     StorageReference mStorageRef;
     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     Uri imageUri;
@@ -99,98 +98,10 @@ public class ProfileUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile_user, container, false);
         ButterKnife.bind(this, root);
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nameText.setVisibility(View.GONE);
-                textAddress.setVisibility(View.GONE);
-                textEmail.setVisibility(View.GONE);
-                textPhone.setVisibility(View.GONE);
-                nameEdit.setVisibility(View.VISIBLE);
-                editAddress.setVisibility(View.VISIBLE);
-                editEmail.setVisibility(View.VISIBLE);
-                editPhone.setVisibility(View.VISIBLE);
-            }
-        });
-        buttonApplyCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
-                String name = editTextUserName.getText().toString();
-                String address = editTextUserAddress.getText().toString();
-                String email = editTextUserEmail.getText().toString();
-                String phone = editTextUserPhone.getText().toString();
-                if (TextUtils.isEmpty(name)){
-                    Snackbar.make(v, "Please Enter Your Name", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (TextUtils.isEmpty(email)){
-                    Snackbar.make(v, "Please Enter Your Email", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (TextUtils.isEmpty(address)){
-                    Snackbar.make(v, "Please Enter Your Address", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (TextUtils.isEmpty(phone)){
-                    Snackbar.make(v, "Please Enter Your Phone", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                else {
-                    HashMap<String,Object> hashMap = new HashMap<>();
-                    hashMap.put("address",address);
-                    hashMap.put("phone",phone);
-                    hashMap.put("email",email);
-                    hashMap.put("userName",name);
-                    Toast.makeText(getActivity(), "Update is done", Toast.LENGTH_SHORT).show();
-                    reference.updateChildren(hashMap);
-                }
-                nameText.setVisibility(View.VISIBLE);
-                textAddress.setVisibility(View.VISIBLE);
-                textEmail.setVisibility(View.VISIBLE);
-                textPhone.setVisibility(View.VISIBLE);
-                nameEdit.setVisibility(View.GONE);
-                editAddress.setVisibility(View.GONE);
-                editEmail.setVisibility(View.GONE);
-                editPhone.setVisibility(View.GONE);
-                editTextUserName.getText().clear();
-                editTextUserAddress.getText().clear();
-                editTextUserEmail.getText().clear();
-                editTextUserPhone.getText().clear();
-            }
-        });
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User users = dataSnapshot.getValue(User.class);
-                String nameUser = dataSnapshot.child("userName").getValue(String.class);
-                String emailUser = dataSnapshot.child("email").getValue(String.class);
-                String phoneUser = dataSnapshot.child("phone").getValue(String.class);
-                String addressUser = dataSnapshot.child("address").getValue(String.class);
-                textViewUserName.setText(nameUser);
-                textViewUserEmail.setText(emailUser);
-                textViewUserPhone.setText(phoneUser);
-                textViewUserAddress.setText(addressUser);
-                if (users.getImageURL().equals("default")) {
-                    imageViewUser.setImageResource(R.drawable.ic_man);
-                } else {
-                    Glide.with(getActivity()).load(users.getImageURL()).into(imageViewUser);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        imageViewUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImage();
-            }
-        });
+        onClickEditProfile();
+        onCkickApply();
+        getDataFirebase();
+        editImageUser();
         return root;
     }
 
@@ -262,5 +173,109 @@ public class ProfileUserFragment extends Fragment {
                 uploadImage();
             }
         }
+    }
+
+    private void onCkickApply(){
+        buttonApplyCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+                String name = editTextUserName.getText().toString();
+                String address = editTextUserAddress.getText().toString();
+                String email = editTextUserEmail.getText().toString();
+                String phone = editTextUserPhone.getText().toString();
+                if (TextUtils.isEmpty(name)){
+                    Snackbar.make(v, "Please Enter Your Name", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (TextUtils.isEmpty(email)){
+                    Snackbar.make(v, "Please Enter Your Email", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (TextUtils.isEmpty(address)){
+                    Snackbar.make(v, "Please Enter Your Address", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (TextUtils.isEmpty(phone)){
+                    Snackbar.make(v, "Please Enter Your Phone", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    HashMap<String,Object> hashMap = new HashMap<>();
+                    hashMap.put("address",address);
+                    hashMap.put("phone",phone);
+                    hashMap.put("email",email);
+                    hashMap.put("userName",name);
+                    Toast.makeText(getActivity(), "Update is done", Toast.LENGTH_SHORT).show();
+                    reference.updateChildren(hashMap);
+                }
+                nameText.setVisibility(View.VISIBLE);
+                textAddress.setVisibility(View.VISIBLE);
+                textEmail.setVisibility(View.VISIBLE);
+                textPhone.setVisibility(View.VISIBLE);
+                nameEdit.setVisibility(View.GONE);
+                editAddress.setVisibility(View.GONE);
+                editEmail.setVisibility(View.GONE);
+                editPhone.setVisibility(View.GONE);
+                editTextUserName.getText().clear();
+                editTextUserAddress.getText().clear();
+                editTextUserEmail.getText().clear();
+                editTextUserPhone.getText().clear();
+            }
+        });
+    }
+
+    private void onClickEditProfile(){
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nameText.setVisibility(View.GONE);
+                textAddress.setVisibility(View.GONE);
+                textEmail.setVisibility(View.GONE);
+                textPhone.setVisibility(View.GONE);
+                nameEdit.setVisibility(View.VISIBLE);
+                editAddress.setVisibility(View.VISIBLE);
+                editEmail.setVisibility(View.VISIBLE);
+                editPhone.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void getDataFirebase(){
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User users = dataSnapshot.getValue(User.class);
+                String nameUser = dataSnapshot.child("userName").getValue(String.class);
+                String emailUser = dataSnapshot.child("email").getValue(String.class);
+                String phoneUser = dataSnapshot.child("phone").getValue(String.class);
+                String addressUser = dataSnapshot.child("address").getValue(String.class);
+                textViewUserName.setText(nameUser);
+                textViewUserEmail.setText(emailUser);
+                textViewUserPhone.setText(phoneUser);
+                textViewUserAddress.setText(addressUser);
+                if (users.getImageURL().equals("default")) {
+                    imageViewUser.setImageResource(R.drawable.ic_man);
+                } else {
+                    Glide.with(getActivity()).load(users.getImageURL()).into(imageViewUser);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void editImageUser(){
+        imageViewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImage();
+            }
+        });
     }
 }
