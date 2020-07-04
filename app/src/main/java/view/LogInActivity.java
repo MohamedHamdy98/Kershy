@@ -142,23 +142,23 @@ public class LogInActivity extends AppCompatActivity {
                             }
                         });
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = database.getReference("Users").child(phone).child("userName");
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String name = dataSnapshot.getValue(String.class);
-                        SharedPreferences sharedPreferences = getSharedPreferences("saveinfo", MODE_PRIVATE);
-                        final SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("name", name);
-                        editor.putString("email", email);
-                        editor.putString("pass", password);
-                        editor.apply();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(LogInActivity.this, "error name", Toast.LENGTH_SHORT).show();
-                    }
-                });
+//                DatabaseReference databaseReference = database.getReference("Users").child(phone).child("userName");
+//                databaseReference.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        String name = dataSnapshot.getValue(String.class);
+//                        SharedPreferences sharedPreferences = getSharedPreferences("saveinfo", MODE_PRIVATE);
+//                        final SharedPreferences.Editor editor = sharedPreferences.edit();
+//                        editor.putString("name", name);
+//                        editor.putString("email", email);
+//                        editor.putString("pass", password);
+//                        editor.apply();
+//                    }
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                        Toast.makeText(LogInActivity.this, "error name", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         });
     }

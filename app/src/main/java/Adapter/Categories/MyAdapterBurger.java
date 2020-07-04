@@ -13,12 +13,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.testeverything.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -58,8 +60,6 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
         holder.imageViewRecyclerCategory.setImageResource(modelBurger.getImage_burger());
         holder.textPriceRecyclerCategory.setText(modelBurger.getPrice_burger());
         holder.textDescriptionRecyclerCategory.setText(modelBurger.getDescription_burger());
-       // holder.textTotalpriceRecyclerCategory.setText(modelBurger.getTotalPrice_burger());
-
         holder.textDescriptionRecyclerCategory.setOnStateChangeListener(new ExpandableTextView.OnStateChangeListener() {
             @Override
             public void onStateChange(boolean isShrink) {
@@ -69,7 +69,6 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
             }
         });
         holder.textDescriptionRecyclerCategory.setText(modelBurger.getDescription_burger());
-
         holder.textDescriptionRecyclerCategory.resetState(modelBurger.isShrink());
         holder.buttonAddRecyclerCategory.setOnClickListener(new View.OnClickListener() {
             @Override

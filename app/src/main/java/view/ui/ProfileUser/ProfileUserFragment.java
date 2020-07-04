@@ -2,9 +2,7 @@ package view.ui.ProfileUser;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,7 +28,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,10 +78,10 @@ public class ProfileUserFragment extends Fragment {
     Button buttonApplyCart;
     @BindView(R.id.textEmail)
     LinearLayout textEmail;
-    @BindView(R.id.editText_userEmail)
-    EditText editTextUserEmail;
-    @BindView(R.id.editEmail)
-    LinearLayout editEmail;
+    //  @BindView(R.id.editText_userEmail)
+    // EditText editTextUserEmail;
+    //  @BindView(R.id.editEmail)
+    //LinearLayout editEmail;
     @BindView(R.id.textAddress)
     LinearLayout textAddress;
     @BindView(R.id.editText_userAddress)
@@ -177,37 +178,35 @@ public class ProfileUserFragment extends Fragment {
         }
     }
 
-    private void onCkickApply(){
+    private void onCkickApply() {
         buttonApplyCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                 String name = editTextUserName.getText().toString();
                 String address = editTextUserAddress.getText().toString();
-                String email = editTextUserEmail.getText().toString();
+                // final String email = editTextUserEmail.getText().toString();
                 String phone = editTextUserPhone.getText().toString();
-                if (TextUtils.isEmpty(name)){
+                if (TextUtils.isEmpty(name)) {
                     Snackbar.make(v, "Please Enter Your Name", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                else if (TextUtils.isEmpty(email)){
-                    Snackbar.make(v, "Please Enter Your Email", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (TextUtils.isEmpty(address)){
+                //else if (TextUtils.isEmpty(email)) {
+                //  Snackbar.make(v, "Please Enter Your Email", Snackbar.LENGTH_SHORT).show();
+                // return;
+                //  }
+                else if (TextUtils.isEmpty(address)) {
                     Snackbar.make(v, "Please Enter Your Address", Snackbar.LENGTH_SHORT).show();
                     return;
-                }
-                else if (TextUtils.isEmpty(phone)){
+                } else if (TextUtils.isEmpty(phone)) {
                     Snackbar.make(v, "Please Enter Your Phone", Snackbar.LENGTH_SHORT).show();
                     return;
-                }
-                else {
-                    HashMap<String,Object> hashMap = new HashMap<>();
-                    hashMap.put("address",address);
-                    hashMap.put("phone",phone);
-                    hashMap.put("email",email);
-                    hashMap.put("userName",name);
+                } else {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("address", address);
+                    hashMap.put("phone", phone);
+                    //hashMap.put("email", email);
+                    hashMap.put("userName", name);
                     Toast.makeText(getActivity(), "Update is done", Toast.LENGTH_SHORT).show();
                     reference.updateChildren(hashMap);
                 }
@@ -217,17 +216,17 @@ public class ProfileUserFragment extends Fragment {
                 textPhone.setVisibility(View.VISIBLE);
                 nameEdit.setVisibility(View.GONE);
                 editAddress.setVisibility(View.GONE);
-                editEmail.setVisibility(View.GONE);
+                // editEmail.setVisibility(View.GONE);
                 editPhone.setVisibility(View.GONE);
                 editTextUserName.getText().clear();
                 editTextUserAddress.getText().clear();
-                editTextUserEmail.getText().clear();
+                // editTextUserEmail.getText().clear();
                 editTextUserPhone.getText().clear();
             }
         });
     }
 
-    private void onClickEditProfile(){
+    private void onClickEditProfile() {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -237,36 +236,36 @@ public class ProfileUserFragment extends Fragment {
                 textPhone.setVisibility(View.GONE);
                 nameEdit.setVisibility(View.VISIBLE);
                 editAddress.setVisibility(View.VISIBLE);
-                editEmail.setVisibility(View.VISIBLE);
+                //  editEmail.setVisibility(View.VISIBLE);
                 editPhone.setVisibility(View.VISIBLE);
             }
         });
     }
 
-    private void getDataFirebase(){
+    private void getDataFirebase() {
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User users = dataSnapshot.getValue(User.class);
-                String nameUser = dataSnapshot.child("userName").getValue(String.class);
-                String emailUser = dataSnapshot.child("email").getValue(String.class);
-                String phoneUser = dataSnapshot.child("phone").getValue(String.class);
-                String addressUser = dataSnapshot.child("address").getValue(String.class);
-                textViewUserName.setText(nameUser);
-                textViewUserEmail.setText(emailUser);
-                textViewUserPhone.setText(phoneUser);
-                textViewUserAddress.setText(addressUser);
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saveName", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("name",nameUser);
-                editor.apply();
-                if (users.getImageURL().equals("default")) {
-                    imageViewUser.setImageResource(R.drawable.ic_man);
-                } else {
-                    Glide.with(getActivity()).load(users.getImageURL()).into(imageViewUser);
+                if (isAdded()){
+                    User users = dataSnapshot.getValue(User.class);
+                    String nameUser = dataSnapshot.child("userName").getValue(String.class);
+                    final String emailUser = dataSnapshot.child("email").getValue(String.class);
+                    String phoneUser = dataSnapshot.child("phone").getValue(String.class);
+                    String addressUser = dataSnapshot.child("address").getValue(String.class);
+                    textViewUserName.setText(nameUser);
+                    textViewUserEmail.setText(emailUser);
+                    textViewUserPhone.setText(phoneUser);
+                    textViewUserAddress.setText(addressUser);
+                    if (users.getImageURL().equals("default")) {
+                        imageViewUser.setImageResource(R.drawable.ic_man);
+                    } else {
+                        Glide.with(getActivity()).load(users.getImageURL()).into(imageViewUser);
+                    }
                 }
+
+
             }
 
             @Override
@@ -276,12 +275,54 @@ public class ProfileUserFragment extends Fragment {
         });
     }
 
-    private void editImageUser(){
+    private void editImageUser() {
         imageViewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openImage();
             }
         });
+    }
+
+    private void reAuthentication() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("Users").child(userId);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String passwordUser = dataSnapshot.child("pass").getValue(String.class);
+                String emailUser = dataSnapshot.child("email").getValue(String.class);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                AuthCredential credential = EmailAuthProvider
+                        .getCredential(emailUser, passwordUser);
+                user.reauthenticate(credential)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    user.updateEmail("editTextUserEmail.getText().toString()").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(getActivity(), "The email updated", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getActivity(), "Password is incorrect", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                    Toast.makeText(getActivity(), "ReAuthentication", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
     }
 }

@@ -67,8 +67,6 @@ public class CategoryActivity extends AppCompatActivity {
     DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
     NavigationView navigationView;
-    private StorageReference mStorageRef;
-    Uri imageUri;
     ImageView imageView_user;
 
     @Override
@@ -166,6 +164,7 @@ public class CategoryActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        FirebaseAuth.getInstance().signOut();
         // System.exit(0);
     }
 
