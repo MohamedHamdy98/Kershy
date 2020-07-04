@@ -166,7 +166,7 @@ public class DeliveryFragment extends Fragment {
             public void onClick(View v) {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference databaseReference = database.getReference("Cart").child(userId);
+                final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

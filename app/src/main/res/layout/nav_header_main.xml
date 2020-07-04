@@ -23,7 +23,7 @@
         app:civ_border_width="4dp"
         app:civ_border_color="#fff"
         android:paddingTop="8dp"
-        android:src="@drawable/me"/>
+        android:src="@drawable/ic_man"/>
 
     <TextView
         android:id="@+id/textView_userName"
@@ -36,7 +36,7 @@
         android:textStyle="bold"
         android:textAllCaps="false"
         android:gravity="center"
-        android:text="Mohammed Hamdy"
+        android:text="User Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

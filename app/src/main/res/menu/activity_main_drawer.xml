@@ -29,10 +29,15 @@
             android:id="@+id/nav_delivery"
             android:icon="@drawable/ic_delivery_40"
             android:title="Delivery" />
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_man"
-            android:title="profile" />
+
     </group>
+    <item android:title="Communication">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_man"
+                android:title="profile" />
+        </menu>
+    </item>
 
 </menu>

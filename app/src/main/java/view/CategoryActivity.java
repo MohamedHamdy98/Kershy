@@ -60,7 +60,7 @@ import java.util.UUID;
 import Model.ModelCart;
 import Model.User;
 
-public class CategoryActivity extends AppCompatActivity  {
+public class CategoryActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -78,11 +78,8 @@ public class CategoryActivity extends AppCompatActivity  {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-         drawer = findViewById(R.id.drawer_layout);
-         navigationView = findViewById(R.id.nav_view);
-
-//        SharedPreferences sharedPreferences = getSharedPreferences("saveinfo",MODE_PRIVATE);
-//        String name = sharedPreferences.getString("name","User Name");
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
 
         databaseReference = database.getReference("Users").child(userId);
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -93,14 +90,11 @@ public class CategoryActivity extends AppCompatActivity  {
                 TextView userName = navigationView.getHeaderView(0).findViewById(R.id.textView_userName);
                 userName.setText(name);
                 imageView_user = navigationView.getHeaderView(0).findViewById(R.id.imageView_user);
-                if (imageView_user == null){
-                    Toast.makeText(CategoryActivity.this, "Wait!", Toast.LENGTH_SHORT).show();
+                if (user.getImageURL().equals("default")) {
+                    imageView_user.setImageResource(R.drawable.ic_man);
                 } else {
-                    Glide.with(CategoryActivity.this)
-                            .load(user.getImageURL())
-                            .into(imageView_user);
+                    Glide.with(CategoryActivity.this).load(user.getImageURL()).into(imageView_user);
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -109,7 +103,7 @@ public class CategoryActivity extends AppCompatActivity  {
         });
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_burger, R.id.nav_sweet, R.id.nav_drink, R.id.nav_orders, R.id.nav_delivery
-        ,R.id.nav_profile)
+                , R.id.nav_profile)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -135,7 +129,7 @@ public class CategoryActivity extends AppCompatActivity  {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.button_item_cart:
                 goto_cartActivity();
                 return true;
@@ -160,22 +154,22 @@ public class CategoryActivity extends AppCompatActivity  {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private void logOut(){
+    private void logOut() {
         Toast.makeText(CategoryActivity.this, "LogOut", Toast.LENGTH_SHORT).show();
-            SharedPreferences preferences = getSharedPreferences("keep",MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("remember","false");
-            editor.apply();
+        SharedPreferences preferences = getSharedPreferences("keep", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("remember", "false");
+        editor.apply();
         Intent intent = new Intent(CategoryActivity.this, LogInActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-           // System.exit(0);
+        // System.exit(0);
     }
 
-    private void shareApplication(){
+    private void shareApplication() {
         Toast.makeText(this, "ShareApplication", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
