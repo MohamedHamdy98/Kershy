@@ -93,9 +93,14 @@ public class CategoryActivity extends AppCompatActivity  {
                 TextView userName = navigationView.getHeaderView(0).findViewById(R.id.textView_userName);
                 userName.setText(name);
                 imageView_user = navigationView.getHeaderView(0).findViewById(R.id.imageView_user);
-                Glide.with(CategoryActivity.this)
-                        .load(user.getImageURL())
-                        .into(imageView_user);
+                if (imageView_user == null){
+                    Toast.makeText(CategoryActivity.this, "Wait!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Glide.with(CategoryActivity.this)
+                            .load(user.getImageURL())
+                            .into(imageView_user);
+                }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

@@ -44,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity {
     DatabaseReference databaseReference = database.getReference("Users");
     @BindView(R.id.editText_signUp_phone)
     EditText editTextSignUpPhone;
+    @BindView(R.id.editText_signUp_address)
+    EditText editTextSignUpAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
                 final String password = editTextSignUpPassword.getText().toString();
                 final String name = editTextSignUpName.getText().toString();
                 final String phone = editTextSignUpPhone.getText().toString();
+                final String address = editTextSignUpAddress.getText().toString();
 
                 if (TextUtils.isEmpty(phone)) {
                     Snackbar.make(v, "Please Enter Your Phone", Snackbar.LENGTH_SHORT).show();
@@ -91,6 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     hashMap.put("email", email);
                                     hashMap.put("pass", password);
                                     hashMap.put("phone", phone);
+                                    hashMap.put("address", address);
                                     hashMap.put("imageURL", "default");
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     databaseReference.child(userId).setValue(hashMap);
