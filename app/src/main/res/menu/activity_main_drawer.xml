@@ -3,41 +3,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group>
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_house"
-            android:title="Offers" />
-        <item
-            android:id="@+id/nav_burger"
-            android:icon="@drawable/ic_burger"
-            android:title="Burger" />
-        <item
-            android:id="@+id/nav_sweet"
-            android:icon="@drawable/ic_donut"
-            android:title="Sweet" />
-        <item
-            android:id="@+id/nav_drink"
-            android:icon="@drawable/ic_cola"
-            android:title="Drink" />
-        <item
-            android:id="@+id/nav_orders"
-            android:icon="@drawable/ic_orders"
-            android:title="Current Order" />
-
-        <item
-            android:id="@+id/nav_delivery"
-            android:icon="@drawable/ic_delivery_40"
-            android:title="Delivery" />
-
-    </group>
-    <item android:title="Communication">
+    <item android:title="Personal Information">
         <menu>
             <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/ic_man"
-                android:title="profile" />
+                android:title="My Profile" />
         </menu>
     </item>
+
+    <item android:title="Categories">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/ic_house"
+                android:title="Offers" />
+            <item
+                android:id="@+id/nav_burger"
+                android:icon="@drawable/ic_burger"
+                android:title="Burger" />
+            <item
+                android:id="@+id/nav_sweet"
+                android:icon="@drawable/ic_donut"
+                android:title="Sweet" />
+            <item
+                android:id="@+id/nav_drink"
+                android:icon="@drawable/ic_cola"
+                android:title="Drink" />
+            <item
+                android:id="@+id/nav_orders"
+                android:icon="@drawable/ic_orders"
+                android:title="My Order" />
+        </menu>
+    </item>
+
+    <item android:title="Delivery">
+        <menu>
+            <item
+                android:id="@+id/nav_delivery"
+                android:icon="@drawable/ic_delivery_40"
+                android:title="Delivery" />
+        </menu>
+    </item>
+
+
 
 </menu>
