@@ -64,7 +64,7 @@ public class DeliveryFragment extends Fragment {
         super.onStart();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference databaseReference = database.getReference("Cart").child(userId);
+        final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
@@ -77,7 +77,7 @@ public class DeliveryFragment extends Fragment {
 
             }
         });
-        // To save value is tru or false...
+        // To save value is true or false...
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

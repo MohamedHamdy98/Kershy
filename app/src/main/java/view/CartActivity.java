@@ -247,34 +247,7 @@ public class CartActivity extends AppCompatActivity {
                 finish();
             }
         });
-//        buttonCartItemBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                BurgerFragment burgerFragment = new BurgerFragment();
-//                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment_container,burgerFragment)
-//                        .commit();
-////                Intent intent = new Intent(CartActivity.this, BurgerFragment.class);
-////                startActivity(intent);
-////                finish();
-////                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//
-//            }
-//        });
-//        cardCartItemBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                BurgerFragment burgerFragment = new BurgerFragment();
-//                fragmentManager.beginTransaction().replace(R.id.nav_host_fragment_container,burgerFragment)
-//                        .commit();
-////                Intent intent = new Intent(CartActivity.this, BurgerFragment.class);
-////                startActivity(intent);
-////                finish();
-////                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//
-//            }
-//        });
+
     }
 
     private boolean hasGPSDevice(Context context) {
@@ -423,29 +396,4 @@ public class CartActivity extends AppCompatActivity {
         itemTouchHelper.attachToRecyclerView(recyclerViewCart);
     }
 
-//
-//    public void statusCheck() {
-//        final LocationManager manager = (LocationManager) getSystemService(CartActivity.LOCATION_SERVICE);
-//        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-//            buildAlertMessageNoGps();
-//        }
-//    }
-//
-//    private void buildAlertMessageNoGps() {
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
-//                .setCancelable(false)
-//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    public void onClick(final DialogInterface dialog, final int id) {
-//                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-//                    }
-//                })
-//                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                    public void onClick(final DialogInterface dialog, final int id) {
-//                        dialog.cancel();
-//                    }
-//                });
-//        final AlertDialog alert = builder.create();
-//        alert.show();
-//    }
 }

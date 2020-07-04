@@ -2,7 +2,9 @@ package view.ui.ProfileUser;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -256,6 +258,10 @@ public class ProfileUserFragment extends Fragment {
                 textViewUserEmail.setText(emailUser);
                 textViewUserPhone.setText(phoneUser);
                 textViewUserAddress.setText(addressUser);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saveName", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("name",nameUser);
+                editor.apply();
                 if (users.getImageURL().equals("default")) {
                     imageViewUser.setImageResource(R.drawable.ic_man);
                 } else {

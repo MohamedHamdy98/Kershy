@@ -112,9 +112,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else{
                     final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     databaseReference.child(userId).child("Phone").setValue(editTextPhoneMap.getText().toString());
-                    SharedPreferences sharedPreferences = getSharedPreferences("saveinfo",MODE_PRIVATE);
-                    String name = sharedPreferences.getString("name","User Name");
-                    databaseReference.child(userId).child("UserName").setValue(name);
+//                    SharedPreferences sharedPreferences = getSharedPreferences("saveName",MODE_PRIVATE);
+//                    String name = sharedPreferences.getString("name","User Name");
+//                    databaseReference.child(userId).child("UserName").setValue(name);
                     // To check progress bar in delivery fragment
                     databaseReference.child(userId).child("writeOrder").setValue(false);
                     databaseReference.child(userId).child("preparingOrder").setValue(false);
@@ -127,11 +127,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     finish();
                 }
-//                Fragment fragment = new OrdersFragment();
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.m, fragment);
-//                fragmentTransaction.commit();
             }
         });
     }
@@ -173,6 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     databaseReference.child(userId).child("Address").setValue(currentLocation.getLatitude() + " " +
                             currentLocation.getLongitude());
+                    getAddressandSetAddress();
                     mapFragment = (SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
                     mapFragment.getMapAsync(MapsActivity.this);
@@ -183,6 +179,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    private void getAddressandSetAddress(){
+        final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        databaseReference = database.getReference("Users").child(userId);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String address = dataSnapshot.child("address").getValue(String.class);
+                String name = dataSnapshot.child("userName").getValue(String.class);
+                databaseReference = database.getReference("Cart").child(userId);
+                databaseReference.child("AddressWrite").setValue(address);
+                databaseReference.child("UserName").setValue(name);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
