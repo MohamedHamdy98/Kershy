@@ -25,8 +25,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/imageView_user"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="20dp"
@@ -34,7 +34,159 @@
             app:civ_border_color="#fff"
             android:paddingTop="8dp"
             android:src="@drawable/me"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:text="Name : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/textView_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textColor="#959599"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="start"
+                android:text="Mohammed Hamdy"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#55555C" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:text="Email : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/textView_userEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:textColor="#959599"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="start"
+                android:text="mohammedhamdyyahia@gmail.com"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#55555C" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:text="Address : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/textView_userAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:textColor="#959599"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:text="ElRyad Nasser Bani Sweif"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#55555C" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:layout_weight="0.5"
+                android:layout_margin="10dp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:text="Phone : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            <TextView
+                android:id="@+id/textView_userPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:textColor="#959599"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:gravity="left"
+                android:text="01122677801"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        </LinearLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>
 
