@@ -35,70 +35,107 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_cart_item_back"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center_horizontal|left"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginBottom="10dp"
-                            android:elevation="15dp"
-                            app:cardBackgroundColor="#19191B"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="15dp">
-
-                            <ImageView
-                                android:id="@+id/button_cart_item_back"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center"
-                                android:paddingLeft="8dp"
-                                android:src="@drawable/ic_arrow_back_24" />
-                        </androidx.cardview.widget.CardView>
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:fontFamily="@font/bangers"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/bangers"
                             android:text="Kershy Cart "
                             android:textAllCaps="false"
                             android:textColor="#fff"
                             android:textSize="30sp" />
+
                         <ImageView
                             android:id="@+id/button_turnOn_GPS"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_alignParentRight="true"
-                            android:src="@drawable/ic_my_location_30"
-                            android:layout_margin="20dp"/>
+                            android:layout_margin="20dp"
+                            android:src="@drawable/ic_my_location_30" />
                     </RelativeLayout>
-
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView_cart"
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:layout_height="wrap_content">
                     </androidx.recyclerview.widget.RecyclerView>
-
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="Bill Details"
-                        android:textAllCaps="false"
-                        android:textColor="#fff"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:text="Bill Details"
+                            android:layout_weight="1"
+                            android:textAllCaps="false"
+                            android:textColor="#fff"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:layout_width="50dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="1.25"
+                            style="@style/RippleStyleGrey">
+                            <Button
+                                android:id="@+id/button_calculate_totalPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="30dp"
+                                android:text=" Click to calculate price"
+                                android:textColor="#fff"
+                                android:padding="2dp"
+                                android:background="@drawable/button_circle_shape_login"
+                                android:textAllCaps="false"
+                                android:textStyle="normal"
+                                android:textSize="14sp"
+                                android:src="@drawable/ic_my_location_30" />
+                        </com.balysv.materialripple.MaterialRippleLayout>
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|left"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Time"
+                            android:textColor="#959599"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/textView_date_order"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:paddingRight="30dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="dd,mm,yy"
+                            android:textAllCaps="false"
+                            android:textColor="#959599"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -113,15 +150,16 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/textView_cart_itemTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:gravity="right"
                             android:paddingRight="30dp"
-                            android:text="40 LE"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:gravity="right"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -131,7 +169,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -140,21 +177,22 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
-                            android:text="Resturant Charges"
+                            android:text="Restaurant Tax"
                             android:textColor="#959599"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/textView_cart_tax"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center"
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:gravity="right"
                             android:paddingRight="30dp"
-                            android:text="4 LE"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:gravity="right"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -179,6 +217,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/textView_cart_deliveryFee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center"
@@ -187,7 +226,7 @@
                             android:layout_weight="1"
                             android:gravity="right"
                             android:paddingRight="30dp"
-                            android:text="1 LE"
+                            android:text="0"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -212,6 +251,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/textView_cart_offer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center"
@@ -220,7 +260,7 @@
                             android:layout_weight="1"
                             android:gravity="right"
                             android:paddingRight="30dp"
-                            android:text="10%"
+                            android:text="0"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -255,6 +295,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/textView_cart_totalPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|center"
@@ -263,11 +304,12 @@
                             android:layout_weight="1"
                             android:gravity="right"
                             android:paddingRight="30dp"
-                            android:text="40.5 LE"
+                            android:text="0 LE"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
+
                     <com.balysv.materialripple.MaterialRippleLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

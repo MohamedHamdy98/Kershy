@@ -3,22 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group>
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:icon="@drawable/ic_house"
+            android:title="Offers" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_burger"
+            android:icon="@drawable/ic_burger"
+            android:title="Burger" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_sweet"
+            android:icon="@drawable/ic_donut"
+            android:title="Sweet" />
         <item
-            android:id="@+id/nav_follow_delivery"
+            android:id="@+id/nav_drink"
+            android:icon="@drawable/ic_cola"
+            android:title="Drink" />
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_orders"
+            android:title="Current Order" />
+
+        <item
+            android:id="@+id/nav_delivery"
             android:icon="@drawable/ic_delivery_40"
             android:title="Delivery" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_man"
+            android:title="profile" />
     </group>
+
 </menu>

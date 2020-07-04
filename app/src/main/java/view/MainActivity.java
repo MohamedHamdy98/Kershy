@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testeverything.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,12 +28,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppThemeNoActionBar);
-
-    //    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         startAnimation();
-        timeSplash();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+      timeSplash();
     }
 
     private void startAnimation(){
@@ -47,10 +52,22 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(SPLASH_SCREEN);
-                    Intent intent = new Intent(MainActivity.this, LogInActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                    finish();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null){
+                        Intent i = new Intent(MainActivity.this, LogInActivity.class);
+                        startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        finish();
+                    } else{
+                        Intent i = new Intent(MainActivity.this, SignUpActivity.class);
+                        startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        finish();
+                    }
+                   // Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+                    //startActivity(intent);
+
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -1,25 +1,73 @@
 package Model;
 
-public class ModelCart {
-    private String name_cart;
-    private String price;
-    private String number_item;
+import androidx.cardview.widget.CardView;
 
-    public ModelCart(String name_cart, String price, String number_item) {
-        this.name_cart = name_cart;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ModelCart {
+    private String id;
+    public String name;
+    public String numItem;
+    public String price;
+    public String  totalPrice;
+    private boolean isShrink = false;
+
+    public ModelCart(String name, String numItem, String price) {
+        this.name = name;
+        this.numItem = numItem;
         this.price = price;
-        this.number_item = number_item;
+    }
+
+    public ModelCart(String name, String numItem, String price, String totalPrice) {
+        this.name = name;
+        this.numItem = numItem;
+        this.price = price;
+        this.totalPrice = totalPrice;
     }
 
     public ModelCart() {
     }
 
-    public String getName_cart() {
-        return name_cart;
+
+    public boolean isShrink() {
+        return isShrink;
     }
 
-    public void setName_cart(String name_cart) {
-        this.name_cart = name_cart;
+    public void setShrink(boolean shrink) {
+        isShrink = shrink;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNumItem() {
+        return numItem;
+    }
+
+    public void setNumItem(String numItem) {
+        this.numItem = numItem;
     }
 
     public String getPrice() {
@@ -30,11 +78,6 @@ public class ModelCart {
         this.price = price;
     }
 
-    public String getNumber_item() {
-        return number_item;
-    }
 
-    public void setNumber_item(String number_item) {
-        this.number_item = number_item;
-    }
+
 }

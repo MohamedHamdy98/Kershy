@@ -8,18 +8,39 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="view.ui.CategoryItem.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Offers"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_burger"
+        android:name="view.ui.CategoryItem.BurgerFragment"
+        android:label="Burger"
+        tools:layout="@layout/fragment_burger" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="view.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_sweet"
+        android:name="view.ui.Sweet.SweetFragment"
+        android:label="Sweet"
+        tools:layout="@layout/fragment_sweet" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="view.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_drink"
+        android:name="view.ui.Drink.DrinkFragment"
+        android:label="Drink"
+        tools:layout="@layout/fragment_drink" />
+
+    <fragment
+        android:id="@+id/nav_orders"
+        android:name="view.ui.Orders.OrdersFragment"
+        android:label=" Current Order"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/nav_delivery"
+        android:name="view.ui.Delivery.DeliveryFragment"
+        android:label="Delivery"
+        tools:layout="@layout/fragment_delivery" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="view.ui.ProfileUser.ProfileUserFragment"
+        android:label="Delivery"
+        tools:layout="@layout/fragment_profile_user" />
 </navigation>
