@@ -95,14 +95,15 @@ public class ProfileUserFragment extends Fragment {
     @BindView(R.id.editPhone)
     LinearLayout editPhone;
     private StorageTask uploadTask;
-
+    @BindView(R.id.v)
+    View vi;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile_user, container, false);
         ButterKnife.bind(this, root);
         onClickEditProfile();
-        onCkickApply();
+        onClickApply();
         getDataFirebase();
         editImageUser();
         return root;
@@ -178,23 +179,18 @@ public class ProfileUserFragment extends Fragment {
         }
     }
 
-    private void onCkickApply() {
+    private void onClickApply() {
         buttonApplyCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                 String name = editTextUserName.getText().toString();
                 String address = editTextUserAddress.getText().toString();
-                // final String email = editTextUserEmail.getText().toString();
                 String phone = editTextUserPhone.getText().toString();
                 if (TextUtils.isEmpty(name)) {
                     Snackbar.make(v, "Please Enter Your Name", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                //else if (TextUtils.isEmpty(email)) {
-                //  Snackbar.make(v, "Please Enter Your Email", Snackbar.LENGTH_SHORT).show();
-                // return;
-                //  }
                 else if (TextUtils.isEmpty(address)) {
                     Snackbar.make(v, "Please Enter Your Address", Snackbar.LENGTH_SHORT).show();
                     return;
@@ -234,6 +230,8 @@ public class ProfileUserFragment extends Fragment {
                 textAddress.setVisibility(View.GONE);
                 textEmail.setVisibility(View.GONE);
                 textPhone.setVisibility(View.GONE);
+                vi.setVisibility(View.GONE);
+                buttonApplyCart.setVisibility(View.VISIBLE);
                 nameEdit.setVisibility(View.VISIBLE);
                 editAddress.setVisibility(View.VISIBLE);
                 //  editEmail.setVisibility(View.VISIBLE);
