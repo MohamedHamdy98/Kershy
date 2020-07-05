@@ -46,7 +46,7 @@ public class DeliveryFragment extends Fragment {
     Switch switch3;
     @BindView(R.id.switch4)
     Switch switch4;
-
+    int valueSeekbar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class DeliveryFragment extends Fragment {
         textMessage = root.findViewById(R.id.message);
         seekBar.setEnabled(true);
         onClickButton();
+        saveSeekBarProgress();
         return root;
     }
 
@@ -64,6 +65,7 @@ public class DeliveryFragment extends Fragment {
     public void onStart() {
         super.onStart();
         checkSeekBar();
+
     }
 
     public void onClickWrite() {
@@ -136,28 +138,31 @@ public class DeliveryFragment extends Fragment {
             public void onClick(View v) {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
+                final DatabaseReference databaseReference = database.getReference("Cart")
+                        .child(userId).child(userId);
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        boolean waitOrder = dataSnapshot.child("waitOrder").getValue(boolean.class);
                         boolean writeOrder = dataSnapshot.child("writeOrder").getValue(boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
-
-                        if (writeOrder == progress) {
-                            Toast.makeText(getActivity(), "written", Toast.LENGTH_SHORT).show();
-                            textMessage.setText("Your order is written");
-                            orderImage.setImageResource(R.drawable.ic_order_180);
-                            seekBar.setProgress(1);
-                        }
-                        else if (waitOrder != progress){
-                            textMessage.setText("Please! Wait");
-                            orderImage.setImageResource(R.drawable.ic_time_180);
-                            seekBar.setProgress(0);
+                        if (isAdded()){
+                            if (writeOrder == progress) {
+                                textMessage.setText("Your order is written");
+                                orderImage.setImageResource(R.drawable.ic_order_180);
+                                seekBar.setProgress(1);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            }
+                            else if (writeOrder != progress){
+                                textMessage.setText("Please! Wait");
+                                orderImage.setImageResource(R.drawable.ic_time_180);
+                                seekBar.setProgress(0);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            }
                         }
 
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
@@ -176,16 +181,23 @@ public class DeliveryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         boolean preparingOrder = dataSnapshot.child("preparingOrder").getValue(Boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
-                        if (preparingOrder == progress) {
-                            Toast.makeText(getActivity(), "preparing", Toast.LENGTH_SHORT).show();
-                            textMessage.setText("Your order is preparing");
-                            orderImage.setImageResource(R.drawable.ic_cook);
-                            seekBar.setProgress(2);
-                        } else if (preparingOrder != progress) {
-                            textMessage.setText("Your order is written");
-                            orderImage.setImageResource(R.drawable.ic_order_180);
-                            seekBar.setProgress(1);
+                        databaseReference.child("valueSeekBar").removeValue();
+                        if (isAdded()){
+                            if (preparingOrder == progress) {
+                                textMessage.setText("Your order is preparing");
+                                orderImage.setImageResource(R.drawable.ic_cook);
+                                seekBar.setProgress(2);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            } else if (preparingOrder != progress) {
+                                textMessage.setText("Your order is written");
+                                orderImage.setImageResource(R.drawable.ic_order_180);
+                                seekBar.setProgress(1);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            }
                         }
+
                     }
 
                     @Override
@@ -206,19 +218,23 @@ public class DeliveryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         boolean wayOrder = dataSnapshot.child("wayOrder").getValue(Boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
-                        if (wayOrder == progress) {
-                            Toast.makeText(getActivity(), "on the way", Toast.LENGTH_SHORT).show();
-                            textMessage.setText("Your order is on the way");
-                            orderImage.setImageResource(R.drawable.ic_delivery_180);
-                            seekBar.setProgress(3);
-                        } else if (wayOrder != progress) {
-                            textMessage.setText("Your order is preparing");
-                            orderImage.setImageResource(R.drawable.ic_cook);
-                            seekBar.setProgress(2);
+                        databaseReference.child("valueSeekBar").removeValue();
+                        if (isAdded()){
+                            if (wayOrder == progress) {
+                                textMessage.setText("Your order is on the way");
+                                orderImage.setImageResource(R.drawable.ic_delivery_180);
+                                seekBar.setProgress(3);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            } else if (wayOrder != progress) {
+                                textMessage.setText("Your order is preparing");
+                                orderImage.setImageResource(R.drawable.ic_cook);
+                                seekBar.setProgress(2);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            }
                         }
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
@@ -237,15 +253,21 @@ public class DeliveryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
-                        if (deliveredOrder == progress) {
-                            Toast.makeText(getActivity(), "receive", Toast.LENGTH_SHORT).show();
-                            textMessage.setText("Your order is receiving");
-                            orderImage.setImageResource(R.drawable.ic_receive_180);
-                            seekBar.setProgress(4);
-                        } else if (deliveredOrder != progress) {
-                            textMessage.setText("Your order is on the way");
-                            orderImage.setImageResource(R.drawable.ic_delivery_180);
-                            seekBar.setProgress(3);
+                        databaseReference.child("valueSeekBar").removeValue();
+                        if (isAdded()){
+                            if (deliveredOrder == progress) {
+                                textMessage.setText("Your order is receiving");
+                                orderImage.setImageResource(R.drawable.ic_receive_180);
+                                seekBar.setProgress(4);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            } else if (deliveredOrder != progress) {
+                                textMessage.setText("Your order is on the way");
+                                orderImage.setImageResource(R.drawable.ic_delivery_180);
+                                seekBar.setProgress(3);
+                                valueSeekbar = seekBar.getProgress();
+                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                            }
                         }
                     }
                     @Override
@@ -346,5 +368,27 @@ public class DeliveryFragment extends Fragment {
         });
     }
 
+    private void saveSeekBarProgress(){
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = database.getReference("Cart").child(userId)
+                .child(userId).child("valueSeekBar");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int value = dataSnapshot.getValue(Integer.class);
+                if (dataSnapshot.exists()){
+                    seekBar.setProgress(value);
+                } else {
+                    seekBar.setProgress(0);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

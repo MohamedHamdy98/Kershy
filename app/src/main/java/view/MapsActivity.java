@@ -50,7 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference("Cart");
-
     @BindView(R.id.cardView_gone)
     CardView cardViewGone;
     @BindView(R.id.button_reset_myLocation_GPS)
@@ -122,6 +121,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     databaseReference.child(userId).child("deliveredOrder").setValue(false);
                     databaseReference.child(userId).child("waitOrder").setValue(false);
                     databaseReference.child(userId).child("progress").setValue(true);
+                    databaseReference.child(userId).child("valueSeekBar").setValue(0);
                     Toast.makeText(MapsActivity.this, "Please wait!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MapsActivity.this,CategoryActivity.class));
                     overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
