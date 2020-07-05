@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,185 +12,194 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="4dp"
         android:elevation="20dp"
-        app:cardBackgroundColor="#2A2A32"
+        app:cardBackgroundColor="#00CB2C"
         app:cardCornerRadius="12dp"
         app:cardElevation="20dp">
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <androidx.cardview.widget.CardView
-                android:layout_width="120dp"
-                android:layout_height="140dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="12dp"
-                app:cardBackgroundColor="#2A2A32"
-                app:cardCornerRadius="8dp"
-                android:elevation="10dp">
-                <ImageView
-                    android:id="@+id/imageView_recycler_category"
-                    android:layout_width="120dp"
-                    android:layout_height="140dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/burgeritemback" />
-            </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="1dp"
+            android:elevation="20dp"
+            app:cardBackgroundColor="#2A2A32"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="20dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
                 android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/text_name_recycler_category"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="120dp"
+                    android:layout_height="140dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="12dp"
+                    app:cardBackgroundColor="#2A2A32"
+                    app:cardCornerRadius="8dp"
+                    android:elevation="10dp">
+                    <ImageView
+                        android:id="@+id/imageView_recycler_category"
+                        android:layout_width="120dp"
+                        android:layout_height="140dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/burgeritemback" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="left|center_vertical"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Creamy nachos"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/text_name_recycler_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="left|center_vertical"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="Creamy nachos"
+                            android:textAllCaps="false"
+                            android:textColor="#fff"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/image_add_cart"
-                    android:layout_width="90dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="right|center"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:src="@drawable/ic_add_cart_30"/>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/image_add_cart"
+                            android:layout_width="90dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="right|center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:src="@drawable/ic_add_cart_30"/>
+                    </LinearLayout>
 
-            <ru.embersoft.expandabletextview.ExpandableTextView
-                android:id="@+id/text_description_recycler_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:etv_animationTime="20"
-                app:etv_expandLines="0"
-                app:etv_showLine="false"
-                android:paddingBottom="10dp"
-                app:etv_textContentSize="14sp"
-                app:etv_textExpand="Show more!"
-                app:etv_textShrink="Show less!"
-                app:etv_textContentColor="#fff"
-                app:etv_textStateColor="#fff"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="10dp" />
+                    <ru.embersoft.expandabletextview.ExpandableTextView
+                        android:id="@+id/text_description_recycler_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:etv_animationTime="20"
+                        app:etv_expandLines="0"
+                        app:etv_showLine="false"
+                        android:paddingBottom="10dp"
+                        app:etv_textContentSize="14sp"
+                        app:etv_textExpand="Show more >"
+                        app:etv_textContentColor="#fff"
+                        app:etv_textStateColor="#fff"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="10dp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/text_price_recycler_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="left|center"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textAllCaps="false"/>
-                <TextView
-                    android:id="@+id/text_totalprice_recycler_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="left|center"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textAllCaps="false"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:gravity="center"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="right|center"
-                    android:layout_marginBottom="6dp"
-                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/text_price_recycler_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_gravity="left|center"
+                            android:textColor="#fff"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:textAllCaps="false"/>
+                        <TextView
+                            android:id="@+id/text_totalprice_recycler_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:visibility="gone"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_gravity="left|center"
+                            android:textColor="#fff"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:textAllCaps="false"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="4dp"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"
-                            android:paddingRight="4dp"
-                            android:background="@drawable/cardview_circle_plus_an_mins"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="right|center"
+                            android:layout_marginBottom="6dp"
                             android:orientation="horizontal">
                             <LinearLayout
-                                android:id="@+id/linear_remove_recycler_category"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="4dp"
-                                android:layout_marginBottom="2dp"
-                                android:layout_marginTop="2dp"
-                                android:layout_weight="1"
-                                android:layout_marginRight="12dp"
-                                android:gravity="center"
-                                android:layout_gravity="center">
-                        <Button
-                            android:id="@+id/button_remove_recycler_category"
-                            android:layout_width="20dp"
-                            android:layout_height="3dp"
-                            android:background="@drawable/ic_newmins"/>
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:paddingRight="4dp"
+                                android:background="@drawable/cardview_circle_plus_an_mins"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:id="@+id/linear_remove_recycler_category"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_weight="1"
+                                    android:layout_marginRight="12dp"
+                                    android:gravity="center"
+                                    android:layout_gravity="center">
+                                    <Button
+                                        android:id="@+id/button_remove_recycler_category"
+                                        android:layout_width="20dp"
+                                        android:layout_height="3dp"
+                                        android:background="@drawable/ic_newmins"/>
+                                </LinearLayout>
+                                <TextView
+                                    android:id="@+id/text_remove_add_recycler_category"
+                                    android:layout_width="30sp"
+                                    android:layout_height="30sp"
+                                    android:text="0"
+                                    android:layout_marginRight="2dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_marginBottom="4dp"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    android:textSize="25sp"
+                                    android:textAllCaps="false"
+                                    android:textStyle="bold"
+                                    android:textColor="#00CB2C"/>
+                                <Button
+                                    android:id="@+id/button_add_recycler_category"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:layout_marginLeft="12dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginRight="4dp"
+                                    android:background="@drawable/ic_newplus"/>
                             </LinearLayout>
-                            <TextView
-                                android:id="@+id/text_remove_add_recycler_category"
-                                android:layout_width="30sp"
-                                android:layout_height="30sp"
-                                android:text="0"
-                                android:layout_marginRight="2dp"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginLeft="2dp"
-                                android:layout_marginBottom="4dp"
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                android:textSize="25sp"
-                                android:textAllCaps="false"
-                                android:textStyle="bold"
-                                android:textColor="#00CB2C"/>
-                            <Button
-                                android:id="@+id/button_add_recycler_category"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_marginLeft="12dp"
-                                android:layout_marginBottom="2dp"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginRight="4dp"
-                                android:background="@drawable/ic_newplus"/>
-                    </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
-        </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
+
 
 </LinearLayout>

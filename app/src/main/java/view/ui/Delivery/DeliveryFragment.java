@@ -1,7 +1,5 @@
 package view.ui.Delivery;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -42,8 +39,13 @@ public class DeliveryFragment extends Fragment {
     @BindView(R.id.delivered)
     Button delivered;
     @BindView(R.id.switch1)
-
     Switch aSwitch;
+    @BindView(R.id.switch2)
+    Switch switch2;
+    @BindView(R.id.switch3)
+    Switch switch3;
+    @BindView(R.id.switch4)
+    Switch switch4;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -189,6 +191,60 @@ public class DeliveryFragment extends Fragment {
                         Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+    }
+
+    private void checkSeekBar(){
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                if (isChecked) {
+                    databaseReference.child("writeOrder").setValue(true);
+
+                } else {
+                    databaseReference.child("writeOrder").setValue(false);
+                }
+
+            }
+        });
+        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                if (isChecked) {
+                    databaseReference.child("writeOrder").setValue(true);
+
+                } else {
+                    databaseReference.child("writeOrder").setValue(false);
+                }
+
+            }
+        });
+        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                if (isChecked) {
+                    databaseReference.child("writeOrder").setValue(true);
+
+                } else {
+                    databaseReference.child("writeOrder").setValue(false);
+                }
+
+            }
+        });
+        switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
+                if (isChecked) {
+                    databaseReference.child("writeOrder").setValue(true);
+
+                } else {
+                    databaseReference.child("writeOrder").setValue(false);
+                }
+
             }
         });
     }
