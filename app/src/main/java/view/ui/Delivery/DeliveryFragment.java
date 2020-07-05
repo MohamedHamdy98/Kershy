@@ -56,7 +56,6 @@ public class DeliveryFragment extends Fragment {
         orderImage = root.findViewById(R.id.image_order);
         textMessage = root.findViewById(R.id.message);
         seekBar.setEnabled(true);
-
         onClickButton();
         return root;
     }
@@ -64,38 +63,7 @@ public class DeliveryFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
-                if (isChecked) {
-                    databaseReference.child("writeOrder").setValue(true);
-
-                } else {
-                    databaseReference.child("writeOrder").setValue(false);
-                }
-
-            }
-        });
-        // To save value is true or false...
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean wr = dataSnapshot.child("writeOrder").getValue(Boolean.class);
-                if (wr == true) {
-                    aSwitch.setChecked(true);
-                } else {
-                    aSwitch.setChecked(false);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        checkSeekBar();
     }
 
     public void onClickWrite() {
@@ -172,17 +140,51 @@ public class DeliveryFragment extends Fragment {
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean waitOrder = dataSnapshot.child("waitOrder").getValue(boolean.class);
                         boolean writeOrder = dataSnapshot.child("writeOrder").getValue(boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
+
                         if (writeOrder == progress) {
                             Toast.makeText(getActivity(), "written", Toast.LENGTH_SHORT).show();
                             textMessage.setText("Your order is written");
                             orderImage.setImageResource(R.drawable.ic_order_180);
                             seekBar.setProgress(1);
-                        } else if (writeOrder != progress) {
-                            textMessage.setText("Please! wait");
+                        }
+                        else if (waitOrder != progress){
+                            textMessage.setText("Please! Wait");
                             orderImage.setImageResource(R.drawable.ic_time_180);
                             seekBar.setProgress(0);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        prepare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean preparingOrder = dataSnapshot.child("preparingOrder").getValue(Boolean.class);
+                        boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
+                        if (preparingOrder == progress) {
+                            Toast.makeText(getActivity(), "preparing", Toast.LENGTH_SHORT).show();
+                            textMessage.setText("Your order is preparing");
+                            orderImage.setImageResource(R.drawable.ic_cook);
+                            seekBar.setProgress(2);
+                        } else if (preparingOrder != progress) {
+                            textMessage.setText("Your order is written");
+                            orderImage.setImageResource(R.drawable.ic_order_180);
+                            seekBar.setProgress(1);
                         }
                     }
 
@@ -193,9 +195,69 @@ public class DeliveryFragment extends Fragment {
                 });
             }
         });
+        way.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean wayOrder = dataSnapshot.child("wayOrder").getValue(Boolean.class);
+                        boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
+                        if (wayOrder == progress) {
+                            Toast.makeText(getActivity(), "on the way", Toast.LENGTH_SHORT).show();
+                            textMessage.setText("Your order is on the way");
+                            orderImage.setImageResource(R.drawable.ic_delivery_180);
+                            seekBar.setProgress(3);
+                        } else if (wayOrder != progress) {
+                            textMessage.setText("Your order is preparing");
+                            orderImage.setImageResource(R.drawable.ic_cook);
+                            seekBar.setProgress(2);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+        delivered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
+                        boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
+                        if (deliveredOrder == progress) {
+                            Toast.makeText(getActivity(), "receive", Toast.LENGTH_SHORT).show();
+                            textMessage.setText("Your order is receiving");
+                            orderImage.setImageResource(R.drawable.ic_receive_180);
+                            seekBar.setProgress(4);
+                        } else if (deliveredOrder != progress) {
+                            textMessage.setText("Your order is on the way");
+                            orderImage.setImageResource(R.drawable.ic_delivery_180);
+                            seekBar.setProgress(3);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
-    private void checkSeekBar(){
+    private void checkSeekBar() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = database.getReference("Cart").child(userId).child(userId);
@@ -215,10 +277,10 @@ public class DeliveryFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
                 if (isChecked) {
-                    databaseReference.child("writeOrder").setValue(true);
+                    databaseReference.child("preparingOrder").setValue(true);
 
                 } else {
-                    databaseReference.child("writeOrder").setValue(false);
+                    databaseReference.child("preparingOrder").setValue(false);
                 }
 
             }
@@ -227,10 +289,10 @@ public class DeliveryFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
                 if (isChecked) {
-                    databaseReference.child("writeOrder").setValue(true);
+                    databaseReference.child("wayOrder").setValue(true);
 
                 } else {
-                    databaseReference.child("writeOrder").setValue(false);
+                    databaseReference.child("wayOrder").setValue(false);
                 }
 
             }
@@ -239,13 +301,50 @@ public class DeliveryFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, final boolean isChecked) {
                 if (isChecked) {
-                    databaseReference.child("writeOrder").setValue(true);
+                    databaseReference.child("deliveredOrder").setValue(true);
 
                 } else {
-                    databaseReference.child("writeOrder").setValue(false);
+                    databaseReference.child("deliveredOrder").setValue(false);
                 }
 
             }
         });
+        // To save value is true or false...
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean writeOrder = dataSnapshot.child("writeOrder").getValue(Boolean.class);
+                boolean preparingOrder = dataSnapshot.child("preparingOrder").getValue(Boolean.class);
+                boolean wayOrder = dataSnapshot.child("wayOrder").getValue(Boolean.class);
+                boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
+                if (writeOrder == true) {
+                    aSwitch.setChecked(true);
+                } else {
+                    aSwitch.setChecked(false);
+                }
+                if (preparingOrder == true) {
+                    switch2.setChecked(true);
+                } else {
+                    switch2.setChecked(false);
+                }
+                if (wayOrder == true) {
+                    switch3.setChecked(true);
+                } else {
+                    switch3.setChecked(false);
+                }
+                if (deliveredOrder == true) {
+                    switch4.setChecked(true);
+                } else {
+                    switch4.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
+
 }
