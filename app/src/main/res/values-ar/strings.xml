@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">كيرشي</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up"> <u>Sign up</u></string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">الرئيسية</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_maps">الخريطة</string>
+    <string name="text_label">\"كلمة المرور يجب أن يكون عددها أكثر من 6 "</string>
+    <string name="d">s</string>
+    <string name="bill_details">تفاصيل الفاتورة</string>
+    <string name="click_to_calculate_price">اضغط لحساب السعر</string>
+    <string name="time">الوقت</string>
+    <string name="item_total">عدد العناصر</string>
+    <string name="restaurant_tax">ضريبة المطعم</string>
+    <string name="delivery_fee">قيمة التوصيل</string>
+    <string name="offer_off">التخفيض</string>
+    <string name="to_pay">السعر الكلي</string>
+    <string name="apply">موافق</string>
+    <string name="my_profile">صفحتي الشخصية</string>
+    <string name="offers">العروض</string>
+    <string name="burger">برجر</string>
+    <string name="sweet">الحلويات</string>
+    <string name="my_order">طلبي</string>
+    <string name="delivery">التوصيل</string>
+    <string name="drink">المشروبات</string>
+    <string name="categories">الأقسام</string>
+    <string name="personal_information">المعلومات الشخصية</string>
+    <string name="number_phone">رقم الموبايل</string>
+    <string name="sigup">إنشاء حساب</string>
+    <string name="name">الاسم</string>
+    <string name="phone">الموبايل</string>
+    <string name="address">العنوان</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="kershy_burger">برجر كيرشي</string>
+    <string name="ratings">التقييم</string>
+    <string name="minutes_delivery_time"> وقت توصيل الطلب</string>
+    <string name="follow_your_order">متابعة الطلب الخاص بك...</string>
+    <string name="rate_restaurant">تقييم المطعم</string>
+    <string name="Your_order_is_written">الطلب الخاص بك تمت كتابته</string>
+    <string name="Your_order_is_preparing">الطلب الخاص بك يتم إعداده في المطعم</string>
+    <string name="Your_order_is_on_the_way">الطلب الخاص بك في طريقه إليك</string>
+    <string name="Your_order_is_receiving">تم توصيل الطلب الخاص بك</string>
+    <string name="please_wait">من فضلك! انتظر</string>
+    <string name="kershy_drink">مشروبات كيرشي</string>
+    <string name="my_orders">طلبي</string>
+    <string name="total_price">السعر الكلي</string>
+    <string name="name_profile">الاسم :</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="email_profile">البريد :</string>
+    <string name="address_profile">العنوان :</string>
+    <string name="phone_profile">الموبايل :</string>
+    <string name="kershy_sweet">حلويات كيرشي</string>
+    <string name="food_name">اسم المنتج</string>
+    <string name="show_more">عرض التفاصيل</string>
+    <string name="old_price">السعر قبل العرض</string>
+    <string name="price_after_offer">السعر بعد العرض</string>
+    <string name="price">السعر</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="remember_me">تذكرني!</string>
+    <string name="not_yet_a_member">لست عضواَ بعد,</string>
+</resources>

@@ -15,7 +15,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_maps">Map</string>
-    <string name="text_label">\"Password should be more thn 6 letters\"</string>
+    <string name="text_label">\"Password should be more than 6 letters\"</string>
     <string name="d">s</string>
     <string name="bill_details">Bill Details</string>
     <string name="click_to_calculate_price">Click to calculate price</string>
