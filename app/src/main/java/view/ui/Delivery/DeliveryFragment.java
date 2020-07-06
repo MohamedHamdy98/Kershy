@@ -57,7 +57,7 @@ public class DeliveryFragment extends Fragment {
         textMessage = root.findViewById(R.id.message);
         seekBar.setEnabled(true);
         onClickButton();
-        saveSeekBarProgress();
+        //saveSeekBarProgress();
         return root;
     }
 
@@ -65,7 +65,6 @@ public class DeliveryFragment extends Fragment {
     public void onStart() {
         super.onStart();
         checkSeekBar();
-
     }
 
     public void onClickWrite() {
@@ -181,20 +180,20 @@ public class DeliveryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         boolean preparingOrder = dataSnapshot.child("preparingOrder").getValue(Boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
-                        databaseReference.child("valueSeekBar").removeValue();
+                       // databaseReference.child("valueSeekBar").removeValue();
                         if (isAdded()){
                             if (preparingOrder == progress) {
                                 textMessage.setText(R.string.Your_order_is_preparing);
                                 orderImage.setImageResource(R.drawable.ic_cook);
                                 seekBar.setProgress(2);
                                 valueSeekbar = seekBar.getProgress();
-                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                              //  databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             } else if (preparingOrder != progress) {
                                 textMessage.setText(R.string.Your_order_is_written);
                                 orderImage.setImageResource(R.drawable.ic_order_180);
                                 seekBar.setProgress(1);
                                 valueSeekbar = seekBar.getProgress();
-                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                              //  databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             }
                         }
 
@@ -218,20 +217,20 @@ public class DeliveryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         boolean wayOrder = dataSnapshot.child("wayOrder").getValue(Boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
-                        databaseReference.child("valueSeekBar").removeValue();
+                       // databaseReference.child("valueSeekBar").removeValue();
                         if (isAdded()){
                             if (wayOrder == progress) {
                                 textMessage.setText(R.string.Your_order_is_on_the_way);
                                 orderImage.setImageResource(R.drawable.ic_delivery_180);
                                 seekBar.setProgress(3);
                                 valueSeekbar = seekBar.getProgress();
-                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                               // databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             } else if (wayOrder != progress) {
                                 textMessage.setText(R.string.Your_order_is_preparing);
                                 orderImage.setImageResource(R.drawable.ic_cook);
                                 seekBar.setProgress(2);
                                 valueSeekbar = seekBar.getProgress();
-                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                                //databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             }
                         }
                     }
@@ -253,20 +252,20 @@ public class DeliveryFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
-                        databaseReference.child("valueSeekBar").removeValue();
+                      //  databaseReference.child("valueSeekBar").removeValue();
                         if (isAdded()){
                             if (deliveredOrder == progress) {
                                 textMessage.setText(R.string.Your_order_is_receiving);
                                 orderImage.setImageResource(R.drawable.ic_receive_180);
                                 seekBar.setProgress(4);
                                 valueSeekbar = seekBar.getProgress();
-                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                               // databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             } else if (deliveredOrder != progress) {
                                 textMessage.setText(R.string.Your_order_is_on_the_way);
                                 orderImage.setImageResource(R.drawable.ic_delivery_180);
                                 seekBar.setProgress(3);
                                 valueSeekbar = seekBar.getProgress();
-                                databaseReference.child("valueSeekBar").setValue(valueSeekbar);
+                               // databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             }
                         }
                     }
