@@ -8,39 +8,39 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="view.ui.CategoryItem.HomeFragment"
-        android:label="Offers"
+        android:label="@string/offers"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_burger"
         android:name="view.ui.CategoryItem.BurgerFragment"
-        android:label="Burger"
+        android:label="@string/burger"
         tools:layout="@layout/fragment_burger" />
 
     <fragment
         android:id="@+id/nav_sweet"
         android:name="view.ui.Sweet.SweetFragment"
-        android:label="Sweet"
+        android:label="@string/sweet"
         tools:layout="@layout/fragment_sweet" />
 
     <fragment
         android:id="@+id/nav_drink"
         android:name="view.ui.Drink.DrinkFragment"
-        android:label="Drink"
+        android:label="@string/drink"
         tools:layout="@layout/fragment_drink" />
 
     <fragment
         android:id="@+id/nav_orders"
         android:name="view.ui.Orders.OrdersFragment"
-        android:label=" Current Order"
+        android:label="@string/my_order"
         tools:layout="@layout/fragment_orders" />
     <fragment
         android:id="@+id/nav_delivery"
         android:name="view.ui.Delivery.DeliveryFragment"
-        android:label="Delivery"
+        android:label="@string/delivery"
         tools:layout="@layout/fragment_delivery" />
     <fragment
         android:id="@+id/nav_profile"
         android:name="view.ui.ProfileUser.ProfileUserFragment"
-        android:label="My Profile"
+        android:label="@string/my_profile"
         tools:layout="@layout/fragment_profile_user" />
 </navigation>

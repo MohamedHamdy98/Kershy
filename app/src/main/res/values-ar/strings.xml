@@ -71,4 +71,6 @@
     <string name="login">تسجيل دخول</string>
     <string name="remember_me">تذكرني!</string>
     <string name="not_yet_a_member">لست عضواَ بعد,</string>
+    <string name="share_application">مشاركة التطبيق</string>
+    <string name="logout">تسجيل خروج</string>
 </resources>

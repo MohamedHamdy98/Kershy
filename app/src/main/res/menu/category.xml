@@ -11,11 +11,11 @@
         android:id="@+id/nav_share_app"
         app:showAsAction="never"
         android:icon="@drawable/ic_share"
-        android:title="Share Application"/>
+        android:title="@string/share_application"/>
 
     <item
         android:id="@+id/nav_logout"
         app:showAsAction="never"
         android:icon="@drawable/ic_logout"
-        android:title="LogOut"/>
+        android:title="@string/logout"/>
 </menu>

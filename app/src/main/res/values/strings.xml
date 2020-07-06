@@ -69,4 +69,6 @@
     <string name="login">LogIn</string>
     <string name="remember_me">Remember me!</string>
     <string name="not_yet_a_member">Not yet a member,</string>
+    <string name="share_application">Share Application</string>
+    <string name="logout">LogOut</string>
 </resources>
