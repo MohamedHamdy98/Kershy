@@ -52,7 +52,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="4dp"
                             android:gravity="center"
-                            android:text="My Orders"
+                            android:text="@string/my_orders"
                             android:textAllCaps="false"
                             android:textColor="#fff"
                             android:textSize="22sp"
@@ -120,7 +120,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
-                                android:text="Time"
+                                android:text="@string/time"
                                 android:textColor="#959599"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -156,7 +156,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
-                                android:text="Item Total"
+                                android:text="@string/item_total"
                                 android:textColor="#959599"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -190,7 +190,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
-                                android:text="Restaurant Tax"
+                                android:text="@string/restaurant_tax"
                                 android:textColor="#959599"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -224,7 +224,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
-                                android:text="Delivery Fee"
+                                android:text="@string/delivery_fee"
                                 android:textColor="#959599"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -258,7 +258,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
-                                android:text="Offer OFF"
+                                android:text="@string/offer_off"
                                 android:textColor="#959599"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -302,7 +302,7 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_weight="1"
-                                android:text="Total Price"
+                                android:text="@string/total_price"
                                 android:textColor="#fff"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />

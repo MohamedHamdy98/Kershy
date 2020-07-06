@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
-                android:text="Price"
+                android:text="@string/price"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"

@@ -147,7 +147,7 @@ public class DeliveryFragment extends Fragment {
                         boolean progress = dataSnapshot.child("progress").getValue(boolean.class);
                         if (isAdded()){
                             if (writeOrder == progress) {
-                                textMessage.setText("Your order is written");
+                                textMessage.setText(R.string.Your_order_is_written);
                                 orderImage.setImageResource(R.drawable.ic_order_180);
                                 seekBar.setProgress(1);
                                 valueSeekbar = seekBar.getProgress();
@@ -184,13 +184,13 @@ public class DeliveryFragment extends Fragment {
                         databaseReference.child("valueSeekBar").removeValue();
                         if (isAdded()){
                             if (preparingOrder == progress) {
-                                textMessage.setText("Your order is preparing");
+                                textMessage.setText(R.string.Your_order_is_preparing);
                                 orderImage.setImageResource(R.drawable.ic_cook);
                                 seekBar.setProgress(2);
                                 valueSeekbar = seekBar.getProgress();
                                 databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             } else if (preparingOrder != progress) {
-                                textMessage.setText("Your order is written");
+                                textMessage.setText(R.string.Your_order_is_written);
                                 orderImage.setImageResource(R.drawable.ic_order_180);
                                 seekBar.setProgress(1);
                                 valueSeekbar = seekBar.getProgress();
@@ -221,13 +221,13 @@ public class DeliveryFragment extends Fragment {
                         databaseReference.child("valueSeekBar").removeValue();
                         if (isAdded()){
                             if (wayOrder == progress) {
-                                textMessage.setText("Your order is on the way");
+                                textMessage.setText(R.string.Your_order_is_on_the_way);
                                 orderImage.setImageResource(R.drawable.ic_delivery_180);
                                 seekBar.setProgress(3);
                                 valueSeekbar = seekBar.getProgress();
                                 databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             } else if (wayOrder != progress) {
-                                textMessage.setText("Your order is preparing");
+                                textMessage.setText(R.string.Your_order_is_preparing);
                                 orderImage.setImageResource(R.drawable.ic_cook);
                                 seekBar.setProgress(2);
                                 valueSeekbar = seekBar.getProgress();
@@ -256,13 +256,13 @@ public class DeliveryFragment extends Fragment {
                         databaseReference.child("valueSeekBar").removeValue();
                         if (isAdded()){
                             if (deliveredOrder == progress) {
-                                textMessage.setText("Your order is receiving");
+                                textMessage.setText(R.string.Your_order_is_receiving);
                                 orderImage.setImageResource(R.drawable.ic_receive_180);
                                 seekBar.setProgress(4);
                                 valueSeekbar = seekBar.getProgress();
                                 databaseReference.child("valueSeekBar").setValue(valueSeekbar);
                             } else if (deliveredOrder != progress) {
-                                textMessage.setText("Your order is on the way");
+                                textMessage.setText(R.string.Your_order_is_on_the_way);
                                 orderImage.setImageResource(R.drawable.ic_delivery_180);
                                 seekBar.setProgress(3);
                                 valueSeekbar = seekBar.getProgress();
@@ -377,16 +377,10 @@ public class DeliveryFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int value = dataSnapshot.getValue(Integer.class);
-                if (dataSnapshot.exists()){
-                    seekBar.setProgress(value);
-                } else {
-                    seekBar.setProgress(0);
-                }
-
+                seekBar.setProgress(value);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }

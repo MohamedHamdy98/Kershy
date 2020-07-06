@@ -36,7 +36,7 @@
         android:textStyle="bold"
         android:textAllCaps="false"
         android:gravity="center"
-        android:text="User Name"
+        android:text="@string/user_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

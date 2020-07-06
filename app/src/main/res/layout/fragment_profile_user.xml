@@ -71,7 +71,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="left"
-                            android:text="Name : "
+                            android:text="@string/name_profile"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <TextView
                             android:id="@+id/textView_userName"
@@ -85,7 +85,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="left"
-                            android:text="User Name"
+                            android:text="@string/user_name"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
                     <LinearLayout
@@ -148,7 +148,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="left"
-                            android:text="Email : "
+                            android:text="@string/email_profile"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <TextView
                             android:id="@+id/textView_userEmail"
@@ -161,7 +161,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="start"
-                            android:text="mohammedhamdyyahia@gmail.com"
+                            android:text="@string/email"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
                     <!--<LinearLayout
@@ -225,7 +225,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="left"
-                            android:text="Address : "
+                            android:text="@string/address_profile"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <TextView
                             android:id="@+id/textView_userAddress"
@@ -238,7 +238,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="left"
-                            android:text="ElRyad Nasser Bani Sweif"
+                            android:text="@string/address"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
 
@@ -304,7 +304,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="left"
-                            android:text="Phone : "
+                            android:text="@string/phone_profile"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <TextView
                             android:id="@+id/textView_userPhone"
@@ -317,7 +317,7 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:gravity="left"
-                            android:text="01122677801"
+                            android:text="@string/number_phone"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
                     <LinearLayout

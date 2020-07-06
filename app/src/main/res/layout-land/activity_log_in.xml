@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/bangers"
         android:gravity="center"
-        android:text="Kershy"
+        android:text="@string/app_name"
         android:textColor="#fff"
         android:textSize="80dp"
         android:textStyle="bold" />
@@ -34,7 +34,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="LogIn"
+            android:text="@string/login"
             android:textColor="#fff"
             android:textSize="45sp"
             android:textStyle="bold" />
@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phone"
+            android:text="@string/phone"
             android:layout_gravity="left"
             android:gravity="left"
             android:textColor="#fff"
@@ -83,7 +83,7 @@
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
             android:gravity="left"
-            android:text="Email"
+            android:text="@string/email"
             android:textColor="#fff"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -118,7 +118,7 @@
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
             android:gravity="left"
-            android:text="Password"
+            android:text="@string/password"
             android:textColor="#fff"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -175,7 +175,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Remember me!" />
+            android:text="@string/remember_me" />
         <com.balysv.materialripple.MaterialRippleLayout
             style="@style/RippleStyleGrey"
             android:layout_width="wrap_content"
@@ -229,7 +229,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Not yet a member, "
+            android:text="@string/not_yet_a_member"
             android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold" />

@@ -41,7 +41,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="20dp"
                             android:gravity="left"
-                            android:text="Follow your order..."
+                            android:text="@string/follow_your_order"
                             android:textAllCaps="false"
                             android:textColor="#fff"
                             android:textSize="22sp"
@@ -71,7 +71,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:gravity="center"
-                            android:text="Please! Wait"
+                            android:text="@string/please_wait"
                             android:textAllCaps="false"
                             android:textColor="#fff"
                             android:textSize="18sp"
@@ -88,6 +88,7 @@
                             android:layout_marginBottom="20dp"
                             android:max="4"
                             android:progress="0"
+                            android:backgroundTint="@color/colorAccent"
                             android:thumb="@drawable/ic_delivery_20" />
 
                         <com.balysv.materialripple.MaterialRippleLayout
@@ -101,7 +102,7 @@
                                 android:background="#00CB2C"
                                 android:gravity="center"
                                 android:padding="15dp"
-                                android:text="Rate Restaurant"
+                                android:text="@string/rate_restaurant"
                                 android:textAllCaps="false"
                                 android:textColor="#fff"
                                 android:textSize="20dp"

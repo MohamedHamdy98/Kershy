@@ -3,46 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Personal Information">
+    <item android:title="@string/personal_information">
         <menu>
             <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/ic_man"
-                android:title="My Profile" />
+                android:title="@string/my_profile" />
         </menu>
     </item>
 
-    <item android:title="Categories">
+    <item android:title="@string/categories">
         <menu>
             <item
                 android:id="@+id/nav_home"
                 android:icon="@drawable/ic_house"
-                android:title="Offers" />
+                android:title="@string/offers" />
             <item
                 android:id="@+id/nav_burger"
                 android:icon="@drawable/ic_burger"
-                android:title="Burger" />
+                android:title="@string/burger" />
             <item
                 android:id="@+id/nav_sweet"
                 android:icon="@drawable/ic_donut"
-                android:title="Sweet" />
+                android:title="@string/sweet" />
             <item
                 android:id="@+id/nav_drink"
                 android:icon="@drawable/ic_cola"
-                android:title="Drink" />
+                android:title="@string/drink" />
             <item
                 android:id="@+id/nav_orders"
                 android:icon="@drawable/ic_orders"
-                android:title="My Order" />
+                android:title="@string/my_order" />
         </menu>
     </item>
 
-    <item android:title="Delivery">
+    <item android:title="@string/delivery">
         <menu>
             <item
                 android:id="@+id/nav_delivery"
                 android:icon="@drawable/ic_delivery_40"
-                android:title="Delivery" />
+                android:title="@string/delivery" />
         </menu>
     </item>
 
