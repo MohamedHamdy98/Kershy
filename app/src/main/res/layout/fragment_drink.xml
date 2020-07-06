@@ -42,37 +42,31 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left|center"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:text="@string/kershy_drink"
-                            android:textAllCaps="false"
-                            android:textColor="#fff"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="@string/kershy_drink"
+                        android:textAllCaps="false"
+                        android:layout_weight="1"
+                        android:textColor="#fff"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_star_24"
+                            android:drawableStart="@drawable/ic_star_24"
                             android:drawablePadding="8dp"
                             android:text="4.5"
                             android:textAllCaps="false"
@@ -83,8 +77,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="20dp"
                             android:layout_marginBottom="4dp"
                             android:text="@string/ratings"
                             android:textAllCaps="false"
@@ -96,13 +90,13 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_time_24"
+                            android:drawableStart="@drawable/ic_time_24"
                             android:drawablePadding="8dp"
                             android:text="45"
                             android:textAllCaps="false"
@@ -113,8 +107,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="20dp"
                             android:layout_marginBottom="4dp"
                             android:text="@string/minutes_delivery_time"
                             android:textAllCaps="false"
@@ -122,6 +116,7 @@
                             android:textSize="18sp"
                             android:textStyle="normal" />
                     </LinearLayout>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
