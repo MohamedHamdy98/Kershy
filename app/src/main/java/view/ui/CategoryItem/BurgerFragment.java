@@ -55,8 +55,9 @@ public class BurgerFragment extends Fragment {
         recyclerViewBurger.setHasFixedSize(true);
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("Menu");
-        databaseReference.child("Burger").addValueEventListener(new ValueEventListener() {
+        DatabaseReference databaseReference = database.getReference("M").child("Burger");
+        databaseReference.child("M").child("Burger").push().getKey();
+                databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 modelBurgerArrayList.clear();
@@ -75,18 +76,7 @@ public class BurgerFragment extends Fragment {
         });
     }
     public void startRecyclerView() {
-        modelBurgerArrayList.add(new ModelBurger("Meat",
-                "At first glance, this is not a suitable spice for coffee, which can spoil the drink, but it is only at first glance. In fact, pepper gives a highlight to this aromatic and tasty drink and only allows you to open new impressions",
-                "50", R.drawable.burgeritemback));
-        modelBurgerArrayList.add(new ModelBurger("Creamy nachos",
-                "Many coffee lovers in the fall enjoy spicy pumpkin latte, but if you want to save or make this drink out of season, you can easily make it at home. Drink can be made on the stove or in the microwave.",
-                "20", R.drawable.burger));
-        modelBurgerArrayList.add(new ModelBurger("Maharaja mac",
-                "Indian cuisine is famous for its abundance of spices and spices. Coffee drink, popular in this country, is no exception.",
-                "80", R.drawable.b));
-        modelBurgerArrayList.add(new ModelBurger("Mc Veggie mac",
-                "In Brazil, they love coffee, they don\\’t just adore it. The average Brazilian drinks up to 12 cups of coffee a day and therefore the technology of making coffee in Brazil is perfect. In Brazil, just a cup of hot coffee is a symbol of respect and hospitality.",
-                "40", R.drawable.burgeritemback));
+
         recyclerViewBurger.setHasFixedSize(true);
         myAdapterBurger = new MyAdapterBurger(modelBurgerArrayList, context);
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));

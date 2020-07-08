@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,17 +20,22 @@ import com.example.testeverything.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import Model.Categories.ModelBurger;
 import Model.ModelCart;
+import Model.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.embersoft.expandabletextview.ExpandableTextView;
+import view.CategoryActivity;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -57,7 +64,28 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ModelBurger modelBurger = categoryArrayList.get(position);
         holder.textNameRecyclerCategory.setText(modelBurger.getName_burger());
-        holder.imageViewRecyclerCategory.setImageResource(modelBurger.getImage_burger());
+        databaseReference = database.getReference("M").child("Burger");
+        databaseReference.child("M").child("Burger").push().getKey();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    ModelBurger modelBurger  = snapshot.getValue(ModelBurger.class);
+                    if (modelBurger.getImage_burger().equals("default")) {
+                        holder.imageViewRecyclerCategory.setImageResource(R.drawable.ic_burger);
+                    } else {
+                        Picasso.get().load(modelBurger.getImage_burger()).into(holder.imageViewRecyclerCategory);
+                        //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
+                    }
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+//        holder.imageViewRecyclerCategory.setImageResource(Integer.parseInt(modelBurger.getImage_burger()));
         holder.textPriceRecyclerCategory.setText(modelBurger.getPrice_burger());
         holder.textDescriptionRecyclerCategory.setText(modelBurger.getDescription_burger());
         holder.textDescriptionRecyclerCategory.setOnStateChangeListener(new ExpandableTextView.OnStateChangeListener() {
@@ -97,6 +125,7 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
                 }
             }
         });
+
         holder.imageAddCart.setOnClickListener(new View.OnClickListener() {
             ModelCart modelCart;
             @Override
@@ -108,7 +137,7 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
                         holder.textPriceRecyclerCategory.getText().toString());
                 databaseReference.child(userId).child("Order").child(holder.textNameRecyclerCategory.getText().toString())
                         .setValue(modelCart);
-                Snackbar.make(v,"Added to cart successfully",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(v, "Added to cart successfully", Snackbar.LENGTH_SHORT).show();
             }
         });
     }
