@@ -127,7 +127,8 @@ public class ProfileUserFragment extends Fragment {
         progressDialog.setMessage("Uploading...");
         progressDialog.show();
         if (imageUri != null) {
-            final StorageReference filereference = mStorageRef.child(String.valueOf(System.currentTimeMillis())
+            final StorageReference filereference = mStorageRef.
+                    child(String.valueOf(System.currentTimeMillis())
                     + "." + getFileExtention(imageUri));
             uploadTask = filereference.putFile(imageUri);
             uploadTask.continueWithTask(new Continuation() {
@@ -282,45 +283,4 @@ public class ProfileUserFragment extends Fragment {
         });
     }
 
-    private void reAuthentication() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("Users").child(userId);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String passwordUser = dataSnapshot.child("pass").getValue(String.class);
-                String emailUser = dataSnapshot.child("email").getValue(String.class);
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                AuthCredential credential = EmailAuthProvider
-                        .getCredential(emailUser, passwordUser);
-                user.reauthenticate(credential)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    user.updateEmail("editTextUserEmail.getText().toString()").addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(getActivity(), "The email updated", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(getActivity(), "Password is incorrect", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                                    Toast.makeText(getActivity(), "ReAuthentication", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-
-        });
-
-    }
 }

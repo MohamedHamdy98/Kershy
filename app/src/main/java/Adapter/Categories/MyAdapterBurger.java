@@ -65,7 +65,7 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
         final ModelBurger modelBurger = categoryArrayList.get(position);
         holder.textNameRecyclerCategory.setText(modelBurger.getName_burger());
         databaseReference = database.getReference("M").child("Burger");
-        databaseReference.child("M").child("Burger").push().getKey();
+        //databaseReference.child("M").child("Burger").push().getKey();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

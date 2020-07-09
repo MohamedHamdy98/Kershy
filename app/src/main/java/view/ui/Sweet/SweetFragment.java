@@ -41,17 +41,6 @@ public class SweetFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_sweet, container, false);
         ButterKnife.bind(this,root);
         startRecyclerView();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         return root;
     }
     public void startRecyclerView() {

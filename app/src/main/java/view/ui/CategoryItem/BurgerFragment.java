@@ -40,8 +40,8 @@ public class BurgerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_burger, container, false);
         ButterKnife.bind(this, root);
-       // startRecyclerView();
-       recyclerView();
+        // startRecyclerView();
+        recyclerView();
         return root;
     }
 
@@ -51,17 +51,19 @@ public class BurgerFragment extends Fragment {
         recyclerView();
     }
 
-    public void recyclerView(){
+    public void recyclerView() {
         recyclerViewBurger.setHasFixedSize(true);
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         DatabaseReference databaseReference = database.getReference("M").child("Burger");
-        databaseReference.child("M").child("Burger").push().getKey();
-                databaseReference.addValueEventListener(new ValueEventListener() {
+       // databaseReference.child("M").child("Burger").push().getKey();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 modelBurgerArrayList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ModelBurger modelBurger = snapshot.getValue(ModelBurger.class);
                     modelBurgerArrayList.add(modelBurger);
                 }
@@ -75,6 +77,7 @@ public class BurgerFragment extends Fragment {
             }
         });
     }
+
     public void startRecyclerView() {
 
         recyclerViewBurger.setHasFixedSize(true);
