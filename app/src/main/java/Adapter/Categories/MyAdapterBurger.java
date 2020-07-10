@@ -64,28 +64,13 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ModelBurger modelBurger = categoryArrayList.get(position);
         holder.textNameRecyclerCategory.setText(modelBurger.getName_burger());
-        databaseReference = database.getReference("M").child("Burger");
-        //databaseReference.child("M").child("Burger").push().getKey();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    ModelBurger modelBurger  = snapshot.getValue(ModelBurger.class);
-                    if (modelBurger.getImage_burger().equals("default")) {
-                        holder.imageViewRecyclerCategory.setImageResource(R.drawable.ic_burger);
-                    } else {
-                        Picasso.get().load(modelBurger.getImage_burger()).into(holder.imageViewRecyclerCategory);
-                        //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
-                    }
-                }
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
-//        holder.imageViewRecyclerCategory.setImageResource(Integer.parseInt(modelBurger.getImage_burger()));
+       // databaseReference = database.getReference("M").child("Burger");
+        if (modelBurger.getImage_burger().equals("default")) {
+            holder.imageViewRecyclerCategory.setImageResource(R.drawable.ic_burger);
+        } else {
+            Picasso.get().load(modelBurger.getImage_burger()).into(holder.imageViewRecyclerCategory);
+            //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
+        }
         holder.textPriceRecyclerCategory.setText(modelBurger.getPrice_burger());
         holder.textDescriptionRecyclerCategory.setText(modelBurger.getDescription_burger());
         holder.textDescriptionRecyclerCategory.setOnStateChangeListener(new ExpandableTextView.OnStateChangeListener() {

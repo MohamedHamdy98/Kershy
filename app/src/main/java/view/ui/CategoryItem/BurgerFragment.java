@@ -1,5 +1,6 @@
 package view.ui.CategoryItem;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,13 +53,14 @@ public class BurgerFragment extends Fragment {
     }
 
     public void recyclerView() {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         recyclerViewBurger.setHasFixedSize(true);
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-
         DatabaseReference databaseReference = database.getReference("M").child("Burger");
        // databaseReference.child("M").child("Burger").push().getKey();
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -69,6 +71,7 @@ public class BurgerFragment extends Fragment {
                 }
                 myAdapterBurger = new MyAdapterBurger(modelBurgerArrayList, context);
                 recyclerViewBurger.setAdapter(myAdapterBurger);
+                progressDialog.dismiss();
             }
 
             @Override

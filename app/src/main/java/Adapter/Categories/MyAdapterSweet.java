@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,12 @@ public class MyAdapterSweet extends RecyclerView.Adapter<MyAdapterSweet.ViewHold
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ModelSweet modelSweet = modelSweetArrayList.get(position);
         holder.textNameRecyclerCategory.setText(modelSweet.getName_sweet());
-        holder.imageViewRecyclerCategory.setImageResource(modelSweet.getImage_sweet());
+        if (modelSweet.getImage_sweet().equals("default")) {
+            holder.imageViewRecyclerCategory.setImageResource(R.drawable.ic_burger);
+        } else {
+            Picasso.get().load(modelSweet.getImage_sweet()).into(holder.imageViewRecyclerCategory);
+            //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
+        }
         holder.textPriceRecyclerCategory.setText(modelSweet.getPrice_sweet());
         holder.textDescriptionRecyclerCategory.setText(modelSweet.getDescription_sweet());
         holder.textDescriptionRecyclerCategory.setOnStateChangeListener(new ExpandableTextView.OnStateChangeListener() {

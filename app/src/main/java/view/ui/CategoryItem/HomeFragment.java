@@ -1,5 +1,6 @@
 package view.ui.CategoryItem;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,9 @@ public class HomeFragment extends Fragment {
 
 
     public void startRecyclerView() {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         recyclerViewItemOffer.setHasFixedSize(true);
         recyclerViewItemOffer.setLayoutManager(new LinearLayoutManager(getActivity()));
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -65,10 +69,10 @@ public class HomeFragment extends Fragment {
                 }
                 adapterItemOffer = new MyAdapterItemOffer(modelItemOfferArrayList, getActivity());
                 recyclerViewItemOffer.setAdapter(adapterItemOffer);
+                progressDialog.dismiss();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }

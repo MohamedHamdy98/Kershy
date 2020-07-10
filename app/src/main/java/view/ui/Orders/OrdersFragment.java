@@ -75,7 +75,6 @@ public class OrdersFragment extends Fragment {
     }
 
     public void getFirebase() {
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -87,14 +86,18 @@ public class OrdersFragment extends Fragment {
                 textViewCartDeliveryFee.setText(deliveryFee);
                 textViewCartItemTotal.setText(totalPrice);
                 textViewCartTax.setText(tax);
-                int Bill = ( Integer.parseInt(totalPrice) + Integer.parseInt(deliveryFee)
-                        + (Integer.parseInt(tax) )
-                        - Integer.parseInt(offer));
-                databaseReference = database.getReference("Cart").child(userId).child("TotalPriceToPay");
-                databaseReference.setValue(String.valueOf(Bill));
-                String bill = dataSnapshot.child("Cart").child(userId).child("TotalPriceToPay")
-                        .getValue(String.class);
-                textViewCartTotalPrice.setText(bill);
+                if (totalPrice == "0") {
+                    databaseReference.child("Cart").child(userId).child("TotalPriceToPay").setValue("0");
+                } else {
+                    int Bill = ( Integer.parseInt(totalPrice) + Integer.parseInt(deliveryFee)
+                            + (Integer.parseInt(tax) )
+                            - Integer.parseInt(offer));
+                    databaseReference = database.getReference("Cart").child(userId).child("TotalPriceToPay");
+                    databaseReference.setValue(String.valueOf(Bill));
+                    String bill = dataSnapshot.child("Cart").child(userId).child("TotalPriceToPay")
+                            .getValue(String.class);
+                    textViewCartTotalPrice.setText(bill);
+                }
             }
 
             @Override

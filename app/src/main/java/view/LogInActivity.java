@@ -62,32 +62,33 @@ public class LogInActivity extends AppCompatActivity {
     CheckBox checkBox;
     private SharedPreferencsConfig sharedPreferencsConfig;
     Uri imageUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppThemeNoActionBar);
         setContentView(R.layout.activity_log_in);
         ButterKnife.bind(this);
-        SharedPreferences preferences = getSharedPreferences("keep",MODE_PRIVATE);
-        String check = preferences.getString("remember","");
-        if (check.equals("true")){
-            startActivity(new Intent(LogInActivity.this,CategoryActivity.class));
-        } else if (check.equals("false")){
+        SharedPreferences preferences = getSharedPreferences("keep", MODE_PRIVATE);
+        String check = preferences.getString("remember", "");
+        if (check.equals("true")) {
+            startActivity(new Intent(LogInActivity.this, CategoryActivity.class));
+        } else if (check.equals("false")) {
             Toast.makeText(LogInActivity.this, "Please LogIn", Toast.LENGTH_SHORT).show();
         }
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()){
+                if (buttonView.isChecked()) {
                     SharedPreferences sharedPreferences = getSharedPreferences("keep", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("remember","true");
+                    editor.putString("remember", "true");
                     editor.apply();
                     Toast.makeText(LogInActivity.this, "Checked", Toast.LENGTH_SHORT).show();
-                }else if (!buttonView.isChecked()){
+                } else if (!buttonView.isChecked()) {
                     SharedPreferences sharedPreferences = getSharedPreferences("keep", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("remember","false");
+                    editor.putString("remember", "false");
                     editor.apply();
                     Toast.makeText(LogInActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
                 }
@@ -141,24 +142,6 @@ public class LogInActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                DatabaseReference databaseReference = database.getReference("Users").child(phone).child("userName");
-//                databaseReference.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        String name = dataSnapshot.getValue(String.class);
-//                        SharedPreferences sharedPreferences = getSharedPreferences("saveinfo", MODE_PRIVATE);
-//                        final SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.putString("name", name);
-//                        editor.putString("email", email);
-//                        editor.putString("pass", password);
-//                        editor.apply();
-//                    }
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//                        Toast.makeText(LogInActivity.this, "error name", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
             }
         });
     }

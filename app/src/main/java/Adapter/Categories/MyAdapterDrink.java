@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -49,7 +50,12 @@ public class MyAdapterDrink extends RecyclerView.Adapter<MyAdapterDrink.ViewHold
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ModelDrink modelDrink = modelDrinkArrayList.get(position);
         holder.textNameRecyclerCategory.setText(modelDrink.getName_drink());
-        holder.imageViewRecyclerCategory.setImageResource(modelDrink.getImage_drink());
+        if (modelDrink.getImage_drink().equals("default")) {
+            holder.imageViewRecyclerCategory.setImageResource(R.drawable.ic_burger);
+        } else {
+            Picasso.get().load(modelDrink.getImage_drink()).into(holder.imageViewRecyclerCategory);
+            //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
+        }
         holder.textPriceRecyclerCategory.setText(modelDrink.getPrice_drink());
         holder.textDescriptionRecyclerCategory.setText(modelDrink.getDescription_drink());
         holder.textDescriptionRecyclerCategory.setOnStateChangeListener(new ExpandableTextView.OnStateChangeListener() {

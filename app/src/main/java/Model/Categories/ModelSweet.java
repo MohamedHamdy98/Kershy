@@ -4,13 +4,13 @@ public class ModelSweet {
     private String name_sweet;
     private String description_sweet;
     private String price_sweet;
-    private int Image_sweet;
+    private String Image_sweet;
     private boolean isShrink = true;
 
     public ModelSweet() {
     }
 
-    public ModelSweet(String name_sweet, String description_sweet, String price_sweet, int image_sweet) {
+    public ModelSweet(String name_sweet, String description_sweet, String price_sweet, String image_sweet) {
         this.name_sweet = name_sweet;
         this.description_sweet = description_sweet;
         this.price_sweet = price_sweet;
@@ -33,11 +33,11 @@ public class ModelSweet {
         this.description_sweet = description_sweet;
     }
 
-    public int getImage_sweet() {
+    public String getImage_sweet() {
         return Image_sweet;
     }
 
-    public void setImage_sweet(int image_sweet) {
+    public void setImage_sweet(String image_sweet) {
         Image_sweet = image_sweet;
     }
 

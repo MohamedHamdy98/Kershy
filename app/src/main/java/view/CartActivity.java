@@ -152,6 +152,7 @@ public class CartActivity extends AppCompatActivity {
                 textViewCartItemTotal.setText(totalPrice);
                 textViewCartTax.setText(tax);
                 if (totalPrice == "0") {
+                    databaseReference.child("Cart").child(userId).child("TotalPriceToPay").setValue("0");
                 } else {
                     int Bill = ( Integer.parseInt(totalPrice) + Integer.parseInt(deliveryFee) +
                             (Integer.parseInt(tax)) ) - Integer.parseInt(offer);

@@ -4,13 +4,13 @@ public class ModelDrink {
     private String name_drink;
     private String description_drink;
     private String price_drink;
-    private int Image_drink;
+    private String Image_drink;
     private boolean isShrink = true;
 
     public ModelDrink() {
     }
 
-    public ModelDrink(String name_drink, String description_drink, String price_drink, int image_drink) {
+    public ModelDrink(String name_drink, String description_drink, String price_drink, String image_drink) {
         this.name_drink = name_drink;
         this.description_drink = description_drink;
         this.price_drink = price_drink;
@@ -41,11 +41,11 @@ public class ModelDrink {
         this.price_drink = price_drink;
     }
 
-    public int getImage_drink() {
+    public String getImage_drink() {
         return Image_drink;
     }
 
-    public void setImage_drink(int image_drink) {
+    public void setImage_drink(String image_drink) {
         Image_drink = image_drink;
     }
 

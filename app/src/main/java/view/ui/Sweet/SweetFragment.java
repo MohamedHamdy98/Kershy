@@ -1,5 +1,6 @@
 package view.ui.Sweet;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,7 +36,7 @@ public class SweetFragment extends Fragment {
     MyAdapterSweet myAdapterSweet;
     Context context;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("Menu").child("Sweet");
+    DatabaseReference databaseReference = database.getReference("M").child("Sweet");
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_sweet, container, false);
@@ -44,6 +45,9 @@ public class SweetFragment extends Fragment {
         return root;
     }
     public void startRecyclerView() {
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         recyclerViewSweet.setHasFixedSize(true);
         recyclerViewSweet.setLayoutManager(new LinearLayoutManager(getActivity()));
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -56,6 +60,7 @@ public class SweetFragment extends Fragment {
                 }
                 myAdapterSweet = new MyAdapterSweet(modelSweetArrayList, getActivity());
                 recyclerViewSweet.setAdapter(myAdapterSweet);
+                progressDialog.dismiss();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
