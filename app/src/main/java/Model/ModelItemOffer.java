@@ -4,12 +4,12 @@ public class ModelItemOffer {
     private String name_offer;
     private String old_price_offer;
     private String new_price_offer;
-    private int image_offer;
+    private String image_offer;
 
     public ModelItemOffer() {
     }
 
-    public ModelItemOffer(String name_offer, String old_price_offer, String new_price_offer, int image_offer) {
+    public ModelItemOffer(String name_offer, String old_price_offer, String new_price_offer, String image_offer) {
         this.name_offer = name_offer;
         this.old_price_offer = old_price_offer;
         this.new_price_offer = new_price_offer;
@@ -40,11 +40,11 @@ public class ModelItemOffer {
         this.new_price_offer = new_price_offer;
     }
 
-    public int getImage_offer() {
+    public String getImage_offer() {
         return image_offer;
     }
 
-    public void setImage_offer(int image_offer) {
+    public void setImage_offer(String image_offer) {
         this.image_offer = image_offer;
     }
 }

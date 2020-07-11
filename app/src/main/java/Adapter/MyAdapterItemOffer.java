@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testeverything.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,13 @@ public class MyAdapterItemOffer extends RecyclerView.Adapter<MyAdapterItemOffer.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ModelItemOffer modelItemOffer = modelItemOfferArrayList.get(position);
-        holder.imageBurgerItemOffer.setImageResource(modelItemOffer.getImage_offer());
+        if (modelItemOffer.getImage_offer().equals("default")) {
+            holder.imageBurgerItemOffer.setImageResource(R.drawable.ic_burger);
+        } else {
+            Picasso.get().load(modelItemOffer.getImage_offer())
+                    .into(holder.imageBurgerItemOffer);
+            //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
+        }
         holder.nameBurgerItemOffer.setText(modelItemOffer.getName_offer());
         holder.oldPriceBurgerItemOffer.setText(modelItemOffer.getOld_price_offer());
         holder.newPriceBurgerItemOffer.setText(modelItemOffer.getNew_price_offer());
