@@ -35,7 +35,7 @@ public class DrinkFragment extends Fragment {
     MyAdapterDrink myAdapterDrink;
     Context context;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("M").child("Drink");
+    DatabaseReference databaseReference = database.getReference("Menu").child("Drink");
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_drink, container, false);

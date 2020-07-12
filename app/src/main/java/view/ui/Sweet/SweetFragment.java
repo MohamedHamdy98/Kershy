@@ -36,7 +36,7 @@ public class SweetFragment extends Fragment {
     MyAdapterSweet myAdapterSweet;
     Context context;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("M").child("Sweet");
+    DatabaseReference databaseReference = database.getReference("Menu").child("Sweet");
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_sweet, container, false);

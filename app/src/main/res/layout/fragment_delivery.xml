@@ -113,54 +113,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:id="@+id/write"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="write" />
-
-                <Button
-                    android:id="@+id/prepare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="prepare" />
-
-                <Button
-                    android:id="@+id/way"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="on the way" />
-
-                <Button
-                    android:id="@+id/delivered"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="delivered" />
-
-                <Switch
-                    android:id="@+id/switch1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="write" />
-
-                <Switch
-                    android:id="@+id/switch2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="prepare" />
-
-                <Switch
-                    android:id="@+id/switch3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="on the way" />
-
-                <Switch
-                    android:id="@+id/switch4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="delivery" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.recyclerView_item_offer)
     RecyclerView recyclerViewItemOffer;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("M").child("Offers");
+    DatabaseReference databaseReference = database.getReference("Menu").child("Offers");
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

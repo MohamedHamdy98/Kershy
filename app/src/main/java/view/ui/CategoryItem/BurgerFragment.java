@@ -59,7 +59,7 @@ public class BurgerFragment extends Fragment {
         recyclerViewBurger.setHasFixedSize(true);
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("M").child("Burger");
+        DatabaseReference databaseReference = database.getReference("Menu").child("Burger");
        // databaseReference.child("M").child("Burger").push().getKey();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
