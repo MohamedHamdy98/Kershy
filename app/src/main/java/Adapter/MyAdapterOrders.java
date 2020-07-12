@@ -26,9 +26,6 @@ import butterknife.ButterKnife;
 import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class MyAdapterOrders extends RecyclerView.Adapter<MyAdapterOrders.ViewHolder> {
-    RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-    ArrayList<ModelSubCart> modelSubCarts = new ArrayList<>();
-
     private ArrayList<ModelCart> modelCartArrayList = new ArrayList<>();
     Context context;
 

@@ -120,9 +120,6 @@ public class OrdersFragment extends Fragment {
                     modelCart = snapshot.getValue(ModelCart.class);
                     modelCartArrayList.add(modelCart);
                 }
-//                databaseReference = database.getReference("Cart");
-//                databaseReference.child(userId).child("OldOrders")
-//                        .setValue(modelCartArrayList);
                 myAdapterOrders = new MyAdapterOrders(modelCartArrayList, context);
                 recyclerViewOrder.setAdapter(myAdapterOrders);
             }

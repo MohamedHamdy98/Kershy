@@ -4,11 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +24,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DeliveryFragment extends Fragment {
-//    SeekBar seekBar;
+    @BindView(R.id.image_order)
+    ImageView imageOrder;
+    @BindView(R.id.message)
+    TextView message;
+    @BindView(R.id.seekBar)
+    SeekBar seekBar;
+
+    //    SeekBar seekBar;
 //    ImageView orderImage;
 //    TextView textMessage;
 //    @BindView(R.id.write)
@@ -65,51 +69,54 @@ public class DeliveryFragment extends Fragment {
     public void onStart() {
         super.onStart();
 //        checkSeekBar();
+        controlDelivery();
     }
 
-//    public void onClickWrite() {
-//        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        final DatabaseReference databaseReference = database.getReference("Cart").child(userId);
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String wa = dataSnapshot.child("waitOrder").getValue(String.class);
-//                String w = dataSnapshot.child("writeOrder").getValue(String.class);
-//                String p = dataSnapshot.child("preparingOrder").getValue(String.class);
-//                String way = dataSnapshot.child("wayOrder").getValue(String.class);
-//                String d = dataSnapshot.child("deliveredOrder").getValue(String.class);
-//                String progress = dataSnapshot.child("progress").getValue(String.class);
-//                if (progress == wa) {
-//                    Toast.makeText(getActivity(), "wait", Toast.LENGTH_SHORT).show();
-//                    textMessage.setText("Please! Wait");
-//                    orderImage.setImageResource(R.drawable.ic_time_180);
-//                } else if (progress == w) {
-//                    Toast.makeText(getActivity(), "written", Toast.LENGTH_SHORT).show();
-//                    textMessage.setText("Your order is written");
-//                    orderImage.setImageResource(R.drawable.ic_order_180);
-//                } else if (progress == p) {
-//                    Toast.makeText(getActivity(), "Preparing", Toast.LENGTH_SHORT).show();
-//                    textMessage.setText("Preparing your order");
-//                    orderImage.setImageResource(R.drawable.ic_cook);
-//                } else if (progress == way) {
-//                    Toast.makeText(getActivity(), "way", Toast.LENGTH_SHORT).show();
-//                    textMessage.setText("Your order is on the way");
-//                    orderImage.setImageResource(R.drawable.ic_delivery_180);
-//                } else if (progress == d) {
-//                    Toast.makeText(getActivity(), "delivered", Toast.LENGTH_SHORT).show();
-//                    textMessage.setText("The order was delivered");
-//                    orderImage.setImageResource(R.drawable.ic_receive_180);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//            }
-//        });
-//
-//    }
+    private void controlDelivery() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = database.getReference("Cart")
+                .child(userId);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Boolean waitOrder = snapshot.child("waitOrder").getValue(Boolean.class);
+                    Boolean writeOrder = snapshot.child("writeOrder").getValue(Boolean.class);
+                    Boolean preparingOrder = snapshot.child("preparingOrder").getValue(Boolean.class);
+                    Boolean way = snapshot.child("wayOrder").getValue(Boolean.class);
+                    Boolean deliveredOrder = snapshot.child("deliveredOrder").getValue(Boolean.class);
+                    Boolean progress = snapshot.child("progress").getValue(Boolean.class);
+//                    if (progress == waitOrder) {
+//                        //   Toast.makeText(getActivity(), "wait", Toast.LENGTH_SHORT).show();
+//                        message.setText("Please! Wait");
+//                        imageOrder.setImageResource(R.drawable.ic_time_180);
+//                    } else
+                        if (progress == writeOrder) {
+                        //  Toast.makeText(getActivity(), "written", Toast.LENGTH_SHORT).show();
+                        message.setText("Your order is written");
+                        imageOrder.setImageResource(R.drawable.ic_order_180);
+                    } else if (progress == preparingOrder) {
+                        //  Toast.makeText(getActivity(), "Preparing", Toast.LENGTH_SHORT).show();
+                        message.setText("Preparing your order");
+                        imageOrder.setImageResource(R.drawable.ic_cook);
+                    } else if (progress == way) {
+                        //  Toast.makeText(getActivity(), "way", Toast.LENGTH_SHORT).show();
+                        message.setText("Your order is on the way");
+                        imageOrder.setImageResource(R.drawable.ic_delivery_180);
+                    } else if (progress == deliveredOrder) {
+                        //  Toast.makeText(getActivity(), "delivered", Toast.LENGTH_SHORT).show();
+                        message.setText("The order was delivered");
+                        imageOrder.setImageResource(R.drawable.ic_receive_180);
+                    }
+                }
 
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
 //    public void getprogress(View view) {
 //        switch (view.getId()) {
 //            case R.id.write:
