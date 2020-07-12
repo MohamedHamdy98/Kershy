@@ -80,38 +80,39 @@ public class DeliveryFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Boolean waitOrder = snapshot.child("waitOrder").getValue(Boolean.class);
-                    Boolean writeOrder = snapshot.child("writeOrder").getValue(Boolean.class);
-                    Boolean preparingOrder = snapshot.child("preparingOrder").getValue(Boolean.class);
-                    Boolean way = snapshot.child("wayOrder").getValue(Boolean.class);
-                    Boolean deliveredOrder = snapshot.child("deliveredOrder").getValue(Boolean.class);
-                    Boolean progress = snapshot.child("progress").getValue(Boolean.class);
-//                    if (progress == waitOrder) {
-//                        //   Toast.makeText(getActivity(), "wait", Toast.LENGTH_SHORT).show();
-//                        message.setText("Please! Wait");
-//                        imageOrder.setImageResource(R.drawable.ic_time_180);
-//                    } else
-                        if (progress == writeOrder) {
-                        //  Toast.makeText(getActivity(), "written", Toast.LENGTH_SHORT).show();
-                        message.setText("Your order is written");
-                        imageOrder.setImageResource(R.drawable.ic_order_180);
-                    } else if (progress == preparingOrder) {
-                        //  Toast.makeText(getActivity(), "Preparing", Toast.LENGTH_SHORT).show();
-                        message.setText("Preparing your order");
-                        imageOrder.setImageResource(R.drawable.ic_cook);
-                    } else if (progress == way) {
-                        //  Toast.makeText(getActivity(), "way", Toast.LENGTH_SHORT).show();
-                        message.setText("Your order is on the way");
-                        imageOrder.setImageResource(R.drawable.ic_delivery_180);
-                    } else if (progress == deliveredOrder) {
-                        //  Toast.makeText(getActivity(), "delivered", Toast.LENGTH_SHORT).show();
-                        message.setText("The order was delivered");
-                        imageOrder.setImageResource(R.drawable.ic_receive_180);
-                    }
+                Boolean waitOrder = dataSnapshot.child("waitOrder").getValue(Boolean.class);
+                Boolean writeOrder = dataSnapshot.child("writeOrder").getValue(Boolean.class);
+                Boolean preparingOrder = dataSnapshot.child("preparingOrder").getValue(Boolean.class);
+                Boolean way = dataSnapshot.child("wayOrder").getValue(Boolean.class);
+                Boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
+                Boolean progress = dataSnapshot.child("progress").getValue(Boolean.class);
+                if (progress) {
+                    Toast.makeText(getActivity(), "wait", Toast.LENGTH_SHORT).show();
+                    message.setText("Please! Wait");
+                    imageOrder.setImageResource(R.drawable.ic_time_180);
                 }
-
+                if (progress == writeOrder) {
+                    Toast.makeText(getActivity(), "written", Toast.LENGTH_SHORT).show();
+                    message.setText("Your order is written");
+                    imageOrder.setImageResource(R.drawable.ic_order_180);
+                }
+                if (progress == preparingOrder) {
+                    Toast.makeText(getActivity(), "Preparing", Toast.LENGTH_SHORT).show();
+                    message.setText("Preparing your order");
+                    imageOrder.setImageResource(R.drawable.ic_cook);
+                }
+                if (progress == way) {
+                    Toast.makeText(getActivity(), "way", Toast.LENGTH_SHORT).show();
+                    message.setText("Your order is on the way");
+                    imageOrder.setImageResource(R.drawable.ic_delivery_180);
+                }
+                if (progress == deliveredOrder) {
+                    Toast.makeText(getActivity(), "delivered", Toast.LENGTH_SHORT).show();
+                    message.setText("The order was delivered");
+                    imageOrder.setImageResource(R.drawable.ic_receive_180);
+                }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
