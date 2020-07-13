@@ -47,9 +47,9 @@ import butterknife.ButterKnife;
 import view.ui.Orders.OrdersFragment;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("Cart");
+    DatabaseReference databaseReference = database.getReference("Cart").child(userId);
     @BindView(R.id.cardView_gone)
     CardView cardViewGone;
     @BindView(R.id.button_reset_myLocation_GPS)
@@ -109,19 +109,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Snackbar.make(v,"Write your phone",Snackbar.LENGTH_LONG).show();
                 }
                 else{
-                    final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    databaseReference.child(userId).child("Phone").setValue(editTextPhoneMap.getText().toString());
+                     databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
 //                    SharedPreferences sharedPreferences = getSharedPreferences("saveName",MODE_PRIVATE);
 //                    String name = sharedPreferences.getString("name","User Name");
 //                    databaseReference.child(userId).child("UserName").setValue(name);
                     // To check progress bar in delivery fragment
-                    databaseReference.child(userId).child("writeOrder").setValue(false);
-                    databaseReference.child(userId).child("preparingOrder").setValue(false);
-                    databaseReference.child(userId).child("wayOrder").setValue(false);
-                    databaseReference.child(userId).child("deliveredOrder").setValue(false);
-                    databaseReference.child(userId).child("waitOrder").setValue(false);
-                    databaseReference.child(userId).child("progress").setValue(true);
-                    databaseReference.child(userId).child("valueSeekBar").setValue(0);
+                    databaseReference.child("writeOrder").setValue(false);
+                    databaseReference.child("preparingOrder").setValue(false);
+                    databaseReference.child("wayOrder").setValue(false);
+                    databaseReference.child("deliveredOrder").setValue(false);
+                    databaseReference.child("waitOrder").setValue(false);
+                    databaseReference.child("progress").setValue(true);
+                    databaseReference.child("valueSeekBar").setValue(0);
                     Toast.makeText(MapsActivity.this, "Please wait!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MapsActivity.this,CategoryActivity.class));
                     overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
@@ -166,7 +165,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Toast.makeText(getApplicationContext(), currentLocation.getLatitude()
                             + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    databaseReference.child(userId).child("Address").setValue(currentLocation.getLatitude() + " " +
+                    databaseReference.child("Address").setValue(currentLocation.getLatitude() + " " +
                             currentLocation.getLongitude());
                     getAddressandSetAddress();
                     mapFragment = (SupportMapFragment) getSupportFragmentManager()

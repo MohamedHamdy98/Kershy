@@ -30,7 +30,7 @@ import ru.embersoft.expandabletextview.ExpandableTextView;
 
 public class MyAdapterSweet extends RecyclerView.Adapter<MyAdapterSweet.ViewHolder> {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("Cart");
+    DatabaseReference databaseReference = database.getReference();
     private ArrayList<ModelSweet> modelSweetArrayList = new ArrayList<>();
     Context context;
 
@@ -103,7 +103,9 @@ public class MyAdapterSweet extends RecyclerView.Adapter<MyAdapterSweet.ViewHold
                         holder.textNameRecyclerCategory.getText().toString(),
                         holder.textRemoveAddRecyclerCategory.getText().toString(),
                         holder.textPriceRecyclerCategory.getText().toString());
-                databaseReference.child(userId).child("Order").child(holder.textNameRecyclerCategory.getText().toString())
+                databaseReference.child("Order")
+                        .child(userId)
+                        .child(holder.textNameRecyclerCategory.getText().toString())
                         .setValue(modelCart);
                 Snackbar.make(v,"Added to cart successfully",Snackbar.LENGTH_SHORT).show();
             }
