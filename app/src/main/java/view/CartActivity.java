@@ -107,7 +107,7 @@ public class CartActivity extends AppCompatActivity {
         recyclerViewCart.setItemAnimator(new DefaultItemAnimator());
         recyclerViewCart.setLayoutManager(new LinearLayoutManager(this));
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = database.getReference().child("Order").child(userId);
+        databaseReference = database.getReference("Cart").child(userId).child("Order");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -120,6 +120,7 @@ public class CartActivity extends AppCompatActivity {
                 myAdapterCart = new MyAdapterCart(modelCartArrayList, getApplicationContext());
                 recyclerViewCart.setAdapter(myAdapterCart);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(CartActivity.this, "Error!", Toast.LENGTH_SHORT).show();

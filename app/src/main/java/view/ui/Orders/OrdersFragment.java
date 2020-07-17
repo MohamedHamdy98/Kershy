@@ -110,8 +110,8 @@ public class OrdersFragment extends Fragment {
         recyclerViewOrder.setHasFixedSize(true);
         recyclerViewOrder.setNestedScrollingEnabled(true);
         recyclerViewOrder.setLayoutManager(new LinearLayoutManager(getActivity()));
-        databaseReference = database.getReference();
-        databaseReference.child("Order").child(userId).addValueEventListener(new ValueEventListener() {
+        databaseReference = database.getReference("Cart");
+        databaseReference.child(userId).child("Order").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 modelCartArrayList.clear();

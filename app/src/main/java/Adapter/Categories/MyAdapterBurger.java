@@ -42,7 +42,7 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHolder> {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference();
+    DatabaseReference databaseReference = database.getReference("Cart");
 
 
     private ArrayList<ModelBurger> categoryArrayList = new ArrayList<>();
@@ -120,8 +120,12 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
                         holder.textNameRecyclerCategory.getText().toString(),
                         holder.textRemoveAddRecyclerCategory.getText().toString(),
                         holder.textPriceRecyclerCategory.getText().toString());
-                databaseReference.child("Order")
+                DatabaseReference reference = database.getReference();
+                reference.child("Order")
                         .child(userId)
+                        .child(holder.textNameRecyclerCategory.getText().toString())
+                        .setValue(modelCart);
+                databaseReference.child(userId).child("Order")
                         .child(holder.textNameRecyclerCategory.getText().toString())
                         .setValue(modelCart);
                 Snackbar.make(v, "Added to cart successfully", Snackbar.LENGTH_SHORT).show();

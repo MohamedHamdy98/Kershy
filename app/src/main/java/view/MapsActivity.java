@@ -167,6 +167,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     databaseReference.child("Address").setValue(currentLocation.getLatitude() + " " +
                             currentLocation.getLongitude());
+                    databaseReference.child("id").setValue(userId);
                     getAddressandSetAddress();
                     mapFragment = (SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
