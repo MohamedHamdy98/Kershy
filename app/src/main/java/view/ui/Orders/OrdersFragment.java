@@ -2,6 +2,7 @@ package view.ui.Orders;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,25 +79,32 @@ public class OrdersFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String offer = dataSnapshot.child("Offers").getValue(String.class);
-                String deliveryFee = dataSnapshot.child("deliveryFee").getValue(String.class);
-                String totalPrice = dataSnapshot.child("Cart").child(userId).child("totalPrice").getValue(String.class);
-                String tax = dataSnapshot.child("Tax").getValue(String.class);
-                textViewCartOffer.setText(offer);
-                textViewCartDeliveryFee.setText(deliveryFee);
-                textViewCartItemTotal.setText(totalPrice);
-                textViewCartTax.setText(tax);
-                if (totalPrice == "0") {
-                    databaseReference.child("Cart").child(userId).child("TotalPriceToPay").setValue("0");
+                if (dataSnapshot.exists()) {
+                    String totalPrice = dataSnapshot.child("Cart").child(userId).child("totalPrice").getValue(String.class);
+                    String offer = dataSnapshot.child("Offers").getValue(String.class);
+                    String deliveryFee = dataSnapshot.child("deliveryFee").getValue(String.class);
+                    String tax = dataSnapshot.child("Tax").getValue(String.class);
+                    if (!TextUtils.isEmpty(totalPrice) && !TextUtils.isEmpty(offer)
+                            && !TextUtils.isEmpty(deliveryFee) && !TextUtils.isEmpty(tax)) {
+                        textViewCartOffer.setText(offer);
+                        textViewCartDeliveryFee.setText(deliveryFee);
+                        textViewCartItemTotal.setText(totalPrice);
+                        textViewCartTax.setText(tax);
+                        if (totalPrice == "0") {
+                            databaseReference.child("Cart").child(userId).child("TotalPriceToPay").setValue("0");
+                        } else {
+                            int Bill = (Integer.parseInt(totalPrice) + Integer.parseInt(deliveryFee)
+                                    + (Integer.parseInt(tax))
+                                    - Integer.parseInt(offer));
+                            databaseReference = database.getReference("Cart").child(userId).child("TotalPriceToPay");
+                            databaseReference.setValue(String.valueOf(Bill));
+                            String bill = dataSnapshot.child("Cart").child(userId).child("TotalPriceToPay")
+                                    .getValue(String.class);
+                            textViewCartTotalPrice.setText(bill);
+                        }
+                    }
                 } else {
-                    int Bill = ( Integer.parseInt(totalPrice) + Integer.parseInt(deliveryFee)
-                            + (Integer.parseInt(tax) )
-                            - Integer.parseInt(offer));
-                    databaseReference = database.getReference("Cart").child(userId).child("TotalPriceToPay");
-                    databaseReference.setValue(String.valueOf(Bill));
-                    String bill = dataSnapshot.child("Cart").child(userId).child("TotalPriceToPay")
-                            .getValue(String.class);
-                    textViewCartTotalPrice.setText(bill);
+                    Toast.makeText(context, "Please! Choose Order.", Toast.LENGTH_SHORT).show();
                 }
             }
 

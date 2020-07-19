@@ -98,10 +98,16 @@ public class BurgerFragment extends Fragment {
 
             }
         });
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Rating").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    for (DataSnapshot data : snapshot.getChildren()){
+                        Float numberRating = data.getValue(Float.class);
 
+                        textViewRating.setText(numberRating + "");
+                    }
+                }
             }
 
             @Override

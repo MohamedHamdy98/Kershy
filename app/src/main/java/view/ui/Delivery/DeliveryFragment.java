@@ -48,7 +48,7 @@ public class DeliveryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Float ratingNumber = rating.getRating();
-                Toast.makeText(getActivity(), ratingNumber+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), ratingNumber + "", Toast.LENGTH_SHORT).show();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference databaseReference = database.getReference("Rating")
@@ -75,35 +75,39 @@ public class DeliveryFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean writeOrder = dataSnapshot.child("writeOrder").getValue(Boolean.class);
-                Boolean preparingOrder = dataSnapshot.child("preparingOrder").getValue(Boolean.class);
-                Boolean way = dataSnapshot.child("wayOrder").getValue(Boolean.class);
-                Boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
-                Boolean progress = dataSnapshot.child("progress").getValue(Boolean.class);
-                if (progress) {
-                    Snackbar.make(getView(), "wait", Snackbar.LENGTH_SHORT).show();
-                    message.setText("Please! Wait");
-                    imageOrder.setImageResource(R.drawable.ic_time_180);
-                }
-                if (progress == writeOrder) {
-                    Snackbar.make(getView(), "written", Snackbar.LENGTH_SHORT).show();
-                    message.setText("Your order is written");
-                    imageOrder.setImageResource(R.drawable.ic_order_180);
-                }
-                if (progress == preparingOrder) {
-                    Snackbar.make(getView(), "Preparing", Snackbar.LENGTH_SHORT).show();
-                    message.setText("Preparing your order");
-                    imageOrder.setImageResource(R.drawable.ic_cook);
-                }
-                if (progress == way) {
-                    Snackbar.make(getView(), "way", Snackbar.LENGTH_SHORT).show();
-                    message.setText("Your order is on the way");
-                    imageOrder.setImageResource(R.drawable.ic_delivery_180);
-                }
-                if (progress == deliveredOrder) {
-                    Snackbar.make(getView(), "delivered", Snackbar.LENGTH_SHORT).show();
-                    message.setText("The order was delivered");
-                    imageOrder.setImageResource(R.drawable.ic_receive_180);
+                if (dataSnapshot.exists()) {
+                    Boolean writeOrder = dataSnapshot.child("writeOrder").getValue(Boolean.class);
+                    Boolean preparingOrder = dataSnapshot.child("preparingOrder").getValue(Boolean.class);
+                    Boolean way = dataSnapshot.child("wayOrder").getValue(Boolean.class);
+                    Boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
+                    Boolean progress = dataSnapshot.child("progress").getValue(Boolean.class);
+                    if (progress == true) {
+                        Snackbar.make(getView(), "wait", Snackbar.LENGTH_SHORT).show();
+                        message.setText("Please! Wait");
+                        imageOrder.setImageResource(R.drawable.ic_time_180);
+                    }
+                    if (progress == writeOrder) {
+                        Snackbar.make(getView(), "written", Snackbar.LENGTH_SHORT).show();
+                        message.setText("Your order is written");
+                        imageOrder.setImageResource(R.drawable.ic_order_180);
+                    }
+                    if (progress == preparingOrder) {
+                        Snackbar.make(getView(), "Preparing", Snackbar.LENGTH_SHORT).show();
+                        message.setText("Preparing your order");
+                        imageOrder.setImageResource(R.drawable.ic_cook);
+                    }
+                    if (progress == way) {
+                        Snackbar.make(getView(), "way", Snackbar.LENGTH_SHORT).show();
+                        message.setText("Your order is on the way");
+                        imageOrder.setImageResource(R.drawable.ic_delivery_180);
+                    }
+                    if (progress == deliveredOrder) {
+                        Snackbar.make(getView(), "delivered", Snackbar.LENGTH_SHORT).show();
+                        message.setText("The order was delivered");
+                        imageOrder.setImageResource(R.drawable.ic_receive_180);
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Please! Choose Order.", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -121,8 +125,13 @@ public class DeliveryFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int value = dataSnapshot.getValue(Integer.class);
-                seekBar.setProgress(value);
+                if (dataSnapshot.exists()) {
+                    int value = dataSnapshot.getValue(Integer.class);
+                    seekBar.setProgress(value);
+                } else {
+                    Toast.makeText(getActivity(), "Please! Choose Order.", Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override
