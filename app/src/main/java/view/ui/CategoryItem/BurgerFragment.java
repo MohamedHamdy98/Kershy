@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,14 +34,17 @@ public class BurgerFragment extends Fragment {
     RecyclerView recyclerViewBurger;
     MyAdapterBurger myAdapterBurger;
     Context context;
+    @BindView(R.id.textView_rating)
+    TextView textViewRating;
+    @BindView(R.id.textView_timeDelivery)
+    TextView textViewTimeDelivery;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_burger, container, false);
         ButterKnife.bind(this, root);
-        // startRecyclerView();
-        recyclerView();
+        showTimeAndRating();
         return root;
     }
 
@@ -52,7 +54,7 @@ public class BurgerFragment extends Fragment {
         recyclerView();
     }
 
-    public void recyclerView() {
+    private void recyclerView() {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -60,7 +62,7 @@ public class BurgerFragment extends Fragment {
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("Menu").child("Burger");
-       // databaseReference.child("M").child("Burger").push().getKey();
+        // databaseReference.child("M").child("Burger").push().getKey();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -81,35 +83,31 @@ public class BurgerFragment extends Fragment {
         });
     }
 
-    public void startRecyclerView() {
+    private void showTimeAndRating(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String time = dataSnapshot.child("TimeDelivery").getValue(String.class);
+                textViewTimeDelivery.setText(time);
+            }
 
-        recyclerViewBurger.setHasFixedSize(true);
-        myAdapterBurger = new MyAdapterBurger(modelBurgerArrayList, context);
-        recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerViewBurger.setAdapter(myAdapterBurger);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
-
-
-//    public void onClick() {
-//        buttonBurgerItemBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.nav_host_fragment, new HomeFragment());
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//            }
-//        });
-//        cardBurgerItemBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.nav_host_fragment, new HomeFragment());
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//            }
-//        });
-//
-//
-//    }
 }

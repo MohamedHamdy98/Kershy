@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,7 +34,10 @@ public class DrinkFragment extends Fragment {
     @BindView(R.id.recyclerView_drink)
     RecyclerView recyclerViewDrink;
     MyAdapterDrink myAdapterDrink;
-    Context context;
+    @BindView(R.id.textView_rating)
+    TextView textViewRating;
+    @BindView(R.id.textView_timeDelivery)
+    TextView textViewTimeDelivery;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference("Menu").child("Drink");
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,6 +45,7 @@ public class DrinkFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_drink, container, false);
         ButterKnife.bind(this,root);
         startRecyclerView();
+        showTimeAndRating();
         return root;
     }
     public void startRecyclerView() {
@@ -61,6 +66,23 @@ public class DrinkFragment extends Fragment {
                 recyclerViewDrink.setAdapter(myAdapterDrink);
                 progressDialog.dismiss();
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void showTimeAndRating(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String time = dataSnapshot.child("TimeDelivery").getValue(String.class);
+                textViewTimeDelivery.setText(time);
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
