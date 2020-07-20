@@ -98,15 +98,17 @@
                     </androidx.cardview.widget.CardView>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="12dp"
                     android:layout_gravity="center"
-                    android:layout_margin="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     app:cardBackgroundColor="#00CB2C"
                     app:cardElevation="12dp">
                     <androidx.cardview.widget.CardView
-                        android:layout_width="270dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:elevation="12dp"
                         android:layout_marginEnd="2dp"
@@ -121,6 +123,9 @@
 
                             <RatingBar
                                 android:id="@+id/rating"
+                                android:rating="2"
+                                android:scaleY="0.75"
+                                android:scaleX="0.75"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

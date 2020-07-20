@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,8 @@ public class BurgerFragment extends Fragment {
     TextView textViewRating;
     @BindView(R.id.textView_timeDelivery)
     TextView textViewTimeDelivery;
+    @BindView(R.id.prgressBar)
+    ProgressBar prgressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,9 +58,7 @@ public class BurgerFragment extends Fragment {
     }
 
     private void recyclerView() {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        prgressBar.setVisibility(View.VISIBLE);
         recyclerViewBurger.setHasFixedSize(true);
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -73,7 +74,7 @@ public class BurgerFragment extends Fragment {
                 }
                 myAdapterBurger = new MyAdapterBurger(modelBurgerArrayList, context);
                 recyclerViewBurger.setAdapter(myAdapterBurger);
-                progressDialog.dismiss();
+                prgressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -83,9 +84,9 @@ public class BurgerFragment extends Fragment {
         });
     }
 
-    private void showTimeAndRating(){
+    private void showTimeAndRating() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference();
+        final DatabaseReference databaseReference = database.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,14 +100,20 @@ public class BurgerFragment extends Fragment {
             }
         });
         databaseReference.child("Rating").addValueEventListener(new ValueEventListener() {
+            float sum;
+            int total = 0;
+            float avg;
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    for (DataSnapshot data : snapshot.getChildren()){
-                        Float numberRating = data.getValue(Float.class);
-
-                        textViewRating.setText(numberRating + "");
-                    }
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Float rating = snapshot.getValue(Float.class);
+                    sum = (sum + rating);
+                    total++;
+                }
+                if (total != 0) {
+                    avg = sum / total;
+                    textViewRating.setText(avg + "");
                 }
             }
 

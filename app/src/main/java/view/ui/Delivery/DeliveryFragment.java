@@ -23,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
+import Model.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -52,7 +55,7 @@ public class DeliveryFragment extends Fragment {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference databaseReference = database.getReference("Rating")
-                        .child(userId).child("Rating");
+                        .child(userId);
                 databaseReference.setValue(ratingNumber);
             }
         });

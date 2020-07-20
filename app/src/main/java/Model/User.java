@@ -1,6 +1,7 @@
 package Model;
 
 public class User {
+    public int num;
     public String nameUser;
     private String imageURL;
     private String phone;
@@ -12,6 +13,14 @@ public class User {
         this.nameUser = nameUser;
         this.imageURL = imageURL;
         this.phone = phone;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public String getNameUser() {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,8 @@ public class DrinkFragment extends Fragment {
     TextView textViewTimeDelivery;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference("Menu").child("Drink");
+    @BindView(R.id.prgressBar)
+    ProgressBar prgressBar;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_drink, container, false);
@@ -49,9 +52,7 @@ public class DrinkFragment extends Fragment {
         return root;
     }
     public void startRecyclerView() {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        prgressBar.setVisibility(View.VISIBLE);
         recyclerViewDrink.setHasFixedSize(true);
         recyclerViewDrink.setLayoutManager(new LinearLayoutManager(getActivity()));
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -64,7 +65,7 @@ public class DrinkFragment extends Fragment {
                 }
                 myAdapterDrink = new MyAdapterDrink(modelDrinkArrayList, getActivity());
                 recyclerViewDrink.setAdapter(myAdapterDrink);
-                progressDialog.dismiss();
+                prgressBar.setVisibility(View.GONE);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -81,6 +82,28 @@ public class DrinkFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String time = dataSnapshot.child("TimeDelivery").getValue(String.class);
                 textViewTimeDelivery.setText(time);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.child("Rating").addValueEventListener(new ValueEventListener() {
+            float sum;
+            int total = 0;
+            float avg;
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Float rating = snapshot.getValue(Float.class);
+                    sum = (sum + rating);
+                    total++;
+                }
+                if (total != 0) {
+                    avg = sum / total;
+                    textViewRating.setText(avg + "");
+                }
             }
 
             @Override

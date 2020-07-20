@@ -41,20 +41,20 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start|center_vertical"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:text="@string/kershy_burger"
-                            android:textAllCaps="false"
-                            android:layout_weight="1"
-                            android:textColor="#fff"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:text="@string/kershy_burger"
+                        android:textAllCaps="false"
+                        android:layout_weight="1"
+                        android:textColor="#fff"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -117,11 +117,16 @@
                             android:textSize="18sp"
                             android:textStyle="normal" />
                     </LinearLayout>
-
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
+            <ProgressBar
+                android:id="@+id/prgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_burger"
                 android:layout_width="match_parent"

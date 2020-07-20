@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -37,7 +38,8 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerViewItemOffer;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference("Menu").child("Offers");
-
+    @BindView(R.id.prgressBar)
+    ProgressBar prgressBar;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -54,9 +56,7 @@ public class HomeFragment extends Fragment {
 
 
     public void startRecyclerView() {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        prgressBar.setVisibility(View.VISIBLE);
         recyclerViewItemOffer.setHasFixedSize(true);
         recyclerViewItemOffer.setLayoutManager(new LinearLayoutManager(getActivity()));
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
                 }
                 adapterItemOffer = new MyAdapterItemOffer(modelItemOfferArrayList, getActivity());
                 recyclerViewItemOffer.setAdapter(adapterItemOffer);
-                progressDialog.dismiss();
+                prgressBar.setVisibility(View.GONE);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
