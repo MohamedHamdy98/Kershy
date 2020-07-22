@@ -98,6 +98,9 @@ public class CartActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         textViewDateOrder.setText(currentDate);
+        databaseReference = database.getReference();
+        databaseReference.child("Cart").child(userId).child("timeOrder").setValue(currentDate);
+        databaseReference.child("AllOrders").child(userId).child("timeOrder").setValue(currentDate);
     }
 
     // all information about recyclerView
@@ -161,6 +164,8 @@ public class CartActivity extends AppCompatActivity {
                     String bill = dataSnapshot.child("Cart").child(userId).child("TotalPriceToPay")
                             .getValue(String.class);
                     textViewCartTotalPrice.setText(bill);
+                    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
+                    dataRef.child("AllOrders").child(userId).child("Bill").setValue(bill);
                 }
             }
 

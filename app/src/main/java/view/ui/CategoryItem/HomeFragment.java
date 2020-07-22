@@ -2,6 +2,7 @@ package view.ui.CategoryItem;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,13 +45,21 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, root);
-
         startRecyclerView();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-//        databaseReference = database.getReference("Menu").child("Burger").child("0");
-//        databaseReference.child("price_burger").setValue("40");
+        // To Stop button back...
+        root.setFocusableInTouchMode(true);
+        root.requestFocus();
+        root.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         return root;
     }
 

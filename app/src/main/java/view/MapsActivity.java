@@ -104,16 +104,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         buttonApplyToPayMoney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // cardViewGone.setVisibility(View.GONE);
                 if(editTextPhoneMap.getText().toString().isEmpty()){
                     Snackbar.make(v,"Write your phone",Snackbar.LENGTH_LONG).show();
                 }
                 else{
                      databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
-//                    SharedPreferences sharedPreferences = getSharedPreferences("saveName",MODE_PRIVATE);
-//                    String name = sharedPreferences.getString("name","User Name");
-//                    databaseReference.child(userId).child("UserName").setValue(name);
-                    // To check progress bar in delivery fragment
+                    DatabaseReference databaseRefer = FirebaseDatabase.getInstance().getReference();
+                    databaseRefer.child("AllOrders").child(userId).child("Phone")
+                            .setValue(editTextPhoneMap.getText().toString());
+                    // For progress bar in delivery fragment
                     databaseReference.child("writeOrder").setValue(false);
                     databaseReference.child("preparingOrder").setValue(false);
                     databaseReference.child("wayOrder").setValue(false);
@@ -190,6 +189,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 databaseReference = database.getReference("Cart").child(userId);
                 databaseReference.child("AddressWrite").setValue(address);
                 databaseReference.child("UserName").setValue(name);
+                DatabaseReference databaseRefer = FirebaseDatabase.getInstance().getReference();
+                databaseRefer.child("AllOrders").child(userId).child("Address").setValue(address);
+                databaseRefer.child("AllOrders").child(userId).child("UserName").setValue(name);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

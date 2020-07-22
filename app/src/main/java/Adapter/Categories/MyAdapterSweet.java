@@ -103,9 +103,8 @@ public class MyAdapterSweet extends RecyclerView.Adapter<MyAdapterSweet.ViewHold
                         holder.textNameRecyclerCategory.getText().toString(),
                         holder.textRemoveAddRecyclerCategory.getText().toString(),
                         holder.textPriceRecyclerCategory.getText().toString());
-                DatabaseReference reference = database.getReference();
-                reference.child("Order")
-                        .child(userId)
+                DatabaseReference reference = database.getReference("AllOrders");
+                reference.child(userId).child("Order")
                         .child(holder.textNameRecyclerCategory.getText().toString())
                         .setValue(modelCart);
                 databaseReference.child(userId).child("Order")

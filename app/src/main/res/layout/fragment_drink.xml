@@ -18,7 +18,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:background="@drawable/cola" />
+            android:background="@drawable/drinkimage" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -47,20 +47,7 @@ public class DeliveryFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_delivery, container, false);
         ButterKnife.bind(this, root);
         saveSeekBarProgress();
-        openRating.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Float ratingNumber = rating.getRating();
-                Toast.makeText(getActivity(), ratingNumber + "", Toast.LENGTH_SHORT).show();
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference databaseReference = database.getReference("Rating")
-                        .child(userId);
-                databaseReference.setValue(ratingNumber);
-            }
-        });
-
-
+        setRating();
         return root;
     }
 
@@ -139,6 +126,21 @@ public class DeliveryFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void setRating(){
+        openRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Float ratingNumber = rating.getRating();
+                Toast.makeText(getActivity(), ratingNumber + "", Toast.LENGTH_SHORT).show();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference databaseReference = database.getReference("Rating")
+                        .child(userId);
+                databaseReference.setValue(ratingNumber);
             }
         });
     }
