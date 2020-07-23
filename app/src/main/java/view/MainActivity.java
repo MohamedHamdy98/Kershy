@@ -64,23 +64,11 @@ public class MainActivity extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         finish();
                     }
-                   // Intent intent = new Intent(MainActivity.this, LogInActivity.class);
-                    //startActivity(intent);
-
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
         thread.start();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(MainActivity.this, LogInActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        }, SPLASH_SCREEN);
     }
 }

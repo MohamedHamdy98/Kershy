@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testeverything.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -66,8 +64,6 @@ public class CartActivity extends AppCompatActivity {
     Button buttonApplyCart;
     @BindView(R.id.button_turnOn_GPS)
     ImageView buttonTurnOnGPS;
-    FirebaseRecyclerOptions<ModelCart> options;
-    FirebaseRecyclerAdapter<ModelCart, AdapterCart> adapter;
     @BindView(R.id.textView_date_order)
     TextView textViewDateOrder;
     @BindView(R.id.textView_cart_itemTotal)

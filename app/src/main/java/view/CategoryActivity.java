@@ -172,7 +172,7 @@ public class CategoryActivity extends AppCompatActivity {
         Toast.makeText(this, "ShareApplication", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        String body = "https://drive.google.com/file/d/1a67pLUHyn4HYJh7b_IWKx8HNdn2xuyJP/view?usp=sharing";
+        String body = "https://drive.google.com/file/d/127ddU9eyyhpy7_58UsmwvuktvO2nJbTW/view?usp=sharing";
         String subject = "Kershy App";
         //http://play.google.com/store/apps/details?id=com.example.testeverything
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);

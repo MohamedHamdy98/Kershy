@@ -64,23 +64,23 @@ public class SignUpActivity extends AppCompatActivity {
                 final String address = editTextSignUpAddress.getText().toString();
 
                 if (TextUtils.isEmpty(phone)) {
-                    Snackbar.make(v, "Please Enter Your Phone", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.enterPhone, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(name)) {
-                    Snackbar.make(v, "Please Enter Your Name", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.enterName, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(email)) {
-                    Snackbar.make(v, "Please Enter Email", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.enterEmail, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Snackbar.make(v, "Please Enter Password", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v,R.string.enterPassword, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 if (password.length() < 6) {
-                    Snackbar.make(v, "Password should be more thn 6 letters", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.passMore6, Snackbar.LENGTH_SHORT).show();
                 }
                 prgressBarSignUp.setVisibility(View.VISIBLE);
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -89,6 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 prgressBarSignUp.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
+                                    // To set user information in database RealTime...
                                     HashMap<String, Object> hashMap = new HashMap<>();
                                     hashMap.put("userName", name);
                                     hashMap.put("email", email);
@@ -99,9 +100,9 @@ public class SignUpActivity extends AppCompatActivity {
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     databaseReference.child(userId).setValue(hashMap);
                                     startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
-                                    Snackbar.make(v, "Authentication success.", Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(v, R.string.Authenticationsuccess, Snackbar.LENGTH_SHORT).show();
                                 } else {
-                                    Snackbar.make(v, "Authentication failed.", Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(v, R.string.AuthenticationFailed, Snackbar.LENGTH_SHORT).show();
                                 }
                             }
                         });

@@ -109,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 else{
                      databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
-                    // For progress bar in delivery fragment
+                    // For set progress bar in delivery fragment..
                     databaseReference.child("writeOrder").setValue(false);
                     databaseReference.child("preparingOrder").setValue(false);
                     databaseReference.child("wayOrder").setValue(false);
@@ -117,7 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     databaseReference.child("waitOrder").setValue(false);
                     databaseReference.child("progress").setValue(true);
                     databaseReference.child("valueSeekBar").setValue(0);
-                    Toast.makeText(MapsActivity.this, "Please wait!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, R.string.wait, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MapsActivity.this,CategoryActivity.class));
                     overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     finish();
@@ -158,18 +158,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude()
-                            + " " + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    // To set address in database..
                     databaseReference.child("Address").setValue(currentLocation.getLatitude() + " " +
                             currentLocation.getLongitude());
+                    // To set user id in database, this step very very important to use in another app(Restaurant App)..
                     databaseReference.child("id").setValue(userId);
+                    // To get address by write it by user when he sign In..
                     getAddressandSetAddress();
                     mapFragment = (SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
                     mapFragment.getMapAsync(MapsActivity.this);
                 } else {
-                    Toast.makeText(MapsActivity.this, "Please! Close App and open it again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, R.string.closeAppandOpen, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -198,13 +199,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng)
-                .title("I am here");
+                .title(getString(R.string.iamhere));
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 mMap.clear();
-                mMap.addMarker(new MarkerOptions().position(latLng).title("I am here")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.iamhere))).showInfoWindow();
             }
         });
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style));
