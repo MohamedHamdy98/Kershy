@@ -109,9 +109,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 else{
                      databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
-                    DatabaseReference databaseRefer = FirebaseDatabase.getInstance().getReference();
-                    databaseRefer.child("AllOrders").child(userId).child("Phone")
-                            .setValue(editTextPhoneMap.getText().toString());
                     // For progress bar in delivery fragment
                     databaseReference.child("writeOrder").setValue(false);
                     databaseReference.child("preparingOrder").setValue(false);
@@ -189,9 +186,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 databaseReference = database.getReference("Cart").child(userId);
                 databaseReference.child("AddressWrite").setValue(address);
                 databaseReference.child("UserName").setValue(name);
-                DatabaseReference databaseRefer = FirebaseDatabase.getInstance().getReference();
-                databaseRefer.child("AllOrders").child(userId).child("Address").setValue(address);
-                databaseRefer.child("AllOrders").child(userId).child("UserName").setValue(name);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

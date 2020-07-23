@@ -63,7 +63,6 @@ public class BurgerFragment extends Fragment {
         recyclerViewBurger.setLayoutManager(new LinearLayoutManager(getActivity()));
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("Menu").child("Burger");
-        // databaseReference.child("M").child("Burger").push().getKey();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,7 +92,6 @@ public class BurgerFragment extends Fragment {
                 String time = dataSnapshot.child("TimeDelivery").getValue(String.class);
                 textViewTimeDelivery.setText(time);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

@@ -185,17 +185,30 @@
                                     android:textAllCaps="false"
                                     android:textStyle="bold"
                                     android:textColor="#00CB2C"/>
-                                <Button
-                                    android:id="@+id/button_add_recycler_category"
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:layout_marginLeft="12dp"
+                                <LinearLayout
+                                    android:id="@+id/linear_add_recycler_category"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="4dp"
                                     android:layout_marginBottom="2dp"
                                     android:layout_marginTop="2dp"
-                                    android:layout_marginRight="4dp"
-                                    android:background="@drawable/ic_newplus"/>
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="12dp"
+                                    android:gravity="center"
+                                    android:layout_gravity="center">
+                                    <Button
+                                        android:id="@+id/button_add_recycler_category"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:layout_marginLeft="12dp"
+                                        android:layout_marginBottom="2dp"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginRight="4dp"
+                                        android:background="@drawable/ic_newplus"/>
+                                </LinearLayout>
+
                             </LinearLayout>
                         </LinearLayout>
                     </RelativeLayout>

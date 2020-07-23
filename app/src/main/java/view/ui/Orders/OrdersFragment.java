@@ -68,13 +68,13 @@ public class OrdersFragment extends Fragment {
         super.onStart();
         start_recyclerView();
     }
-
+    // For get Time order
     public void getTimeOrder() {
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         textViewDateOrder.setText(currentDate);
     }
-
+    // For get offers,deliverFee,tax,totalPrice to calculate bill and set them in database..
     public void getFirebase() {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -64,15 +64,15 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ModelBurger modelBurger = categoryArrayList.get(position);
         holder.textNameRecyclerCategory.setText(modelBurger.getName_burger());
-       // databaseReference = database.getReference("M").child("Burger");
+        // For get image
         if (modelBurger.getImage_burger().equals("default")) {
             holder.imageViewRecyclerCategory.setImageResource(R.drawable.ic_burger);
         } else {
             Picasso.get().load(modelBurger.getImage_burger()).into(holder.imageViewRecyclerCategory);
-            //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
         }
         holder.textPriceRecyclerCategory.setText(modelBurger.getPrice_burger());
         holder.textDescriptionRecyclerCategory.setText(modelBurger.getDescription_burger());
+        // For hide and show description
         holder.textDescriptionRecyclerCategory.setOnStateChangeListener(new ExpandableTextView.OnStateChangeListener() {
             @Override
             public void onStateChange(boolean isShrink) {
@@ -83,6 +83,7 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
         });
         holder.textDescriptionRecyclerCategory.setText(modelBurger.getDescription_burger());
         holder.textDescriptionRecyclerCategory.resetState(modelBurger.isShrink());
+        // For add number of item
         holder.buttonAddRecyclerCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +91,14 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
                 holder.textRemoveAddRecyclerCategory.setText(String.valueOf(num + 1));
             }
         });
+        holder.linearAddRecyclerCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int num = Integer.parseInt(holder.textRemoveAddRecyclerCategory.getText().toString());
+                holder.textRemoveAddRecyclerCategory.setText(String.valueOf(num + 1));
+            }
+        });
+        // For mines number of item
         holder.buttonRemoveRecyclerCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,20 +119,17 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
                 }
             }
         });
-
+        // For add item in cart
         holder.imageAddCart.setOnClickListener(new View.OnClickListener() {
             ModelCart modelCart;
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 modelCart = new ModelCart(
                         holder.textNameRecyclerCategory.getText().toString(),
                         holder.textRemoveAddRecyclerCategory.getText().toString(),
                         holder.textPriceRecyclerCategory.getText().toString());
-                DatabaseReference reference = database.getReference("AllOrders");
-                reference.child(userId).child("Order")
-                        .child(holder.textNameRecyclerCategory.getText().toString())
-                        .setValue(modelCart);
+                // For add item in firebase
                 databaseReference.child(userId).child("Order")
                         .child(holder.textNameRecyclerCategory.getText().toString())
                         .setValue(modelCart);
@@ -157,6 +163,8 @@ public class MyAdapterBurger extends RecyclerView.Adapter<MyAdapterBurger.ViewHo
         TextView textRemoveAddRecyclerCategory;
         @BindView(R.id.button_add_recycler_category)
         Button buttonAddRecyclerCategory;
+        @BindView(R.id.linear_add_recycler_category)
+        LinearLayout linearAddRecyclerCategory;
         @BindView(R.id.linear_remove_recycler_category)
         LinearLayout linearRemoveRecyclerCategory;
         @BindView(R.id.image_add_cart)

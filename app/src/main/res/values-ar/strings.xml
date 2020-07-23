@@ -73,4 +73,15 @@
     <string name="not_yet_a_member">لست عضواَ بعد,</string>
     <string name="share_application">مشاركة التطبيق</string>
     <string name="logout">تسجيل خروج</string>
+    <string name="Uploading">Uploading...</string>
+    <string name="Error">Error</string>
+    <string name="Please_Choose_image">Please! Choose image!</string>
+    <string name="enterName">Please Enter Your Name</string>
+    <string name="enterAddress">Please Enter Your Address</string>
+    <string name="enterPhone">Please Enter Your Phone</string>
+    <string name="updateIsDone">Update is done</string>
+    <string name="gpsIsTurnedOn">GPS is turning on.</string>
+    <string name="Your_GPS_seems_to_be_disabled_do_you_want_to_enable_it">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

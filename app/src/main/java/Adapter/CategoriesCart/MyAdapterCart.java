@@ -48,9 +48,11 @@ public class MyAdapterCart extends RecyclerView.Adapter<MyAdapterCart.ViewHolder
         holder.textViewNameCart.setText(modelCart.getName());
         holder.textViewNumberItemCart.setText(modelCart.getNumItem());
         holder.textViewPriceCart.setText(modelCart.getPrice());
+        // For calculate price
         int onePrice = ((Integer.valueOf(modelCart.getPrice()))) * ((Integer.valueOf(modelCart.getNumItem())));
         holder.textViewPriceCart.setText(String.valueOf(onePrice));
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        // For Remove item from cart and database
         holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -71,18 +73,6 @@ public class MyAdapterCart extends RecyclerView.Adapter<MyAdapterCart.ViewHolder
     public void setList(ArrayList<ModelCart> models) {
         this.modelCartArrayList = models;
         notifyDataSetChanged();
-    }
-
-    public void grandTotal() {
-        int oneType;
-        int overTotal =0 ;
-        for (int i = 0; i < modelCartArrayList.size(); i++) {
-            ModelCart modelCart = modelCartArrayList.get(i);
-            oneType = ((Integer.valueOf(modelCart.getPrice()))) * ((Integer.valueOf(modelCart.getNumItem())));
-            overTotal = overTotal + oneType;
-            databaseReference = database.getReference("totalPrice");
-            databaseReference.setValue(String.valueOf(overTotal));
-        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

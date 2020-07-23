@@ -27,7 +27,6 @@
         android:supportsRtl="true"
         tools:replace="android:supportsRtl"
         android:theme="@style/AppTheme">
-        <activity android:name="view.ui.Orders.OrdersActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

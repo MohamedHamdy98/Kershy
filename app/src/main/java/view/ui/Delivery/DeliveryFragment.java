@@ -56,7 +56,7 @@ public class DeliveryFragment extends Fragment {
         super.onStart();
         controlDelivery();
     }
-
+    // For check progress and change image and text..
     private void controlDelivery() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -106,7 +106,7 @@ public class DeliveryFragment extends Fragment {
             }
         });
     }
-
+    // For SetProgress the seekBar..
     private void saveSeekBarProgress() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -129,7 +129,7 @@ public class DeliveryFragment extends Fragment {
             }
         });
     }
-
+    // For SetRating..
     private void setRating(){
         openRating.setOnClickListener(new View.OnClickListener() {
             @Override

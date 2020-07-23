@@ -49,15 +49,16 @@ public class MyAdapterDrink extends RecyclerView.Adapter<MyAdapterDrink.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final ModelDrink modelDrink = modelDrinkArrayList.get(position);
+        // For get image
         holder.textNameRecyclerCategory.setText(modelDrink.getName_drink());
         if (modelDrink.getImage_drink().equals("default")) {
             holder.imageViewRecyclerCategory.setImageResource(R.drawable.ic_burger);
         } else {
             Picasso.get().load(modelDrink.getImage_drink()).into(holder.imageViewRecyclerCategory);
-            //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
         }
         holder.textPriceRecyclerCategory.setText(modelDrink.getPrice_drink());
         holder.textDescriptionRecyclerCategory.setText(modelDrink.getDescription_drink());
+        // For hide and show description
         holder.textDescriptionRecyclerCategory.setOnStateChangeListener(new ExpandableTextView.OnStateChangeListener() {
             @Override
             public void onStateChange(boolean isShrink) {
@@ -68,6 +69,7 @@ public class MyAdapterDrink extends RecyclerView.Adapter<MyAdapterDrink.ViewHold
         });
         holder.textDescriptionRecyclerCategory.setText(modelDrink.getDescription_drink());
         holder.textDescriptionRecyclerCategory.resetState(modelDrink.isShrink());
+        // For add number of item
         holder.buttonAddRecyclerCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +77,14 @@ public class MyAdapterDrink extends RecyclerView.Adapter<MyAdapterDrink.ViewHold
                 holder.textRemoveAddRecyclerCategory.setText(String.valueOf(num + 1));
             }
         });
+        holder.linearAddRecyclerCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int num = Integer.parseInt(holder.textRemoveAddRecyclerCategory.getText().toString());
+                holder.textRemoveAddRecyclerCategory.setText(String.valueOf(num + 1));
+            }
+        });
+        // For mines number of item
         holder.buttonRemoveRecyclerCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +105,7 @@ public class MyAdapterDrink extends RecyclerView.Adapter<MyAdapterDrink.ViewHold
                 }
             }
         });
+        // For add item in cart
         holder.imageAddCart.setOnClickListener(new View.OnClickListener() {
             ModelCart modelCart;
             @Override
@@ -104,10 +115,7 @@ public class MyAdapterDrink extends RecyclerView.Adapter<MyAdapterDrink.ViewHold
                         holder.textNameRecyclerCategory.getText().toString(),
                         holder.textRemoveAddRecyclerCategory.getText().toString(),
                         holder.textPriceRecyclerCategory.getText().toString());
-                DatabaseReference reference = database.getReference("AllOrders");
-                reference.child(userId).child("Order")
-                        .child(holder.textNameRecyclerCategory.getText().toString())
-                        .setValue(modelCart);
+                // For add item in firebase
                 databaseReference.child(userId).child("Order")
                         .child(holder.textNameRecyclerCategory.getText().toString())
                         .setValue(modelCart);
@@ -127,6 +135,8 @@ public class MyAdapterDrink extends RecyclerView.Adapter<MyAdapterDrink.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.linear_add_recycler_category)
+        LinearLayout linearAddRecyclerCategory;
         @BindView(R.id.imageView_recycler_category)
         ImageView imageViewRecyclerCategory;
         @BindView(R.id.text_name_recycler_category)

@@ -93,7 +93,7 @@ public class CartActivity extends AppCompatActivity {
         getTimeOrder();
         onClickApplayCart();
     }
-
+    // To getTime Order and set it in database..
     public void getTimeOrder() {
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
@@ -102,7 +102,6 @@ public class CartActivity extends AppCompatActivity {
         databaseReference.child("Cart").child(userId).child("timeOrder").setValue(currentDate);
         databaseReference.child("AllOrders").child(userId).child("timeOrder").setValue(currentDate);
     }
-
     // all information about recyclerView
     public void start_recyclerView() {
         recyclerViewCart.setHasFixedSize(true);
@@ -131,7 +130,6 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -140,7 +138,7 @@ public class CartActivity extends AppCompatActivity {
         hasGPSDevice(this);
         enableLoc();
     }
-
+    // For get offers,deliverFee,tax,totalPrice to calculate bill and set them in UI activity..
     public void getFirebase() {
         databaseReference = database.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -154,6 +152,8 @@ public class CartActivity extends AppCompatActivity {
                 textViewCartDeliveryFee.setText(deliveryFee);
                 textViewCartItemTotal.setText(totalPrice);
                 textViewCartTax.setText(tax);
+                // Don't touch this, it is dangerous..
+                // To set it 0 if it is null (if you delete this the app will crash)...HhHhHhHhH sorry!
                 if (totalPrice == "0") {
                     databaseReference.child("Cart").child(userId).child("TotalPriceToPay").setValue("0");
                 } else {
@@ -164,8 +164,6 @@ public class CartActivity extends AppCompatActivity {
                     String bill = dataSnapshot.child("Cart").child(userId).child("TotalPriceToPay")
                             .getValue(String.class);
                     textViewCartTotalPrice.setText(bill);
-                    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
-                    dataRef.child("AllOrders").child(userId).child("Bill").setValue(bill);
                 }
             }
 
@@ -174,18 +172,15 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
-
-    public void getFirebasr2() {
+    // To set totalPrice 0 (if you delete this the app will crash)...HhHhHhHhH sorry!
+    public void setTotalPrice() {
         databaseReference = database.getReference("Cart").child(userId).child("Order");
-        //databaseReference2 = database.getReference("Cart").child(userId).child("Order");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getValue() == null) {
                     databaseReference = database.getReference("Cart").child(userId).child("totalPrice");
-                    // databaseReference2 = database.getReference("Cart").child(userId).child("TotalPriceToPay");
                     databaseReference.setValue("0");
-                    //databaseReference2.setValue("0");
                 }
             }
 
@@ -195,7 +190,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
-
+    // To calculate total price and set it in database..
     public void getTotalPrice() {
         int oneType;
         int overTotal = 0;
@@ -207,7 +202,7 @@ public class CartActivity extends AppCompatActivity {
             databaseReference.setValue(String.valueOf(overTotal));
         }
     }
-
+    // To check if child order is null, if order == null this method will set it..
     public void checkDataFirebase() {
         databaseReference = database.getReference("Cart").child(userId).child("Order");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -230,7 +225,6 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
-
     // all button in activity...
     private void onClickcalculaiteTotalPrice() {
         buttonCalculateTotalPrice.setOnClickListener(new View.OnClickListener() {
@@ -238,11 +232,11 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getTotalPrice();
                 getFirebase();
-                getFirebasr2();
+                setTotalPrice();
             }
         });
     }
-
+    // To move from this to Maps activity..
     private void onClickApplayCart() {
         buttonApplyCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,7 +249,7 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
-
+    // To open Gps..
     private boolean hasGPSDevice(Context context) {
         final LocationManager mgr = (LocationManager) context
                 .getSystemService(Context.LOCATION_SERVICE);
@@ -327,79 +321,26 @@ public class CartActivity extends AppCompatActivity {
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             buildAlertMessageNoGps();
         } else {
-            Toast.makeText(this, "GPS is turning on.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.gpsIsTurnedOn, Toast.LENGTH_LONG).show();
         }
     }
 
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        builder.setMessage(R.string.Your_GPS_seems_to_be_disabled_do_you_want_to_enable_it)
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
                     }
                 });
         final AlertDialog alert = builder.create();
         alert.show();
-    }
-
-    private void checkGPS() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-        builder.setTitle("GPS.").setMessage("To continue please turn on Gps.")
-                .setPositiveButton("Turn on.", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(i);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                }).create();
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-    // turn on gps
-    private void turnOn_GPS() {
-        buttonTurnOnGPS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                statusCheckGPS();
-            }
-        });
-    }
-
-    public void ItemTouch() {
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                Toast.makeText(CartActivity.this, "on Move", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                Toast.makeText(CartActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
-                //Remove swiped item from list and notify the RecyclerView
-                int position = viewHolder.getAdapterPosition();
-                databaseReference.child("Cart").removeValue();
-                modelCartArrayList.remove(position);
-                ModelCart modelCart = new ModelCart();
-                myAdapterCart.notifyDataSetChanged();
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerViewCart);
     }
 
 }

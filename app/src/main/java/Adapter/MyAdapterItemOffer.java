@@ -44,7 +44,6 @@ public class MyAdapterItemOffer extends RecyclerView.Adapter<MyAdapterItemOffer.
         } else {
             Picasso.get().load(modelItemOffer.getImage_offer())
                     .into(holder.imageBurgerItemOffer);
-            //Glide.with(context).load(modelBurger.getImage_burger()).into( holder.imageViewRecyclerCategory);
         }
         holder.nameBurgerItemOffer.setText(modelItemOffer.getName_offer());
         holder.oldPriceBurgerItemOffer.setText(modelItemOffer.getOld_price_offer());

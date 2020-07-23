@@ -108,23 +108,23 @@ public class ProfileUserFragment extends Fragment {
         editImageUser();
         return root;
     }
-
+    // Open gallery from phone
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 1);
     }
-
+    // get extention
     private String getFileExtention(Uri uri) {
         ContentResolver contentResolver = getContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
-
+    // Upload image and update it in database(to convert image="default" to image="linkImage")
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Uploading...");
+        progressDialog.setMessage(getString(R.string.Uploading));
         progressDialog.show();
         if (imageUri != null) {
             final StorageReference filereference = mStorageRef.
@@ -151,7 +151,7 @@ public class ProfileUserFragment extends Fragment {
                         reference.updateChildren(hashMap);
                         progressDialog.dismiss();
                     } else {
-                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.Error, Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 }
@@ -163,7 +163,7 @@ public class ProfileUserFragment extends Fragment {
                 }
             });
         } else {
-            Toast.makeText(getContext(), "Please! Choose image!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.Please_Choose_image, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -179,7 +179,7 @@ public class ProfileUserFragment extends Fragment {
             }
         }
     }
-
+    // To save user in formation in database..
     private void onClickApply() {
         buttonApplyCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,14 +189,14 @@ public class ProfileUserFragment extends Fragment {
                 String address = editTextUserAddress.getText().toString();
                 String phone = editTextUserPhone.getText().toString();
                 if (TextUtils.isEmpty(name)) {
-                    Snackbar.make(v, "Please Enter Your Name", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.enterName, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 else if (TextUtils.isEmpty(address)) {
-                    Snackbar.make(v, "Please Enter Your Address", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.enterAddress, Snackbar.LENGTH_SHORT).show();
                     return;
                 } else if (TextUtils.isEmpty(phone)) {
-                    Snackbar.make(v, "Please Enter Your Phone", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, R.string.enterPhone, Snackbar.LENGTH_SHORT).show();
                     return;
                 } else {
                     HashMap<String, Object> hashMap = new HashMap<>();
@@ -204,7 +204,7 @@ public class ProfileUserFragment extends Fragment {
                     hashMap.put("phone", phone);
                     //hashMap.put("email", email);
                     hashMap.put("userName", name);
-                    Toast.makeText(getActivity(), "Update is done", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.updateIsDone, Toast.LENGTH_SHORT).show();
                     reference.updateChildren(hashMap);
                 }
                 nameText.setVisibility(View.VISIBLE);
@@ -213,16 +213,14 @@ public class ProfileUserFragment extends Fragment {
                 textPhone.setVisibility(View.VISIBLE);
                 nameEdit.setVisibility(View.GONE);
                 editAddress.setVisibility(View.GONE);
-                // editEmail.setVisibility(View.GONE);
                 editPhone.setVisibility(View.GONE);
                 editTextUserName.getText().clear();
                 editTextUserAddress.getText().clear();
-                // editTextUserEmail.getText().clear();
                 editTextUserPhone.getText().clear();
             }
         });
     }
-
+    // To hide and show design to edit profile..
     private void onClickEditProfile() {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,12 +233,11 @@ public class ProfileUserFragment extends Fragment {
                 buttonApplyCart.setVisibility(View.VISIBLE);
                 nameEdit.setVisibility(View.VISIBLE);
                 editAddress.setVisibility(View.VISIBLE);
-                //  editEmail.setVisibility(View.VISIBLE);
                 editPhone.setVisibility(View.VISIBLE);
             }
         });
     }
-
+    // To get User information from database..
     private void getDataFirebase() {
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);

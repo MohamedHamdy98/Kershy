@@ -78,7 +78,7 @@ public class CategoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-
+        // To get userName and image to set them in header in navigation drawer..
         databaseReference = database.getReference("Users").child(userId);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
