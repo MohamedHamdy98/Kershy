@@ -96,4 +96,5 @@
     <string name="Unchecked">Unchecked</string>
     <string name="EmailSent">"We have sent you instructions to reset your password!"</string>
     <string name="Failed_send_email">Failed to send reset email!</string>
+    <string name="reset_password">Reset Password,</string>
 </resources>
