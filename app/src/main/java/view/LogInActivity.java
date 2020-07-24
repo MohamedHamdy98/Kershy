@@ -22,6 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,9 +95,9 @@ public class LogInActivity extends AppCompatActivity {
         textViewResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LogInActivity.this,ResetPasswordActivity.class));
+                startActivity(new Intent(LogInActivity.this, ResetPasswordActivity.class));
                 finish();
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         // To go to home(Offers Fragment) activity..
@@ -131,6 +136,38 @@ public class LogInActivity extends AppCompatActivity {
                                     startActivity(new Intent(LogInActivity.this, CategoryActivity.class));
                                     Snackbar.make(v, R.string.logSuccess, Snackbar.LENGTH_SHORT).show();
                                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    // For set progress bar in delivery fragment..
+                                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference databaseReference = database.getReference("Cart")
+                                            .child(userId);
+                                    databaseReference.child("writeOrder").setValue(false);
+                                    databaseReference.child("preparingOrder").setValue(false);
+                                    databaseReference.child("wayOrder").setValue(false);
+                                    databaseReference.child("deliveredOrder").setValue(false);
+                                    databaseReference.child("waitOrder").setValue(false);
+                                    databaseReference.child("progress").setValue(true);
+                                    databaseReference.child("valueSeekBar").setValue(0);
+                                    databaseReference.child("id").setValue(userId);
+                                    databaseReference.child("Phone").setValue(editTextLoginPhone.getText().toString());
+                                    DatabaseReference reference = FirebaseDatabase.getInstance()
+                                            .getReference("Users").child(userId);
+                                    reference.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            String name = dataSnapshot.child("userName").getValue(String.class);
+                                            DatabaseReference databaseReference =
+                                                    database.getReference("Cart")
+                                                            .child(userId);
+                                            databaseReference.child("UserName").setValue(name);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+
                                 } else {
                                     Snackbar.make(v, R.string.logFailed, Snackbar.LENGTH_SHORT).show();
                                 }

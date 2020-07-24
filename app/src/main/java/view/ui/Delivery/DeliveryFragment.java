@@ -60,7 +60,7 @@ public class DeliveryFragment extends Fragment {
     private void controlDelivery() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference databaseReference = database.getReference("Cart")
+        final DatabaseReference databaseReference = database.getReference("branchCart")
                 .child(userId);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,7 +110,7 @@ public class DeliveryFragment extends Fragment {
     private void saveSeekBarProgress() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference databaseReference = database.getReference("Cart").child(userId)
+        final DatabaseReference databaseReference = database.getReference("branchCart").child(userId)
                 .child("valueSeekBar");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -131,17 +131,14 @@ public class DeliveryFragment extends Fragment {
     }
     // For SetRating..
     private void setRating(){
-        openRating.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Float ratingNumber = rating.getRating();
-                Toast.makeText(getActivity(), ratingNumber + "", Toast.LENGTH_SHORT).show();
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference databaseReference = database.getReference("Rating")
-                        .child(userId);
-                databaseReference.setValue(ratingNumber);
-            }
+        openRating.setOnClickListener(v -> {
+            Float ratingNumber = rating.getRating();
+            Toast.makeText(getActivity(), ratingNumber + "", Toast.LENGTH_SHORT).show();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference databaseReference = database.getReference("Rating")
+                    .child(userId);
+            databaseReference.setValue(ratingNumber);
         });
     }
 

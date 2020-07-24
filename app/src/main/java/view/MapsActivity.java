@@ -42,6 +42,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
+import Model.ModelCart;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import view.ui.Orders.OrdersFragment;
@@ -101,31 +104,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void onClick() {
-        buttonApplyToPayMoney.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(editTextPhoneMap.getText().toString().isEmpty()){
-                    Snackbar.make(v,"Write your phone",Snackbar.LENGTH_LONG).show();
-                }
-                else{
-                     databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
-                    // For set progress bar in delivery fragment..
-                    databaseReference.child("writeOrder").setValue(false);
-                    databaseReference.child("preparingOrder").setValue(false);
-                    databaseReference.child("wayOrder").setValue(false);
-                    databaseReference.child("deliveredOrder").setValue(false);
-                    databaseReference.child("waitOrder").setValue(false);
-                    databaseReference.child("progress").setValue(true);
-                    databaseReference.child("valueSeekBar").setValue(0);
-                    Toast.makeText(MapsActivity.this, R.string.wait, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MapsActivity.this,CategoryActivity.class));
-                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                    finish();
-                }
+        buttonApplyToPayMoney.setOnClickListener(v -> {
+            if(editTextPhoneMap.getText().toString().isEmpty()){
+                Snackbar.make(v,"Write your phone",Snackbar.LENGTH_LONG).show();
+            }
+            else{
+                databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
+                Toast.makeText(MapsActivity.this, R.string.wait, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MapsActivity.this,CategoryActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                finish();
             }
         });
     }
-
     private void reset_myLocation() {
         buttonResetMyLocationGPS.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,25 +144,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    // To set address in database..
-                    databaseReference.child("Address").setValue(currentLocation.getLatitude() + " " +
-                            currentLocation.getLongitude());
-                    // To set user id in database, this step very very important to use in another app(Restaurant App)..
-                    databaseReference.child("id").setValue(userId);
-                    // To get address by write it by user when he sign In..
-                    getAddressandSetAddress();
-                    mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.map);
-                    mapFragment.getMapAsync(MapsActivity.this);
-                } else {
-                    Toast.makeText(MapsActivity.this, R.string.closeAppandOpen, Toast.LENGTH_SHORT).show();
-                }
+        task.addOnSuccessListener(location -> {
+            if (location != null) {
+                currentLocation = location;
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                // To set address in database..
+                databaseReference.child("Address").setValue(currentLocation.getLatitude() + " " +
+                        currentLocation.getLongitude());
+                // To set user id in database, this step very very important to use in another app(Restaurant App)..
+                databaseReference.child("id").setValue(userId);
+                // To get address by write it by user when he sign In..
+                getAddressandSetAddress();
+                mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.map);
+                mapFragment.getMapAsync(MapsActivity.this);
+            } else {
+                Toast.makeText(MapsActivity.this, R.string.closeAppandOpen, Toast.LENGTH_SHORT).show();
             }
         });
     }

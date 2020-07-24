@@ -43,6 +43,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import Adapter.AdapterCart;
@@ -96,7 +98,6 @@ public class CartActivity extends AppCompatActivity {
         textViewDateOrder.setText(currentDate);
         databaseReference = database.getReference();
         databaseReference.child("Cart").child(userId).child("timeOrder").setValue(currentDate);
-        databaseReference.child("AllOrders").child(userId).child("timeOrder").setValue(currentDate);
     }
     // all information about recyclerView
     public void start_recyclerView() {
@@ -234,14 +235,13 @@ public class CartActivity extends AppCompatActivity {
     }
     // To move from this to Maps activity..
     private void onClickApplayCart() {
-        buttonApplyCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CartActivity.this, MapsActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-            }
+        buttonApplyCart.setOnClickListener(v -> {
+            set_all_user_information();
+            set_order_user();
+            Intent intent = new Intent(CartActivity.this, MapsActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            finish();
         });
 
     }
@@ -337,6 +337,66 @@ public class CartActivity extends AppCompatActivity {
                 });
         final AlertDialog alert = builder.create();
         alert.show();
+    }
+    // To set order user information in database and show it in Restaurant application..
+    private void set_order_user(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Cart").child(userId).child("Order").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    ModelCart modelCart;
+                    modelCart = snapshot.getValue(ModelCart.class);
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchCart");
+                    reference.child(userId).child("Order").setValue(modelCart);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    // To set all user information in database and show it in Restaurant application..
+    private void set_all_user_information(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Cart").child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String phone = dataSnapshot.child("Phone").getValue(String.class);
+                String name = dataSnapshot.child("UserName").getValue(String.class);
+                String time = dataSnapshot.child("timeOrder").getValue(String.class);
+                String totalPrice = dataSnapshot.child("totalPrice").getValue(String.class);
+                String totalPriceToPay = dataSnapshot.child("TotalPriceToPay").getValue(String.class);
+                String address = dataSnapshot.child("AddressWrite").getValue(String.class);
+                DatabaseReference referenceString = FirebaseDatabase.getInstance().getReference();
+                HashMap<String,Object> hashMap = new HashMap<>();
+                // set data as string
+                hashMap.put("Phone",phone);
+                hashMap.put("UserName",name);
+                hashMap.put("id",userId);
+                hashMap.put("totalPrice",totalPrice);
+                hashMap.put("TotalPriceToPay",totalPriceToPay);
+                hashMap.put("AddressWrite",address);
+                hashMap.put("timeOrder",time);
+                // To set child in database of user to control of delivery by it in Restaurant applicatiom..
+                hashMap.put("writeOrder",false);
+                hashMap.put("preparingOrder",false);
+                hashMap.put("wayOrder",false);
+                hashMap.put("deliveredOrder",false);
+                hashMap.put("waitOrder",false);
+                hashMap.put("progress",true);
+                hashMap.put("valueSeekBar",0);
+                // set all data
+                referenceString.child("branchCart").child(userId).setValue(hashMap);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
