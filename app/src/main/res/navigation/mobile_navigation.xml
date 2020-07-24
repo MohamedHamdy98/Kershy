@@ -43,4 +43,9 @@
         android:name="view.ui.ProfileUser.ProfileUserFragment"
         android:label="@string/my_profile"
         tools:layout="@layout/fragment_profile_user" />
+    <fragment
+        android:id="@+id/nav_language"
+        android:name="view.ui.Language.LanguagFragment"
+        android:label="@string/language"
+        tools:layout="@layout/fragment_languag" />
 </navigation>

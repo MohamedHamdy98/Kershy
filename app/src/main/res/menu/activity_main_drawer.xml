@@ -45,6 +45,14 @@
                 android:title="@string/delivery" />
         </menu>
     </item>
+    <item android:title="@string/language">
+        <menu>
+            <item
+                android:id="@+id/nav_language"
+                android:icon="@drawable/ic_language"
+                android:title="@string/language" />
+        </menu>
+    </item>
 
 
 

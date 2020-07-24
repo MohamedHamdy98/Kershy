@@ -50,7 +50,7 @@
     <string name="Your_order_is_written">Your order is written</string>
     <string name="Your_order_is_preparing">Your order is preparing</string>
     <string name="Your_order_is_on_the_way">Your order is on the way</string>
-    <string name="Your_order_is_receiving">Your order is receiving</string>
+    <string name="Your_order_is_delivered">Your order is delivered</string>
     <string name="please_wait">Please! Wait</string>
     <string name="kershy_drink">Kershy Drink</string>
     <string name="my_orders">My Orders</string>
@@ -97,4 +97,9 @@
     <string name="EmailSent">"We have sent you instructions to reset your password!"</string>
     <string name="Failed_send_email">Failed to send reset email!</string>
     <string name="reset_password">Reset Password,</string>
+    <string name="chooseOrder">Please! Choose Order.</string>
+    <string name="language">Language</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="english">English</string>
+    <string name="arabic">Arabic</string>
 </resources>

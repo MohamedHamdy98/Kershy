@@ -101,7 +101,7 @@ public class CategoryActivity extends AppCompatActivity {
         });
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_burger, R.id.nav_sweet, R.id.nav_drink, R.id.nav_orders, R.id.nav_delivery
-                , R.id.nav_profile)
+                , R.id.nav_profile,R.id.nav_language)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

@@ -1,7 +1,10 @@
 package view;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -12,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.testeverything.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,4 +76,5 @@ public class MainActivity extends AppCompatActivity {
         });
         thread.start();
     }
+
 }

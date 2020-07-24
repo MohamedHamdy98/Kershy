@@ -52,7 +52,7 @@
     <string name="Your_order_is_written">الطلب الخاص بك تمت كتابته</string>
     <string name="Your_order_is_preparing">الطلب الخاص بك يتم إعداده في المطعم</string>
     <string name="Your_order_is_on_the_way">الطلب الخاص بك في طريقه إليك</string>
-    <string name="Your_order_is_receiving">تم توصيل الطلب الخاص بك</string>
+    <string name="Your_order_is_delivered">تم توصيل الطلب الخاص بك</string>
     <string name="please_wait">من فضلك! انتظر</string>
     <string name="kershy_drink">مشروبات كيرشي</string>
     <string name="my_orders">طلبي</string>
@@ -99,4 +99,9 @@
     <string name="EmailSent">تم إرسال رمز اعادة كلمة المرور</string>
     <string name="Failed_send_email">فشل إرسال رمز اعادة كلمة المرور</string>
     <string name="reset_password">نسيت كلمة المرور, </string>
+    <string name="chooseOrder">من فضلك قم باختيار الطلب الخاص بك</string>
+    <string name="language">اللغة</string>
+    <string name="choose_language">اختر اللغة</string>
+    <string name="english">الإنجليزية</string>
+    <string name="arabic">العربية</string>
 </resources>
