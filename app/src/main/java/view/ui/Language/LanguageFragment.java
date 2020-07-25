@@ -1,6 +1,8 @@
 package view.ui.Language;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 import view.LogInActivity;
 import view.MainActivity;
 
-public class LanguagFragment extends Fragment {
+public class LanguageFragment extends Fragment {
 
     @BindView(R.id.button_english)
     Button buttonEnglish;
@@ -34,22 +36,32 @@ public class LanguagFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_languag, container, false);
         ButterKnife.bind(this, root);
         onClick();
+
         return root;
     }
+
+
     private void onClick(){
         buttonArabic.setOnClickListener(v -> setLanguage("ar"));
         buttonEnglish.setOnClickListener(v -> setLanguage("en"));
 
     }
-
     private void setLanguage(String locale) {
         Resources resource = getResources();
         DisplayMetrics displayMetrics = resource.getDisplayMetrics();
         Configuration configuration = resource.getConfiguration();
         configuration.setLocale(new Locale(locale.toLowerCase()));
         resource.updateConfiguration(configuration, displayMetrics);
+        saveLocale(locale);
         Intent refresh = new Intent(getActivity(), MainActivity.class);
         startActivity(refresh);
         getActivity().finish();
+    }
+    public void saveLocale(String lang) {
+        SharedPreferences prefs = getActivity().getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("language", lang);
+        editor.commit();
     }
 }

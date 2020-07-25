@@ -45,7 +45,7 @@
         tools:layout="@layout/fragment_profile_user" />
     <fragment
         android:id="@+id/nav_language"
-        android:name="view.ui.Language.LanguagFragment"
+        android:name="view.ui.Language.LanguageFragment"
         android:label="@string/language"
         tools:layout="@layout/fragment_languag" />
 </navigation>
