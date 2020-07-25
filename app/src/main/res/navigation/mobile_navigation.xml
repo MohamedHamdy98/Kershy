@@ -47,5 +47,5 @@
         android:id="@+id/nav_language"
         android:name="view.ui.Language.LanguageFragment"
         android:label="@string/language"
-        tools:layout="@layout/fragment_languag" />
+        tools:layout="@layout/fragment_language" />
 </navigation>

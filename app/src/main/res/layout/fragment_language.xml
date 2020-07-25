@@ -1,0 +1,65 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="view.ui.Language.LanguageFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/background">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/choose_language"
+            android:textColor="#fff"
+            android:textSize="45dp"
+            android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            style="@style/RippleStyleGrey">
+            <Button
+                android:id="@+id/button_english"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:text="@string/english"
+               android:background="@drawable/button_circle_shape_login" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            style="@style/RippleStyleGrey">
+            <Button
+                android:id="@+id/button_arabic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:text="@string/arabic"
+               android:background="@drawable/button_circle_shape_login" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+    </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

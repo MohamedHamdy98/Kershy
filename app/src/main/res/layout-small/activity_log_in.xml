@@ -7,13 +7,7 @@
     android:background="@drawable/background"
     android:orientation="vertical"
     tools:context="view.LogInActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,12 +49,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/phone"
-            android:layout_gravity="left"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:gravity="start"
             android:textColor="#fff"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginStart="20dp"/>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,9 +80,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:gravity="start"
             android:text="@string/email"
             android:textColor="#fff"
             android:textSize="12sp"
@@ -121,9 +115,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginLeft="20dp"
-            android:gravity="left"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:gravity="start"
             android:text="@string/password"
             android:textColor="#fff"
             android:textSize="12sp"
@@ -177,8 +171,8 @@
             android:paddingLeft="10dp"
             android:layout_weight="1"
             android:textAllCaps="false"
-            android:textColor="#fff"
             android:buttonTint="#fff"
+            android:textColor="#fff"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,7 +181,7 @@
             style="@style/RippleStyleGrey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_gravity="center">
             <androidx.cardview.widget.CardView
                 android:id="@+id/button2_goto_main_activity"
@@ -252,7 +246,4 @@
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

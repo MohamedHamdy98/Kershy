@@ -2,6 +2,7 @@ package view.ui.Sweet;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,17 @@ public class SweetFragment extends Fragment {
         startRecyclerView();
         showTimeAndRating();
         return root;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
     }
     public void startRecyclerView() {
         prgressBar.setVisibility(View.VISIBLE);

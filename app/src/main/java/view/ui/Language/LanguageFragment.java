@@ -3,6 +3,7 @@ package view.ui.Language;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import view.LogInActivity;
 import view.MainActivity;
 
 public class LanguageFragment extends Fragment {
@@ -33,14 +33,24 @@ public class LanguageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_languag, container, false);
+        View root = inflater.inflate(R.layout.fragment_language, container, false);
         ButterKnife.bind(this, root);
         onClick();
 
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+    }
     private void onClick(){
         buttonArabic.setOnClickListener(v -> setLanguage("ar"));
         buttonEnglish.setOnClickListener(v -> setLanguage("en"));

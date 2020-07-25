@@ -36,15 +36,21 @@
 
         <activity
             android:name="view.MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name="view.CartActivity" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.CartActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="view.CategoryActivity"
             android:label="@string/title_activity_category"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="view.SignUpActivity" />
-        <activity android:name="view.LogInActivity" />
-        <activity android:name="view.MainActivity">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.LogInActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="view.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
