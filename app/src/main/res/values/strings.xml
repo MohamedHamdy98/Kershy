@@ -102,4 +102,6 @@
     <string name="choose_language">Choose Language</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
+    <string name="kershy_cart">Kershy Cart</string>
+    <string name="reset_pass">Reset Password</string>
 </resources>

@@ -104,4 +104,6 @@
     <string name="choose_language">اختر اللغة</string>
     <string name="english">الإنجليزية</string>
     <string name="arabic">العربية</string>
+    <string name="kershy_cart">سلة كيرشي</string>
+    <string name="reset_pass">إعادة كلمة المرور</string>
 </resources>

@@ -64,8 +64,6 @@ public class CartActivity extends AppCompatActivity {
     MyAdapterCart myAdapterCart;
     @BindView(R.id.button_apply_cart)
     Button buttonApplyCart;
-    @BindView(R.id.button_turnOn_GPS)
-    ImageView buttonTurnOnGPS;
     @BindView(R.id.textView_date_order)
     TextView textViewDateOrder;
     @BindView(R.id.textView_cart_itemTotal)
