@@ -144,14 +144,17 @@ public class DeliveryFragment extends Fragment {
     }
     // For SetRating..
     private void setRating(){
-        openRating.setOnClickListener(v -> {
-            Float ratingNumber = rating.getRating();
-            Toast.makeText(getActivity(), ratingNumber + "", Toast.LENGTH_SHORT).show();
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            DatabaseReference databaseReference = database.getReference("Rating")
-                    .child(userId);
-            databaseReference.setValue(ratingNumber);
+        openRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Float ratingNumber = rating.getRating();
+                Toast.makeText(DeliveryFragment.this.getActivity(), ratingNumber + "", Toast.LENGTH_SHORT).show();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference databaseReference = database.getReference("Rating")
+                        .child(userId);
+                databaseReference.setValue(ratingNumber);
+            }
         });
     }
 

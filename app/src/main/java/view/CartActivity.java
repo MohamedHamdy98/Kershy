@@ -233,15 +233,17 @@ public class CartActivity extends AppCompatActivity {
     }
     // To move from this to Maps activity..
     private void onClickApplayCart() {
-        buttonApplyCart.setOnClickListener(v -> {
-            set_all_user_information();
-            set_order_user();
-            Intent intent = new Intent(CartActivity.this, MapsActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            finish();
+        buttonApplyCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartActivity.this.set_all_user_information();
+                CartActivity.this.set_order_user();
+                Intent intent = new Intent(CartActivity.this, MapsActivity.class);
+                CartActivity.this.startActivity(intent);
+                CartActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                CartActivity.this.finish();
+            }
         });
-
     }
     // To open Gps..
     private boolean hasGPSDevice(Context context) {
@@ -339,7 +341,8 @@ public class CartActivity extends AppCompatActivity {
     // To set order user information in database and show it in Restaurant application..
     private void set_order_user(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("Cart").child(userId).child("Order").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Cart").child(userId).child("Order")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
@@ -368,6 +371,8 @@ public class CartActivity extends AppCompatActivity {
                 String totalPrice = dataSnapshot.child("totalPrice").getValue(String.class);
                 String totalPriceToPay = dataSnapshot.child("TotalPriceToPay").getValue(String.class);
                 String address = dataSnapshot.child("AddressWrite").getValue(String.class);
+                double Latitude = dataSnapshot.child("Latitude").getValue(double.class);
+                double Longitude = dataSnapshot.child("Longitude").getValue(double.class);
                 DatabaseReference referenceString = FirebaseDatabase.getInstance().getReference();
                 HashMap<String,Object> hashMap = new HashMap<>();
                 // set data as string
@@ -378,6 +383,8 @@ public class CartActivity extends AppCompatActivity {
                 hashMap.put("TotalPriceToPay",totalPriceToPay);
                 hashMap.put("AddressWrite",address);
                 hashMap.put("timeOrder",time);
+                hashMap.put("Latitude",0);
+                hashMap.put("Longitude",0);
                 // To set child in database of user to control of delivery by it in Restaurant applicatiom..
                 hashMap.put("writeOrder",false);
                 hashMap.put("preparingOrder",false);

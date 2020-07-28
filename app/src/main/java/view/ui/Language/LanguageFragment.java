@@ -52,8 +52,18 @@ public class LanguageFragment extends Fragment {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
     }
     private void onClick(){
-        buttonArabic.setOnClickListener(v -> setLanguage("ar"));
-        buttonEnglish.setOnClickListener(v -> setLanguage("en"));
+        buttonArabic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LanguageFragment.this.setLanguage("ar");
+            }
+        });
+        buttonEnglish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LanguageFragment.this.setLanguage("en");
+            }
+        });
 
     }
     private void setLanguage(String locale) {

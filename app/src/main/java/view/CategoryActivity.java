@@ -153,7 +153,6 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void logOut() {
-        Toast.makeText(CategoryActivity.this, "LogOut", Toast.LENGTH_SHORT).show();
         SharedPreferences preferences = getSharedPreferences("keep", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("remember", "false");
@@ -169,7 +168,6 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void shareApplication() {
-        Toast.makeText(this, "ShareApplication", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         String body = "https://drive.google.com/file/d/1K69JAxw0aS7eKRt5QKJR_hHBI8VNUWqD/view?usp=sharing";

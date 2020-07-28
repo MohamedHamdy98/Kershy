@@ -43,10 +43,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Model.ModelCart;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import view.ui.Delivery.DeliveryFragment;
 import view.ui.Orders.OrdersFragment;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -79,6 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         reset_myLocation();
         swipe_activity();
         onClick();
+        set_all_user_information();
     }
 
     @Override
@@ -103,17 +106,86 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    private void onClick() {
-        buttonApplyToPayMoney.setOnClickListener(v -> {
-            if(editTextPhoneMap.getText().toString().isEmpty()){
-                Snackbar.make(v,"Write your phone",Snackbar.LENGTH_LONG).show();
+    // To set order user information in database and show it in Restaurant application..
+    private void set_order_user(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Cart").child(userId).child("Order")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            ModelCart modelCart;
+                            modelCart = snapshot.getValue(ModelCart.class);
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchCart");
+                            reference.child(userId).child("Order").setValue(modelCart);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+    }
+    // To set all user information in database and show it in Restaurant application..
+    private void set_all_user_information(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("Cart").child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String phone = dataSnapshot.child("Phone").getValue(String.class);
+                String name = dataSnapshot.child("UserName").getValue(String.class);
+                String time = dataSnapshot.child("timeOrder").getValue(String.class);
+                String totalPrice = dataSnapshot.child("totalPrice").getValue(String.class);
+                String totalPriceToPay = dataSnapshot.child("TotalPriceToPay").getValue(String.class);
+                String address = dataSnapshot.child("AddressWrite").getValue(String.class);
+                double Latitude = dataSnapshot.child("Latitude").getValue(double.class);
+                double Longitude = dataSnapshot.child("Longitude").getValue(double.class);
+                DatabaseReference referenceString = FirebaseDatabase.getInstance().getReference();
+                HashMap<String,Object> hashMap = new HashMap<>();
+                // set data as string
+                hashMap.put("Phone",phone);
+                hashMap.put("UserName",name);
+                hashMap.put("id",userId);
+                hashMap.put("totalPrice",totalPrice);
+                hashMap.put("TotalPriceToPay",totalPriceToPay);
+                hashMap.put("AddressWrite",address);
+                hashMap.put("timeOrder",time);
+                hashMap.put("Latitude",Latitude);
+                hashMap.put("Longitude",Longitude);
+                // To set child in database of user to control of delivery by it in Restaurant applicatiom..
+                hashMap.put("writeOrder",false);
+                hashMap.put("preparingOrder",false);
+                hashMap.put("wayOrder",false);
+                hashMap.put("deliveredOrder",false);
+                hashMap.put("waitOrder",false);
+                hashMap.put("progress",true);
+                hashMap.put("valueSeekBar",0);
+                // set all data
+                referenceString.child("branchCart").child(userId).setValue(hashMap);
             }
-            else{
-                databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
-                Toast.makeText(MapsActivity.this, R.string.wait, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MapsActivity.this,CategoryActivity.class));
-                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                finish();
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void onClick() {
+        buttonApplyToPayMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextPhoneMap.getText().toString().isEmpty()) {
+                    Snackbar.make(v, "Write your phone", Snackbar.LENGTH_LONG).show();
+                } else {
+                    MapsActivity.this.set_order_user();
+                    databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
+                    Toast.makeText(MapsActivity.this, R.string.wait, Toast.LENGTH_SHORT).show();
+                    MapsActivity.this.startActivity(new Intent(MapsActivity.this, CategoryActivity.class));
+                    MapsActivity.this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    MapsActivity.this.finish();
+                }
             }
         });
     }
@@ -144,22 +216,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(location -> {
-            if (location != null) {
-                currentLocation = location;
-                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                // To set address in database..
-                databaseReference.child("Address").setValue(currentLocation.getLatitude() + " " +
-                        currentLocation.getLongitude());
-                // To set user id in database, this step very very important to use in another app(Restaurant App)..
-                databaseReference.child("id").setValue(userId);
-                // To get address by write it by user when he sign In..
-                getAddressandSetAddress();
-                mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.map);
-                mapFragment.getMapAsync(MapsActivity.this);
-            } else {
-                Toast.makeText(MapsActivity.this, R.string.closeAppandOpen, Toast.LENGTH_SHORT).show();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    currentLocation = location;
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    // To set address in database..
+                    databaseReference.child("Latitude").setValue(currentLocation.getLatitude());
+                    databaseReference.child("Longitude").setValue(currentLocation.getLongitude());
+                    // To set user id in database, this step very very important to use in another app(Restaurant App)..
+                    databaseReference.child("id").setValue(userId);
+                    // To get address by write it by user when he sign In..
+                    MapsActivity.this.getAddressandSetAddress();
+                    mapFragment = (SupportMapFragment) MapsActivity.this.getSupportFragmentManager()
+                            .findFragmentById(R.id.map);
+                    mapFragment.getMapAsync(MapsActivity.this);
+                } else {
+                    Toast.makeText(MapsActivity.this, R.string.closeAppandOpen, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

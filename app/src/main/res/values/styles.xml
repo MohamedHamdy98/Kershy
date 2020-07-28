@@ -7,7 +7,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="AppThemeEdit" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#19191B</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="EditTextMaterial" parent="Theme.MaterialComponents.Light.NoActionBar">
+      <item name="boxStrokeColor">#E65642</item>
+        <item name="boxStrokeWidthFocused">2dp</item>
+    </style>
     <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#19191B</item>

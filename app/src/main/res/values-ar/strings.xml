@@ -38,7 +38,7 @@
     <string name="categories">الأقسام</string>
     <string name="personal_information">المعلومات الشخصية</string>
     <string name="number_phone">رقم الموبايل</string>
-    <string name="sigup">إنشاء حساب</string>
+    <string name="signup">إنشاء حساب</string>
     <string name="name">الاسم</string>
     <string name="phone">الموبايل</string>
     <string name="address">العنوان</string>
@@ -89,7 +89,7 @@
     <string name="passMore6">كلمة المرور يجب أن تكون أكثر من 6 أحرف</string>
     <string name="logSuccess">تم تسجيل الدخول</string>
     <string name="logFailed">فشل تسجيل الدخول</string>
-    <string name="wait">من فضلك انتظر</string>
+    <string name="wait">تم إرسال طلبك</string>
     <string name="closeAppandOpen">من فضلك اغلق التطبيق وقم بتشغيله مرة اخري حتي يتم تحديد موقعك</string>
     <string name="iamhere">أنا هنا</string>
     <string name="Authenticationsuccess">تم إنشاء الحساب</string>
@@ -98,7 +98,7 @@
     <string name="Unchecked">لم يتم التحديد</string>
     <string name="EmailSent">تم إرسال رمز اعادة كلمة المرور</string>
     <string name="Failed_send_email">فشل إرسال رمز اعادة كلمة المرور</string>
-    <string name="reset_password">نسيت كلمة المرور, </string>
+    <string name="reset_password">نسيت كلمة المرور</string>
     <string name="chooseOrder">من فضلك قم باختيار الطلب الخاص بك</string>
     <string name="language">اللغة</string>
     <string name="choose_language">اختر اللغة</string>

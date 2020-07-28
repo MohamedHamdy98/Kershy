@@ -36,7 +36,7 @@
     <string name="categories">Categories</string>
     <string name="personal_information">Personal Information</string>
     <string name="number_phone">number phone</string>
-    <string name="sigup">SigUp</string>
+    <string name="signup">Sign Up</string>
     <string name="name">Name</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
@@ -87,7 +87,7 @@
     <string name="passMore6">Password should be more than 6 letters</string>
     <string name="logSuccess">LogIn success</string>
     <string name="logFailed">LogIn failed</string>
-    <string name="wait">Please wait!</string>
+    <string name="wait">Done</string>
     <string name="closeAppandOpen">Please! Close App and open it again.</string>
     <string name="iamhere">I am here</string>
     <string name="Authenticationsuccess">Authentication success.</string>
@@ -96,7 +96,7 @@
     <string name="Unchecked">Unchecked</string>
     <string name="EmailSent">"We have sent you instructions to reset your password!"</string>
     <string name="Failed_send_email">Failed to send reset email!</string>
-    <string name="reset_password">Reset Password,</string>
+    <string name="reset_password">FORGOT PASSWORD?</string>
     <string name="chooseOrder">Please! Choose Order.</string>
     <string name="language">Language</string>
     <string name="choose_language">Choose Language</string>

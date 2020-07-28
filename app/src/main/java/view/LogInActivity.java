@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,11 +18,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testeverything.R;
+import com.google.android.gms.common.internal.Objects;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LogInActivity extends AppCompatActivity {
-
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth mAuth;
     @BindView(R.id.button_goto_main_activity)
     Button buttonGotoMainActivity;
     @BindView(R.id.textView_goto_signUpActivity)
@@ -44,8 +46,6 @@ public class LogInActivity extends AppCompatActivity {
     EditText editTextLoginPassword;
     @BindView(R.id.prgressBar_login)
     ProgressBar prgressBarLogin;
-    @BindView(R.id.editText_login_phone)
-    EditText editTextLoginPhone;
     @BindView(R.id.checkBox)
     CheckBox checkBox;
     @BindView(R.id.textView_resetPassword)
@@ -54,10 +54,39 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppThemeNoActionBar);
+        setTheme(R.style.AppThemeEdit);
         setContentView(R.layout.activity_log_in);
         ButterKnife.bind(this);
-        // To keep logIn...
+        mAuth = FirebaseAuth.getInstance();
+        signUp();
+        resetPass();
+        logIn();
+        keepLogIn();
+    }
+    // To go to reset password activity..
+    private void resetPass(){
+        textViewResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogInActivity.this.startActivity(new Intent(LogInActivity.this, ResetPasswordActivity.class));
+                LogInActivity.this.finish();
+                LogInActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+    }
+    // To go to sigIn activity..
+    private void signUp(){
+        textViewGotoSignUpActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
+                LogInActivity.this.startActivity(intent);
+                LogInActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+    }
+    // To keep logIn...
+    private void keepLogIn(){
         SharedPreferences preferences = getSharedPreferences("keep", MODE_PRIVATE);
         String check = preferences.getString("remember", "");
         if (check.equals("true")) {
@@ -68,50 +97,28 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("keep", MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = LogInActivity.this.getSharedPreferences("keep", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("remember", "true");
                     editor.apply();
-                    Toast.makeText(LogInActivity.this, R.string.checked, Toast.LENGTH_SHORT).show();
                 } else if (!buttonView.isChecked()) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("keep", MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = LogInActivity.this.getSharedPreferences("keep", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("remember", "false");
                     editor.apply();
-                    Toast.makeText(LogInActivity.this, R.string.Unchecked, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        // To go to sigIn activity..
-        textViewGotoSignUpActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-        // To go to reset password activity..
-        textViewResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LogInActivity.this, ResetPasswordActivity.class));
-                finish();
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
-        // To go to home(Offers Fragment) activity..
-        firebaseAuth = FirebaseAuth.getInstance();
+
+    }
+    // To go to home(Offers Fragment) activity..
+    // To login...
+    private void logIn(){
         buttonGotoMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 final String email = editTextLoginGmail.getText().toString();
                 final String password = editTextLoginPassword.getText().toString();
-                final String phone = editTextLoginPhone.getText().toString();
-                if (TextUtils.isEmpty(phone)) {
-                    Snackbar.make(v, R.string.enterPhone, Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
                 if (TextUtils.isEmpty(email)) {
                     Snackbar.make(v, R.string.enterEmail, Snackbar.LENGTH_SHORT).show();
                     return;
@@ -123,22 +130,19 @@ public class LogInActivity extends AppCompatActivity {
                 if (password.length() < 6) {
                     Snackbar.make(v, R.string.passMore6, Snackbar.LENGTH_SHORT).show();
                 }
-                editTextLoginGmail.getText().clear();
-                editTextLoginPassword.getText().clear();
-                editTextLoginPhone.getText().clear();
                 prgressBarLogin.setVisibility(View.VISIBLE);
-                firebaseAuth.signInWithEmailAndPassword(email, password)
+                mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LogInActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 prgressBarLogin.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    startActivity(new Intent(LogInActivity.this, CategoryActivity.class));
                                     Snackbar.make(v, R.string.logSuccess, Snackbar.LENGTH_SHORT).show();
-                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    LogInActivity.this.startActivity(new Intent(LogInActivity.this, CategoryActivity.class));
+                                    LogInActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                     // For set progress bar in delivery fragment..
-                                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    final String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = database.getReference("Cart")
                                             .child(userId);
                                     databaseReference.child("writeOrder").setValue(false);
@@ -149,7 +153,6 @@ public class LogInActivity extends AppCompatActivity {
                                     databaseReference.child("progress").setValue(true);
                                     databaseReference.child("valueSeekBar").setValue(0);
                                     databaseReference.child("id").setValue(userId);
-                                    databaseReference.child("Phone").setValue(editTextLoginPhone.getText().toString());
                                     DatabaseReference reference = FirebaseDatabase.getInstance()
                                             .getReference("Users").child(userId);
                                     reference.addValueEventListener(new ValueEventListener() {
@@ -167,15 +170,13 @@ public class LogInActivity extends AppCompatActivity {
 
                                         }
                                     });
-
                                 } else {
-                                    Snackbar.make(v, R.string.logFailed, Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(v,R.string.logFailed+"", Snackbar.LENGTH_SHORT).show();
+                                    Log.e("Error LogIn",task.getException()+"");
                                 }
                             }
                         });
             }
         });
-
     }
-
 }

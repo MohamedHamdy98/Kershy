@@ -79,10 +79,6 @@ public class ProfileUserFragment extends Fragment {
     Button buttonApplyCart;
     @BindView(R.id.textEmail)
     LinearLayout textEmail;
-    //  @BindView(R.id.editText_userEmail)
-    // EditText editTextUserEmail;
-    //  @BindView(R.id.editEmail)
-    //LinearLayout editEmail;
     @BindView(R.id.textAddress)
     LinearLayout textAddress;
     @BindView(R.id.editText_userAddress)
@@ -214,7 +210,6 @@ public class ProfileUserFragment extends Fragment {
                     HashMap<String, Object> hashMap = new HashMap<>();
                     hashMap.put("address", address);
                     hashMap.put("phone", phone);
-                    //hashMap.put("email", email);
                     hashMap.put("userName", name);
                     Toast.makeText(getActivity(), R.string.updateIsDone, Toast.LENGTH_SHORT).show();
                     reference.updateChildren(hashMap);
