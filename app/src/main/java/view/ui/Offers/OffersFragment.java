@@ -1,23 +1,18 @@
-package view.ui.CategoryItem;
+package view.ui.Offers;
 
-import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.testeverything.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +27,7 @@ import Model.ModelItemOffer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeFragment extends Fragment {
+public class OffersFragment extends Fragment {
 
     ArrayList<ModelItemOffer> modelItemOfferArrayList = new ArrayList<>();
     MyAdapterItemOffer adapterItemOffer;
@@ -44,7 +39,7 @@ public class HomeFragment extends Fragment {
     ProgressBar prgressBar;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_offers, container, false);
         ButterKnife.bind(this, root);
         startRecyclerView();
         // To Stop button back...

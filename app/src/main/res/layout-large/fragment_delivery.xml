@@ -123,7 +123,7 @@
 
                     <RatingBar
                         android:id="@+id/rating"
-                        android:rating="2"
+                        android:rating="5"
                         android:scaleY="0.75"
                         android:scaleX="0.75"
                         android:layout_width="wrap_content"

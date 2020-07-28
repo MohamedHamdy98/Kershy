@@ -12,7 +12,7 @@
         android:background="#19191B"
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
-        tools:context="view.ui.CategoryItem.BurgerFragment">
+        tools:context="view.ui.Burger.BurgerFragment">
 
         <View
             android:layout_width="match_parent"

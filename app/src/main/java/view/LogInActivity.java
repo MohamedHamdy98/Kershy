@@ -145,13 +145,6 @@ public class LogInActivity extends AppCompatActivity {
                                     final FirebaseDatabase database = FirebaseDatabase.getInstance();
                                     DatabaseReference databaseReference = database.getReference("Cart")
                                             .child(userId);
-                                    databaseReference.child("writeOrder").setValue(false);
-                                    databaseReference.child("preparingOrder").setValue(false);
-                                    databaseReference.child("wayOrder").setValue(false);
-                                    databaseReference.child("deliveredOrder").setValue(false);
-                                    databaseReference.child("waitOrder").setValue(false);
-                                    databaseReference.child("progress").setValue(true);
-                                    databaseReference.child("valueSeekBar").setValue(0);
                                     databaseReference.child("id").setValue(userId);
                                     DatabaseReference reference = FirebaseDatabase.getInstance()
                                             .getReference("Users").child(userId);

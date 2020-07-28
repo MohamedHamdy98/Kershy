@@ -85,8 +85,8 @@ public class DeliveryFragment extends Fragment {
                     Boolean deliveredOrder = dataSnapshot.child("deliveredOrder").getValue(Boolean.class);
                     Boolean progress = dataSnapshot.child("progress").getValue(Boolean.class);
                     if (progress == true) {
-                        Snackbar.make(getView(), R.string.wait, Snackbar.LENGTH_SHORT).show();
-                        message.setText(R.string.wait);
+                        Snackbar.make(getView(), R.string.PleaseWait, Snackbar.LENGTH_SHORT).show();
+                        message.setText(R.string.PleaseWait);
                         imageOrder.setImageResource(R.drawable.ic_time_180);
                     }
                     if (progress == writeOrder) {

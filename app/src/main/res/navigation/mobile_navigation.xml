@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="view.ui.CategoryItem.HomeFragment"
+        android:name="view.ui.Offers.OffersFragment"
         android:label="@string/offers"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_offers" />
     <fragment
         android:id="@+id/nav_burger"
-        android:name="view.ui.CategoryItem.BurgerFragment"
+        android:name="view.ui.Burger.BurgerFragment"
         android:label="@string/burger"
         tools:layout="@layout/fragment_burger" />
 

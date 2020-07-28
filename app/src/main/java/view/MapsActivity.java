@@ -82,6 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         swipe_activity();
         onClick();
         set_all_user_information();
+        set_order_user();
     }
 
     @Override
@@ -116,8 +117,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                             ModelCart modelCart;
                             modelCart = snapshot.getValue(ModelCart.class);
-                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchCart");
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchOrder");
                             reference.child(userId).child("Order").setValue(modelCart);
+                            reference.child(userId).child("id").setValue(userId);
+
                         }
                     }
 
@@ -179,7 +182,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (editTextPhoneMap.getText().toString().isEmpty()) {
                     Snackbar.make(v, "Write your phone", Snackbar.LENGTH_LONG).show();
                 } else {
-                    MapsActivity.this.set_order_user();
                     databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
                     Toast.makeText(MapsActivity.this, R.string.wait, Toast.LENGTH_SHORT).show();
                     MapsActivity.this.startActivity(new Intent(MapsActivity.this, CategoryActivity.class));
@@ -189,6 +191,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
     private void reset_myLocation() {
         buttonResetMyLocationGPS.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,7 +271,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onMapClick(LatLng latLng) {
                 mMap.clear();
-                mMap.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.iamhere))).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(latLng)
+                        .title(String.valueOf(R.string.iamhere))).showInfoWindow();
             }
         });
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style));

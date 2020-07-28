@@ -104,4 +104,5 @@
     <string name="arabic">Arabic</string>
     <string name="kershy_cart">Kershy Cart</string>
     <string name="reset_pass">Reset Password</string>
+    <string name="PleaseWait">Plesae Wait</string>
 </resources>
