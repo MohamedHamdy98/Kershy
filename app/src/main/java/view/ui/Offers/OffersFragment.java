@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -81,6 +82,10 @@ public class OffersFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ModelItemOffer modelItemOffer = snapshot.getValue(ModelItemOffer.class);
                     modelItemOfferArrayList.add(modelItemOffer);
+                    String id = modelItemOffer.getId();
+                    if (id == "Burger"){
+                        Toast.makeText(getActivity(), "burger", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 adapterItemOffer = new MyAdapterItemOffer(modelItemOfferArrayList, getActivity());
                 recyclerViewItemOffer.setAdapter(adapterItemOffer);

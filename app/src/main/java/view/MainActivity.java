@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.testeverything.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.Locale;
 
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.AppThemeNoActionBar);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        startAnimation();
     }
 
     public void loadLanguage() {

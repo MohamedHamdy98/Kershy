@@ -1,6 +1,7 @@
 package Model;
 
 public class ModelItemOffer {
+    private String id;
     private String name_offer;
     private String old_price_offer;
     private String new_price_offer;
@@ -30,6 +31,14 @@ public class ModelItemOffer {
 
     public void setOld_price_offer(String old_price_offer) {
         this.old_price_offer = old_price_offer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNew_price_offer() {
