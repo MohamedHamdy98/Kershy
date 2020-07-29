@@ -87,6 +87,7 @@ public class CartActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         // call all functions
         getTimeOrder();
+        getInfoUser();
         onClickApplayCart();
     }
     // To getTime Order and set it in database..
@@ -149,9 +150,9 @@ public class CartActivity extends AppCompatActivity {
                 textViewCartTax.setText(tax);
                 // Don't touch this, it is dangerous..
                 // To set it 0 if it is null (if you delete this the app will crash)...HhHhHhHhH sorry!
-                if (totalPrice == "0") {
-                    databaseReference.child("Cart").child(userId).child("TotalPriceToPay").setValue("0");
-                } else {
+//                if (totalPrice == "0") {
+//                    databaseReference.child("Cart").child(userId).child("TotalPriceToPay").setValue("0");
+//                } else {
                     int Bill = ( Integer.parseInt(totalPrice) + Integer.parseInt(deliveryFee) +
                             (Integer.parseInt(tax)) ) - Integer.parseInt(offer);
                     databaseReference = database.getReference("Cart").child(userId).child("TotalPriceToPay");
@@ -159,7 +160,7 @@ public class CartActivity extends AppCompatActivity {
                     String bill = dataSnapshot.child("Cart").child(userId).child("TotalPriceToPay")
                             .getValue(String.class);
                     textViewCartTotalPrice.setText(bill);
-                }
+//                }
             }
 
             @Override
@@ -236,11 +237,11 @@ public class CartActivity extends AppCompatActivity {
         buttonApplyCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartActivity.this.set_all_user_information();
+                set_all_user_information();
                 Intent intent = new Intent(CartActivity.this, MapsActivity.class);
-                CartActivity.this.startActivity(intent);
-                CartActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                CartActivity.this.finish();
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                finish();
             }
         });
     }
@@ -337,27 +338,7 @@ public class CartActivity extends AppCompatActivity {
         final AlertDialog alert = builder.create();
         alert.show();
     }
-//    // To set order user information in database and show it in Restaurant application..
-//    private void set_order_user(){
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-//        databaseReference.child("Cart").child(userId).child("Order")
-//                .addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    ModelCart modelCart;
-//                    modelCart = snapshot.getValue(ModelCart.class);
-//                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchCart");
-//                    reference.child(userId).child("Order").setValue(modelCart);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+
     // To set all user information in database and show it in Restaurant application..
     private void set_all_user_information(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -370,8 +351,6 @@ public class CartActivity extends AppCompatActivity {
                 String totalPrice = dataSnapshot.child("totalPrice").getValue(String.class);
                 String totalPriceToPay = dataSnapshot.child("TotalPriceToPay").getValue(String.class);
                 String address = dataSnapshot.child("AddressWrite").getValue(String.class);
-                double Latitude = dataSnapshot.child("Latitude").getValue(double.class);
-                double Longitude = dataSnapshot.child("Longitude").getValue(double.class);
                 DatabaseReference referenceString = FirebaseDatabase.getInstance().getReference();
                 HashMap<String,Object> hashMap = new HashMap<>();
                 // set data as string
@@ -382,8 +361,6 @@ public class CartActivity extends AppCompatActivity {
                 hashMap.put("TotalPriceToPay",totalPriceToPay);
                 hashMap.put("AddressWrite",address);
                 hashMap.put("timeOrder",time);
-                hashMap.put("Latitude",0);
-                hashMap.put("Longitude",0);
                 // To set child in database of user to control of delivery by it in Restaurant applicatiom..
                 hashMap.put("writeOrder",false);
                 hashMap.put("preparingOrder",false);
@@ -403,4 +380,28 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
+    private void getInfoUser(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String phone = snapshot.child("phone").getValue(String.class);
+                String name = snapshot.child("userName").getValue(String.class);
+                String address = snapshot.child("address").getValue(String.class);
+                HashMap<String,Object> hashMap = new HashMap<>();
+                hashMap.put("UserName",name);
+                hashMap.put("MainPhone",phone);
+                hashMap.put("AddressWrite",address);
+                hashMap.put("Latitude",0);
+                hashMap.put("Longitude",0);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Cart").child(userId);
+                reference.updateChildren(hashMap);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
