@@ -103,8 +103,8 @@
                             android:layout_margin="10dp"
                             android:textStyle="bold"
                             android:textAllCaps="false"
-                            android:gravity="left"
-                            android:text="Name : "
+                            android:gravity="start"
+                            android:text="@string/name_profile"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <EditText
                             android:id="@+id/editText_userName"
@@ -115,12 +115,11 @@
                             android:inputType="text"
                             android:layout_gravity="center"
                             android:textColor="#959599"
-                            android:textSize="16sp"
-                            android:hint="Please! Enter your name!"
+                            android:textSize="12dp"
+                            android:hint="@string/enterEmail"
                             android:textColorHint="#959599"
                             android:textStyle="bold"
                             android:textAllCaps="false"
-                            android:gravity="start"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
                     <View
@@ -152,53 +151,17 @@
                             android:id="@+id/textView_userEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="end|center"
+                            android:layout_gravity="center"
                             android:textColor="#959599"
                             android:textSize="16sp"
                             android:paddingEnd="5dp"
-                            android:gravity="end|center"
+                            android:gravity="center"
                             android:layout_weight="1"
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:text="@string/email"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
-                    <!--<LinearLayout
-                        android:id="@+id/editEmail"
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="4dp"
-                            android:layout_gravity="center"
-                            android:textColor="#fff"
-                            android:textSize="18sp"
-                            android:layout_margin="10dp"
-                            android:textStyle="bold"
-                            android:textAllCaps="false"
-                            android:gravity="left"
-                            android:text="Email : "
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-                        <EditText
-                            android:id="@+id/editText_userEmail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="4dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:inputType="textEmailAddress"
-                            android:textColor="#959599"
-                            android:textSize="16sp"
-                            android:hint="Please! Enter your Email!"
-                            android:textColorHint="#959599"
-                            android:textStyle="bold"
-                            android:textAllCaps="false"
-                            android:gravity="start"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-                    </LinearLayout>-->
                     <View
                         android:id="@+id/v"
                         android:layout_width="match_parent"
@@ -256,8 +219,8 @@
                             android:layout_margin="10dp"
                             android:textStyle="bold"
                             android:textAllCaps="false"
-                            android:gravity="left"
-                            android:text="Address : "
+                            android:gravity="start"
+                            android:text="@string/address_profile"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <EditText
                             android:id="@+id/editText_userAddress"
@@ -269,11 +232,10 @@
                             android:layout_gravity="center"
                             android:textColor="#959599"
                             android:textSize="16sp"
-                            android:hint="Please! Enter your Address!"
+                            android:hint="@string/enterAddress"
                             android:textColorHint="#959599"
                             android:textStyle="bold"
                             android:textAllCaps="false"
-                            android:gravity="start"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                     </LinearLayout>
 
@@ -332,8 +294,7 @@
                             android:layout_margin="10dp"
                             android:textStyle="bold"
                             android:textAllCaps="false"
-                            android:gravity="left"
-                            android:text="Phone : "
+                            android:text="@string/phone_profile"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
                         <EditText
                             android:id="@+id/editText_userPhone"
@@ -345,7 +306,7 @@
                             android:layout_gravity="center"
                             android:textColor="#959599"
                             android:textSize="16sp"
-                            android:hint="Please! Enter your Phone!"
+                            android:hint="@string/enterPhone"
                             android:textColorHint="#959599"
                             android:textStyle="bold"
                             android:textAllCaps="false"
@@ -363,7 +324,7 @@
                             android:background="#00CB2C"
                             android:visibility="gone"
                             android:gravity="center"
-                            android:text="Save"
+                            android:text="@string/save"
                             android:padding="6dp"
                             android:textAllCaps="false"
                             android:textColor="#fff"

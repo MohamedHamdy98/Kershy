@@ -106,5 +106,9 @@
     <string name="arabic">العربية</string>
     <string name="kershy_cart">سلة كيرشي</string>
     <string name="reset_pass">إعادة كلمة المرور</string>
-    <string name="PleaseWait">Plesae Wait</string>
+    <string name="PleaseWait">يرجي الانتظار حتي يتم تأكيد طلبك</string>
+    <string name="haveAccount">لا يوجد لديك حساب , الرجاء إنشاء حساب جديد</string>
+    <string name="waitsignup">جاري إنشاء حساب</string>
+    <string name="waitlogin">جاري تسجيل الدخول</string>
+    <string name="save">حفظ</string>
 </resources>

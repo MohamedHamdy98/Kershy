@@ -118,9 +118,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             ModelCart modelCart;
                             modelCart = snapshot.getValue(ModelCart.class);
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchOrder");
-                            reference.child(userId).child("Order").setValue(modelCart);
+                            reference.child(userId).child("Order").child(modelCart.name).setValue(modelCart);
                             reference.child(userId).child("id").setValue(userId);
-
                         }
                     }
 

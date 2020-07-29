@@ -105,4 +105,8 @@
     <string name="kershy_cart">Kershy Cart</string>
     <string name="reset_pass">Reset Password</string>
     <string name="PleaseWait">Plesae Wait</string>
+    <string name="haveAccount">" You don't have account! Please Create account and comeback to logIn"</string>
+    <string name="waitsignup">Sign up</string>
+    <string name="waitlogin">Log in..</string>
+    <string name="save">Save</string>
 </resources>

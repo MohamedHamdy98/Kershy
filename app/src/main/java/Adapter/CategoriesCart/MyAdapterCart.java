@@ -57,9 +57,16 @@ public class MyAdapterCart extends RecyclerView.Adapter<MyAdapterCart.ViewHolder
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                DatabaseReference databaseReference = database.getReference().child("Cart")
-                        .child(userId).child("Order").child(modelCart.name);
+                DatabaseReference databaseReference = database.getReference()
+                        .child("Cart")
+                        .child(userId).child("Order")
+                        .child(modelCart.name);
                 databaseReference.removeValue();
+                DatabaseReference reference = database.getReference()
+                        .child("branchOrder")
+                        .child(userId).child("Order")
+                        .child(modelCart.name);
+                reference.removeValue();
             }
         });
 

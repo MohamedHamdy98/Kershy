@@ -21,6 +21,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="AppTheme.WhiteColorAccent">
+        <item name="colorAccent">@color/colorWhite</item>
+    </style>
+    <style name="AppTheme.WhiteEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+    </style>
     <style name="RippleStyleGrey">
         <item name="mrl_rippleOverlay">true</item>
         <item name="mrl_rippleColor">#19191B</item>

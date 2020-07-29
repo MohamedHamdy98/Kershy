@@ -1,5 +1,6 @@
 package view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +33,8 @@ import java.util.Locale;
 import Model.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.testeverything.R.string.waitsignup;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -88,12 +92,15 @@ public class SignUpActivity extends AppCompatActivity {
                 if (password.length() < 6) {
                     Snackbar.make(v, R.string.passMore6, Snackbar.LENGTH_SHORT).show();
                 }
-                prgressBarSignUp.setVisibility(View.VISIBLE);
+                ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+                progressDialog.setMessage(waitsignup+"");
+                progressDialog.show();
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                prgressBarSignUp.setVisibility(View.GONE);
+                                ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+                                progressDialog.setMessage(getString(waitsignup));
                                 if (task.isSuccessful()) {
                                     // To set user information in database RealTime...
                                     HashMap<String, Object> hashMap = new HashMap<>();
@@ -105,8 +112,10 @@ public class SignUpActivity extends AppCompatActivity {
                                     hashMap.put("imageURL", "default");
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     databaseReference.child(userId).setValue(hashMap);
+                                    progressDialog.dismiss();
                                     startActivity(new Intent(SignUpActivity.this, LogInActivity.class));
-                                    Snackbar.make(v, R.string.Authenticationsuccess, Snackbar.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpActivity.this,R.string.Authenticationsuccess , Toast.LENGTH_SHORT).show();
+                                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                                 } else {
                                     Snackbar.make(v, R.string.AuthenticationFailed, Snackbar.LENGTH_SHORT).show();
                                 }
