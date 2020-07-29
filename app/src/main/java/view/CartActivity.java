@@ -237,7 +237,6 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CartActivity.this.set_all_user_information();
-                CartActivity.this.set_order_user();
                 Intent intent = new Intent(CartActivity.this, MapsActivity.class);
                 CartActivity.this.startActivity(intent);
                 CartActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -338,27 +337,27 @@ public class CartActivity extends AppCompatActivity {
         final AlertDialog alert = builder.create();
         alert.show();
     }
-    // To set order user information in database and show it in Restaurant application..
-    private void set_order_user(){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("Cart").child(userId).child("Order")
-                .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    ModelCart modelCart;
-                    modelCart = snapshot.getValue(ModelCart.class);
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchCart");
-                    reference.child(userId).child("Order").setValue(modelCart);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    // To set order user information in database and show it in Restaurant application..
+//    private void set_order_user(){
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//        databaseReference.child("Cart").child(userId).child("Order")
+//                .addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    ModelCart modelCart;
+//                    modelCart = snapshot.getValue(ModelCart.class);
+//                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("branchCart");
+//                    reference.child(userId).child("Order").setValue(modelCart);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
     // To set all user information in database and show it in Restaurant application..
     private void set_all_user_information(){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
