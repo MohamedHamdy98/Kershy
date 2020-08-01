@@ -2,6 +2,7 @@ package view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         setTheme(R.style.AppThemeEdit);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         firebaseAuth = FirebaseAuth.getInstance();
         buttonGotoMainActivity.setOnClickListener(new View.OnClickListener() {
             @Override

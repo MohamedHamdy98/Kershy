@@ -1,11 +1,15 @@
 package view;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -182,7 +187,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Snackbar.make(v, "Write your phone", Snackbar.LENGTH_LONG).show();
                 } else {
                     databaseReference.child("Phone").setValue(editTextPhoneMap.getText().toString());
-                    Toast.makeText(MapsActivity.this, R.string.wait, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapsActivity.this, R.string.success, Toast.LENGTH_SHORT).show();
                     MapsActivity.this.startActivity(new Intent(MapsActivity.this, CategoryActivity.class));
                     MapsActivity.this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     MapsActivity.this.finish();
@@ -279,7 +284,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         googleMap.addMarker(markerOptions);
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -111,4 +111,5 @@
     <string name="waitsignup">جاري إنشاء حساب</string>
     <string name="waitlogin">جاري تسجيل الدخول</string>
     <string name="save">حفظ</string>
+    <string name="success">تم إرسال الطلب بنجاح</string>
 </resources>
