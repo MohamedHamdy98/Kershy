@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.testeverything">
+    package="com.MH.kershyApp">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -16,7 +16,7 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name="DataOffline.GlobalApp"
+        android:name="com.MH.kershyApp.DataOffline.GlobalApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_app_round"
         android:label="@string/app_name"
@@ -31,28 +31,28 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="view.ResetPasswordActivity"
+            android:name="com.MH.kershyApp.view.ResetPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="view.MapsActivity"
+            android:name="com.MH.kershyApp.view.MapsActivity"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait" />
         <activity
-            android:name="view.CartActivity"
+            android:name="com.MH.kershyApp.view.CartActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="view.CategoryActivity"
+            android:name="com.MH.kershyApp.view.CategoryActivity"
             android:label="@string/title_activity_category"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="view.SignUpActivity"
+            android:name="com.MH.kershyApp.view.SignUpActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="view.LogInActivity"
+            android:name="com.MH.kershyApp.view.LogInActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="view.MainActivity"
+            android:name="com.MH.kershyApp.view.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

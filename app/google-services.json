@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "859695804764",
-    "firebase_url": "https://delivery-app-d08f8.firebaseio.com",
-    "project_id": "delivery-app-d08f8",
-    "storage_bucket": "delivery-app-d08f8.appspot.com"
+    "project_number": "888406274227",
+    "firebase_url": "https://delivery-app-cd418.firebaseio.com",
+    "project_id": "delivery-app-cd418",
+    "storage_bucket": "delivery-app-cd418.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:859695804764:android:3a011119acce1ce8f3d199",
+        "mobilesdk_app_id": "1:888406274227:android:03b7397675dea719c680c6",
         "android_client_info": {
-          "package_name": "com.example.testeverything"
+          "package_name": "com.MH.kershyApp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "859695804764-v2vissdllig7ief1lskivd6ujms2dee7.apps.googleusercontent.com",
+          "client_id": "888406274227-jfvuvjvlhdkq5shfpunci1jfhcsaefhc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.testeverything",
+            "package_name": "com.MH.kershyApp",
             "certificate_hash": "eb8b507f44bea88cae2e1dc402b19317619a28bf"
           }
         },
         {
-          "client_id": "859695804764-kv4g6qlp0p8e8quv5dkhu0k9s3ctnb3d.apps.googleusercontent.com",
+          "client_id": "888406274227-h9676t7po9231vqs87hcqe20ao99bqud.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCf8cFeSpBxwU-UqKehEkZoW_KeRjilNCM"
+          "current_key": "AIzaSyAWpzADJsgkmaFoGNeTp-owr615sIYIIIg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "859695804764-kv4g6qlp0p8e8quv5dkhu0k9s3ctnb3d.apps.googleusercontent.com",
+              "client_id": "888406274227-h9676t7po9231vqs87hcqe20ao99bqud.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

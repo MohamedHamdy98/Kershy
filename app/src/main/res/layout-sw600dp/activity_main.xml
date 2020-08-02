@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash"
     android:orientation="vertical"
-    tools:context="view.MainActivity">
+    tools:context=".view.MainActivity">
 <ImageView
     android:id="@+id/imageSplash"
     android:layout_width="match_parent"

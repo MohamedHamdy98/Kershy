@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash"
     android:orientation="vertical"
-    tools:context="view.ui.Offers.OffersFragment">
+    tools:context=".view.ui.Offers.OffersFragment">
     <ProgressBar
         android:id="@+id/prgressBar"
         android:layout_width="wrap_content"

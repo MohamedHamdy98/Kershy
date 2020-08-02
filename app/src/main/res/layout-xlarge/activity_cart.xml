@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#19191B"
     android:orientation="vertical"
-    tools:context="view.CartActivity">
+    tools:context=".view.CartActivity">
 
     <ScrollView
         android:layout_width="match_parent"

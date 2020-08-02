@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/splash"
-    tools:context="view.ui.Delivery.DeliveryFragment">
+    tools:context=".view.ui.Delivery.DeliveryFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

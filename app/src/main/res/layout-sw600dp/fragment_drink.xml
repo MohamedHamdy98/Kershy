@@ -13,7 +13,7 @@
         android:background="#19191B"
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
-        tools:context="view.ui.Drink.DrinkFragment">
+        tools:context=".view.ui.Drink.DrinkFragment">
 
         <View
             android:layout_width="match_parent"
