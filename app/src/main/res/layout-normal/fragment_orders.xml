@@ -318,7 +318,7 @@
                                 android:layout_weight="1"
                                 android:gravity="end"
                                 android:paddingEnd="30dp"
-                                android:text="40.5 LE"
+                                android:text="0 LE"
                                 android:textColor="#fff"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />

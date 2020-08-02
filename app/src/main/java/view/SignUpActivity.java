@@ -94,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Snackbar.make(v, R.string.passMore6, Snackbar.LENGTH_SHORT).show();
                 }
                 ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
-                progressDialog.setMessage(waitsignup+"");
+                progressDialog.setMessage(getString(waitsignup));
                 progressDialog.show();
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
